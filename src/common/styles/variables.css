@@ -1,0 +1,12 @@
+:root {
+    --bg-color-day: #FFFFFF;
+    --bg-color-day-header-footer: #F3F4F6;
+    --bg-color-day-btn-active: #E5E7EB;
+    --bg-color-day-color: rgba(0,0,0,0.1);
+    /*--bg-color-day-divider: rgba(0,0,0,0.8);*/
+
+    --bg-color-night: #0B1120;
+    --bg-color-night-header-footer: #141C2C;
+    --bg-color-night-btn-active: #E5E7EB;
+    --bg-color-night-color: rgba(255,255,255,0.1);
+}
