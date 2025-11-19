@@ -1,4 +1,3 @@
-import type { FetchPlaylistsArgs } from '@/features/playlists/api/playlistsApi.types.ts'
 import { baseApi } from '@/app/api/baseApi.ts'
 import type { ApiResponse } from '@/features/movies/api/popularMoviesApi.types.ts'
 

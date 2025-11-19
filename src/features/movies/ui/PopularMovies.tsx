@@ -1,7 +1,6 @@
 import { useFetchPopularMoviesQuery } from '@/features/movies/api/popularMoviesApi.ts'
 
-type Props = {}
-export const PopularMovies = (props: Props) => {
+export const PopularMovies = () => {
   const { data } = useFetchPopularMoviesQuery()
   console.log(data)
   return <div>HELLO</div>
