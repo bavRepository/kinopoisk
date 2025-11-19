@@ -5,16 +5,17 @@ export const popularMoviesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     // fetchPlaylists: build.query<PlaylistsResponse, FetchPlaylistsArgs>({
     // удалим типизацию так как у нас уже есть responseSchema и перенесем аргументы
-    fetchPopularMovies: build.query<ApiResponse, void>({
-      query: () => {
+    fetchPopularMovies: build.query<ApiResponse, { params?: { page?: number } }>({
+      query: (params) => {
         // query: (params: FetchPlaylistsArgs) => {
         // query: (params: FetchPlaylistsArgs) => {
         return {
-          url: '/movie/popular?language=en-US&page=1',
-          // params,
+          url: '/movie/popular',
+          params,
         }
       },
     }),
+    // { params?: { backdrop_path?: string }}
   }),
 })
 

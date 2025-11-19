@@ -1,12 +1,12 @@
 import { Link, NavLink } from 'react-router'
 import s from './header.module.css'
-import s2 from '@/common/styles/container.module.css'
 import { Path } from '@/common/routing'
 import logo from '@/assets/images/logo_blue.svg'
 import SunIcon from '@/assets/images/sun.svg'
 import MoonIcon from '@/assets/images/moon.svg'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import { changeThemeModeAC, selectThemeMode } from '@/app/model/app-slice.ts'
+import { Container } from '@/common/components/Container/Container.tsx'
 export const Header = () => {
   const navItems = [
     { to: Path.Main, label: 'Main' },
@@ -34,7 +34,7 @@ export const Header = () => {
 
   return (
     <header className={`${s.wrapper} ${currentTheme === 'light' ? s.backgroundDay : s.backgroundNight}`}>
-      <div className={s2.container}>
+      <Container>
         <div className={s.contentWrapper}>
           <Link to={Path.Main}>
             <img className={s.logo} src={logo} alt='logo' />
@@ -67,14 +67,14 @@ export const Header = () => {
             <img src={currentTheme === 'light' ? MoonIcon : SunIcon} alt='icon' />
           </button>
         </div>
-      </div>
-      {/*{data && (*/}
-      {/*  <div className={s.loginContainer}>*/}
-      {/*    <Link to={Path.Profile}>{data.login}</Link>*/}
-      {/*    <button onClick={logoutHandler}>logout</button>*/}
-      {/*  </div>*/}
-      {/*)}*/}
-      {/*{!data && <Login />}*/}
+        {/*{data && (*/}
+        {/*  <div className={s.loginContainer}>*/}
+        {/*    <Link to={Path.Profile}>{data.login}</Link>*/}
+        {/*    <button onClick={logoutHandler}>logout</button>*/}
+        {/*  </div>*/}
+        {/*)}*/}
+        {/*{!data && <Login />}*/}
+      </Container>
     </header>
   )
 }

@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify'
 // import { useGlobalLoading } from '@/common/hooks/useGlobalLoading.ts'
 // import { LinearProgress } from '@/common/components/LinearProgress/LinearProgress.tsx'
 import { useEffect, useState } from 'react'
+import { Footer } from '@/common/components/Footer/Footer.tsx'
 
 export const App = () => {
   const [loaded, setLoaded] = useState(false)
@@ -18,10 +19,9 @@ export const App = () => {
     <div className={`${s.contentWrapper} ${loaded ? s.loaded : ''}`}>
       <Header />
       {/*{isGlobalLoading && <LinearProgress />}*/}
-      <div className={s.layout}>
-        <Routing />
-      </div>
+      <Routing />
       <ToastContainer />
+      <Footer />
     </div>
   )
 }

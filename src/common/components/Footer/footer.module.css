@@ -1,0 +1,17 @@
+.details {
+    padding: 20px;
+    text-align: center;
+}
+.footer {
+    background-color: var(--bg-color-day-header-footer);
+    transition: all 0.5s ease;
+}
+
+.day {
+    background-color: var( --bg-color-day-header-footer);
+    color: var( --color-day);
+}
+.night {
+    background-color: var( --bg-color-night-header-footer);
+    color: var( --color-night);
+}

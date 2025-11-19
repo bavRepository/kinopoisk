@@ -8,6 +8,7 @@
 
 .backgroundDay {
   background-color: var( --bg-color-day-header-footer);
+  border-bottom: 1px solid var(--bg-color-day-divider);
 }
 
 .backgroundNight {
@@ -17,7 +18,7 @@
 
 .list {
   display: flex;
-  padding: 25px 0;
+  padding: 20px 0;
   gap: 10px;
   justify-content: center;
   li{
@@ -73,7 +74,7 @@
   border: 1px solid rgba(0,0,0,0.2);
   /*border-color: var(--bg-color-day-btn-active);*/
   background-color: var(--bg-color-night);
-  color: var(--bg-color-day-color);
+  color: var(--color-day);
   cursor: pointer;
 }
 

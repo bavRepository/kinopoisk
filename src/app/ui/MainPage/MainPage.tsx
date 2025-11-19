@@ -1,13 +1,12 @@
-import { PopularMovies } from '@/features/movies/ui/PopularMovies.tsx'
+import { useFetchPopularMoviesQuery } from '@/features/movies/api/popularMoviesApi.ts'
+import { Search } from '@/common/components/Search/Search.tsx'
 
 export const MainPage = () => {
+  const { data } = useFetchPopularMoviesQuery({ params: { page: 1 } })
+
   return (
-    <div>
-      <h1>
-        Main page
-        <br />
-      </h1>
-      <PopularMovies />
-    </div>
+    <>
+      <Search popularMovies={data} />
+    </>
   )
 }

@@ -1,12 +1,12 @@
 :root {
-    --hover-color-link: #3d24e6;
+    --hover-color-link: #3119cf;
     --color-gray: #c1c0c8;
     --color-day: #0B1120;
 
     --bg-color-day-header-footer: #F3F4F6;
     --bg-color-day-btn-active: #E5E7EB;
     --bg-color-day: rgba(0,0,0,0.1);
-    --bg-color-day-divider: rgba(0,0,0,0.05);
+    --bg-color-day-divider: rgba(0,0,0,0.2);
 
 
     --color-night: #FFFFFF;
@@ -15,5 +15,5 @@
     --bg-color-night-theme-btn-active: #E5E7EB;
     --bg-color-night-btn-active2: #2e394e;
     --bg-color-night: rgba(255,255,255,0.1);
-    --bg-color-night-divider: rgba(255,255,255,0.5);
+    --bg-color-night-divider: rgba(255,255,255,0.2);
 }
