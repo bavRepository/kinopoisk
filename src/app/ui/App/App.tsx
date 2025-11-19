@@ -4,17 +4,24 @@ import s from './app.module.css'
 import { ToastContainer } from 'react-toastify'
 import { useGlobalLoading } from '@/common/hooks/useGlobalLoading.ts'
 import { LinearProgress } from '@/common/components/LinearProgress/LinearProgress.tsx'
+import { useEffect, useState } from 'react'
 
 export const App = () => {
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(() => {
+    requestAnimationFrame(() => setLoaded(true))
+  }, [])
+
   const isGlobalLoading = useGlobalLoading()
   return (
-    <>
+    <div className={`${s.contentWrapper} ${loaded ? s.loaded : ''}`}>
       <Header />
       {isGlobalLoading && <LinearProgress />}
       <div className={s.layout}>
         <Routing />
       </div>
       <ToastContainer />
-    </>
+    </div>
   )
 }

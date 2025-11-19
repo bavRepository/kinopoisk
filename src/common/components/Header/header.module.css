@@ -1,29 +1,59 @@
 @import '@/common/styles/variables.css';
 
 .wrapper {
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease, transform 0.5s ease;
   background-color: var( --bg-color-day-header-footer);
-  border-bottom: 1px solid var(--bg-color-day-color);
+  border-bottom: 1px solid var(--bg-color-day-divider);
+}
+
+.backgroundDay {
+  background-color: var( --bg-color-day-header-footer);
+}
+
+.backgroundNight {
+  background-color: var( --bg-color-night-header-footer);
+  border-bottom: 1px solid var(--bg-color-night-divider);
 }
 
 .list {
   display: flex;
-  gap: 40px;
-  padding: 30px 0;
+  padding: 25px 0;
+  gap: 10px;
   justify-content: center;
+  li{
+    padding: 4px 12px;
+
+  }
+}
+
+.separator {
+  color: var( --color-gray);
+  align-self: center;
 }
 
 .link {
   padding: 8px 12px;
-  border-radius: 20px;
   font-weight: 500;
+  border-radius: 999px;
+  color: var(--color-day);
 }
+.link:hover {
+  color: var(--hover-color-link);
+}
+.linkDay {
+  color: var(--color-day);
+}
+.linkNight {
+  color: var(--color-night);
+}
+
 
 .activeDayLink {
   background-color: var(--bg-color-day-btn-active);
 }
 
-.activeLinkNight {
-  background-color: var(--bg-color-night-btn-active);
+.activeNightLink {
+  background-color: var(--bg-color-night-btn-active2);
 }
 
 
@@ -33,20 +63,25 @@
   align-items: center;
 }
 
-.btnDayNight {
+.btnChangeMode {
   padding-top: 5px;
-  transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+
   width: 40px;
   height: 40px;
   min-width: 40px;
   border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.2);
   /*border-color: var(--bg-color-day-btn-active);*/
-  background-color: var(--bg-color-day);
+  background-color: var(--bg-color-night);
   color: var(--bg-color-day-color);
   cursor: pointer;
 }
-.btnDayNight:hover {
+
+.btnChangeModeNight {
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.btnChangeMode:hover {
   transform: translateY(-1px);
   border: 1px solid #7B68EE;
 }
@@ -59,7 +94,7 @@
 
 .logo {
   display: block;
-  width: 140px;
+  width: 180px;
   opacity: 0.8;
   transition: opacity .3s;
   cursor: pointer;

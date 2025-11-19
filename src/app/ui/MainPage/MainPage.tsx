@@ -1,15 +1,13 @@
-import { useGetMeQuery } from '@/features/auth/api/authApi.ts'
+import { PopularMovies } from '@/features/movies/ui/PopularMovies.tsx'
 
 export const MainPage = () => {
-  const { data } = useGetMeQuery()
-
   return (
     <div>
       <h1>
         Main page
         <br />
-        {data?.login}
       </h1>
+      <PopularMovies />
     </div>
   )
 }
