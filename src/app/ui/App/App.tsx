@@ -2,8 +2,8 @@ import { Routing } from '@/common/routing'
 import { Header } from '@/common/components'
 import s from './app.module.css'
 import { ToastContainer } from 'react-toastify'
-import { useGlobalLoading } from '@/common/hooks/useGlobalLoading.ts'
-import { LinearProgress } from '@/common/components/LinearProgress/LinearProgress.tsx'
+// import { useGlobalLoading } from '@/common/hooks/useGlobalLoading.ts'
+// import { LinearProgress } from '@/common/components/LinearProgress/LinearProgress.tsx'
 import { useEffect, useState } from 'react'
 
 export const App = () => {
@@ -13,11 +13,11 @@ export const App = () => {
     requestAnimationFrame(() => setLoaded(true))
   }, [])
 
-  const isGlobalLoading = useGlobalLoading()
+  // const isGlobalLoading = useGlobalLoading()
   return (
     <div className={`${s.contentWrapper} ${loaded ? s.loaded : ''}`}>
       <Header />
-      {isGlobalLoading && <LinearProgress />}
+      {/*{isGlobalLoading && <LinearProgress />}*/}
       <div className={s.layout}>
         <Routing />
       </div>
