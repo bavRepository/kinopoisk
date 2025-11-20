@@ -1,5 +1,5 @@
 import { getRandomIndex } from '@/common/utils/getRandomIndex.ts'
-import type { Movie } from '@/features/movies/api/popularMoviesApi.types.ts'
+import type { Movie } from '@/features/movies/api/moviesApi.types.ts'
 
 export const getRandomBackgroundImageUrl = (arr: Movie[]) => {
   const index = getRandomIndex(arr)

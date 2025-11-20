@@ -1,11 +1,11 @@
 import { baseApi } from '@/app/api/baseApi.ts'
-import type { ApiResponse } from '@/features/movies/api/popularMoviesApi.types.ts'
+import type { moviesApiResponse } from './moviesApi.types.ts'
 
-export const popularMoviesApi = baseApi.injectEndpoints({
+export const moviesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     // fetchPlaylists: build.query<PlaylistsResponse, FetchPlaylistsArgs>({
     // удалим типизацию так как у нас уже есть responseSchema и перенесем аргументы
-    fetchPopularMovies: build.query<ApiResponse, { params?: { page?: number } }>({
+    fetchPopularMovies: build.query<moviesApiResponse, { params?: { page?: number } }>({
       query: (params) => {
         // query: (params: FetchPlaylistsArgs) => {
         // query: (params: FetchPlaylistsArgs) => {
@@ -19,4 +19,4 @@ export const popularMoviesApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useFetchPopularMoviesQuery } = popularMoviesApi
+export const { useFetchPopularMoviesQuery } = moviesApi

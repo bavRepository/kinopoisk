@@ -2,16 +2,27 @@ import { useMemo } from 'react'
 import { getRandomBackgroundImageUrl } from '@/common/utils/getRandomImage.ts'
 import { Container } from '@/common/components/Container/Container.tsx'
 import s from './promo.module.css'
-import type { PopularMovieApiResponse } from '@/features/movies/api/popularMoviesApi.types.ts'
+import type { moviesApiResponse } from '@/features/movies/api/moviesApi.types.ts'
 import { SearchForm } from '@/common/components/SearchForm/SearchForm.tsx'
+import Skeleton from 'react-loading-skeleton'
+import { Box } from '@/common/components/SkeletonBox/SkeletonBox.tsx'
 
 type Props = {
-  popularMovies: PopularMovieApiResponse
+  popularMovies: moviesApiResponse | undefined
+  isLoading: boolean
 }
-export const Promo = ({ popularMovies }: Props) => {
+export const Promo = ({ popularMovies, isLoading }: Props) => {
   const backgroundPictureUrl = useMemo(() => {
     return getRandomBackgroundImageUrl(popularMovies?.results || [])
   }, [popularMovies?.results])
+
+  const skeletonWrapped = (
+    <Box style={{ display: 'block' }}>
+      <Skeleton count={1} width={250} height={40} />
+      <Skeleton count={1} width={405} height={30} />
+      <Skeleton count={1} width={568} height={50} borderRadius={20} />
+    </Box>
+  )
 
   return (
     <section
@@ -21,11 +32,15 @@ export const Promo = ({ popularMovies }: Props) => {
       }}
     >
       <Container style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-        <div className={s.contentWrapper}>
-          <h1 className={s.title}>Welcome</h1>
-          <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
-          <SearchForm />
-        </div>
+        {isLoading ? (
+          skeletonWrapped
+        ) : (
+          <div className={s.contentWrapper}>
+            <h1 className={s.title}>Welcome</h1>
+            <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
+            <SearchForm />
+          </div>
+        )}
       </Container>
     </section>
   )

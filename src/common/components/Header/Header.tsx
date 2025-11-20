@@ -7,6 +7,7 @@ import MoonIcon from '@/assets/images/moon.svg'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import { changeThemeModeAC, selectThemeMode } from '@/app/model/app-slice.ts'
 import { Container } from '@/common/components/Container/Container.tsx'
+import { saveState } from '@/common/localStorage/localStorage.ts'
 export const Header = () => {
   const navItems = [
     { to: Path.Main, label: 'Main' },
@@ -26,7 +27,9 @@ export const Header = () => {
   // const logoutHandler = () => logout()
 
   const changeThemeHandler = () => {
-    dispatch(changeThemeModeAC({ themeMode: currentTheme === 'dark' ? 'light' : 'dark' }))
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
+    dispatch(changeThemeModeAC({ themeMode: newTheme }))
+    saveState(newTheme)
   }
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>

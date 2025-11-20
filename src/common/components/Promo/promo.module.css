@@ -8,13 +8,13 @@
     font-size: 48px;
     font-weight: 800;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: var(--color-night);
 }
 
 .subtitle {
     font-size: 24px;
     font-weight: 600;
-    color: #FFFFFF;
+    color: var(--color-night);
 }
 
 .backgroundImage {

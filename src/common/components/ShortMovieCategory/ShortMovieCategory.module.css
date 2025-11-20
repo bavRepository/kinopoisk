@@ -11,7 +11,7 @@
 .movies {
     padding-top: 30px;
     display: flex;
-    gap: 30px;
+    gap: 24px;
     flex-wrap: wrap;
 }
 
@@ -22,13 +22,18 @@
     border-radius: 999px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
     border: 1px solid #bdbfbf;
     color: var(--color-day);
 }
 
+
 .more:hover {
-    background-color: #e4eceb;
+    background-color: #e2e8f0;
+}
+
+.more.night:hover {
+    background-color: #141c2c;
 }
 
 .moreNightBorder {
@@ -40,7 +45,7 @@
 /*}*/
 
 .title {
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
     color: var(--color-day);
     font-size: 24px;
     font-weight: 600;

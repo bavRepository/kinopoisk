@@ -5,9 +5,9 @@ import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
 export const Movies = () => {
   const currentTheme = useAppSelector(selectThemeMode)
-  const themeBgColorClasses = currentTheme === 'dark' ? s.bgColorNight : ''
+  const themeBgColorClasses = currentTheme === 'dark' ? ' ' + s.bgColorNight : ''
   return (
-    <section className={s.movies + ' ' + themeBgColorClasses}>
+    <section className={s.movies + themeBgColorClasses}>
       <Container>
         <PopularMovies />
       </Container>

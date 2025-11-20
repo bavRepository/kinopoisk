@@ -8,7 +8,7 @@ export const baseApi = createApi({
     // await new Promise<void>((resolve) => {
     //   setTimeout(() => {
     //     resolve()
-    //   }, 1200)
+    //   }, 2200)
     // })
     const res = await fetchBaseQuery({
       // await fetchBaseQuery({

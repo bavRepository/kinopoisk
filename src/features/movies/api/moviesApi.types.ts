@@ -17,7 +17,7 @@ export type Movie = {
 }
 
 // Тип для общего ответа API
-export type PopularMovieApiResponse = {
+export type moviesApiResponse = {
   page: number
   results: Movie[]
   total_pages: number

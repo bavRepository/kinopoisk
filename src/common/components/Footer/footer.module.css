@@ -4,7 +4,7 @@
 }
 .footer {
     background-color: var(--bg-color-day-header-footer);
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
 }
 
 .day {

@@ -14,4 +14,9 @@ export const SOCKET_EVENTS = {
   PLAYLIST_UPDATED: 'tracks.playlist-updated',
 } as const
 
+export const IMAGES_PROCESSED = {
+  POSTER_API_PATH: 'https://image.tmdb.org/t/p/',
+  IMAGE_SIZE: 'w500',
+}
+
 export type SocketEvents = (typeof SOCKET_EVENTS)[keyof typeof SOCKET_EVENTS]
