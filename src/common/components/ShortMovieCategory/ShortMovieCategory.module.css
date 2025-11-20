@@ -2,60 +2,9 @@
     padding-top: 30px;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 40px;
-}
-
-.header:not(:first-child) {
-    padding-top: 50px;
-}
 
 .movies {
     display: flex;
     gap: 24px;
     flex-wrap: wrap;
 }
-
-.more {
-    padding: 6px 12px;
-    font-size: 14px;
-    background-color: inherit;
-    border-radius: 999px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid #bdbfbf;
-    color: var(--color-day);
-}
-
-
-.more:hover {
-    background-color: #e2e8f0;
-}
-
-.more.night:hover {
-    background-color: #141c2c;
-}
-
-.moreNightBorder {
-    border-color: var(--bg-color-night-btn-active2);
-}
-
-/*moreNightBorder {*/
-/*    border: 1px solid #b3c5c5;*/
-/*}*/
-
-.title {
-    transition: all 0.3s ease;
-    color: var(--color-day);
-    font-size: 24px;
-    font-weight: 600;
-}
-
-.colorNight {
-    color: var(--color-night);
-}
-

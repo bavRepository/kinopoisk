@@ -6,6 +6,7 @@ import type { moviesApiResponse } from '@/features/movies/api/moviesApi.types.ts
 import { SearchForm } from '@/common/components/SearchForm/SearchForm.tsx'
 import Skeleton from 'react-loading-skeleton'
 import { Box } from '@/common/components/SkeletonBox/SkeletonBox.tsx'
+import { IMAGES_API_SETTINGS } from '@/common/constants'
 
 type Props = {
   popularMovies: moviesApiResponse | undefined
@@ -28,7 +29,7 @@ export const Promo = ({ popularMovies, isLoading }: Props) => {
     <section
       className={s.promo + ' ' + s.backgroundImage}
       style={{
-        backgroundImage: `linear-gradient(rgba(4, 21, 45, 0) 0%, rgb(18, 18, 18) 79.17%), url("http://image.tmdb.org/t/p/original/${backgroundPictureUrl}")`,
+        backgroundImage: `linear-gradient(rgba(4, 21, 45, 0) 0%, rgb(18, 18, 18) 79.17%), url("${IMAGES_API_SETTINGS.API_PATH}/${IMAGES_API_SETTINGS.IMAGE_SIZE.original}/${backgroundPictureUrl}")`,
       }}
     >
       <Container style={{ display: 'flex', alignItems: 'center', width: '100%' }}>

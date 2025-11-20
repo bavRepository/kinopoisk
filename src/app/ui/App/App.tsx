@@ -16,14 +16,13 @@ export const App = () => {
   const dispatch = useAppDispatch()
   const theme = restoreState('light')
   dispatch(changeThemeModeAC({ themeMode: theme }))
-
+  // 'linear-gradient(90deg, #F3F4F6 40%, #FFFFFF 50%, #F3F4F6 60%)'
   useEffect(() => {
     requestAnimationFrame(() => setLoaded(true))
   }, [])
-  const skeletonGradientAnimation = 'linear-gradient(90deg, #F3F4F6 40%, #FFFFFF 50%, #F3F4F6 60%)'
-  // const isGlobalLoading = useGlobalLoading()
+  // const skeletonGradientAnimation = 'linear-gradient(90deg, transparent, var(--skeleton-highlight), transparent)'
   return (
-    <SkeletonTheme customHighlightBackground={skeletonGradientAnimation}>
+    <SkeletonTheme baseColor={'#c1c0c8'} highlightColor={'#E5E7EB'}>
       <div className={`${s.contentWrapper} ${loaded ? s.loaded : ''}`}>
         <Header />
         {/*{isGlobalLoading && <LinearProgress />}*/}

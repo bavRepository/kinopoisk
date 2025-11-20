@@ -23,8 +23,31 @@ export const moviesApi = baseApi.injectEndpoints({
         }
       },
     }),
+    getUpcomingMovies: build.query<moviesApiResponse, void>({
+      query: () => {
+        // query: (params: FetchPlaylistsArgs) => {
+        // query: (params: FetchPlaylistsArgs) => {
+        return {
+          url: '/movie/upcoming',
+        }
+      },
+    }),
+    getNowPlayingMovies: build.query<moviesApiResponse, void>({
+      query: () => {
+        // query: (params: FetchPlaylistsArgs) => {
+        // query: (params: FetchPlaylistsArgs) => {
+        return {
+          url: '/movie/now_playing',
+        }
+      },
+    }),
     // { params?: { backdrop_path?: string }}
   }),
 })
 
-export const { useGetPopularMoviesQuery, useGetTopRatedMoviesQuery } = moviesApi
+export const {
+  useGetPopularMoviesQuery,
+  useGetTopRatedMoviesQuery,
+  useGetUpcomingMoviesQuery,
+  useGetNowPlayingMoviesQuery,
+} = moviesApi

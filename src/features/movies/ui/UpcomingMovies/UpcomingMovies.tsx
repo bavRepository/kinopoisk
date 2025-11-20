@@ -1,13 +1,13 @@
 import { ShortMovieCategory } from '@/common/components/ShortMovieCategory/ShortMovieCategory.tsx'
-import { useGetPopularMoviesQuery } from '@/features/movies/api/moviesApi.ts'
+import { useGetUpcomingMoviesQuery } from '@/features/movies/api/moviesApi.ts'
 import { MoviesHeader } from '@/features/movies/ui/MoviesHeader/MoviesHeader.tsx'
 
-export const PopularMovies = () => {
-  const { data, isLoading } = useGetPopularMoviesQuery()
+export const UpcomingMovies = () => {
+  const { data, isLoading } = useGetUpcomingMoviesQuery()
 
   return (
     <>
-      <MoviesHeader title={'Popular Movies'} />
+      <MoviesHeader title={'Upcoming Movies'} />
       <ShortMovieCategory popularMovies={data} isLoading={isLoading} />
     </>
   )
