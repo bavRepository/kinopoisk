@@ -16,15 +16,15 @@
   border-bottom: 1px solid var(--bg-color-night-divider);
 }
 
+nav {
+  display: flex;
+}
+
 .list {
   display: flex;
   padding: 20px 0;
-  gap: 10px;
   justify-content: center;
-  li{
-    padding: 4px 12px;
-
-  }
+  gap: 10px;
 }
 
 .separator {
@@ -33,10 +33,11 @@
 }
 
 .link {
-  padding: 8px 12px;
+  padding: 8px 10px;
   font-weight: 500;
   border-radius: 999px;
   color: var(--color-day);
+  margin-left: 10px;
 }
 .link:hover {
   color: var(--hover-color-link);

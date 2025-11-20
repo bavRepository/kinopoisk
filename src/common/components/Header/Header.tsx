@@ -36,11 +36,11 @@ export const Header = () => {
     <header className={`${s.wrapper} ${currentTheme === 'light' ? s.backgroundDay : s.backgroundNight}`}>
       <Container>
         <div className={s.contentWrapper}>
-          <Link to={Path.Main}>
+          <Link to={Path.Main} aria-label={'Go to home page'}>
             <img className={s.logo} src={logo} alt='logo' />
           </Link>
 
-          <nav className={s.list}>
+          <nav>
             {/*<ul className={s.list}>*/}
             {/*  {navItems.map((item, index) => (*/}
             {/*    <li key={item.to}>*/}
@@ -52,12 +52,12 @@ export const Header = () => {
             {/*  ))}*/}
             {/*</ul>*/}
             {navItems.map((item, index) => (
-              <>
-                <NavLink key={item.to} to={item.to} className={navLinkClasses}>
+              <div key={item.to} className={s.list}>
+                <NavLink to={item.to} className={navLinkClasses}>
                   {item.label}
                 </NavLink>
                 {index !== navItems.length - 1 && <span className={s.separator}>|</span>}
-              </>
+              </div>
             ))}
           </nav>
           <button

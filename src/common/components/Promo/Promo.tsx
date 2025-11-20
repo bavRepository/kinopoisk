@@ -1,19 +1,18 @@
 import { useMemo } from 'react'
 import { getRandomBackgroundImageUrl } from '@/common/utils/getRandomImage.ts'
 import { Container } from '@/common/components/Container/Container.tsx'
-import s from './search.module.css'
-import { useAppSelector } from '@/common/hooks'
-import { selectThemeMode } from '@/app/model/app-slice.ts'
-import type { PopularMovieApiResponse, Movie } from '@/features/movies/api/popularMoviesApi.types.ts'
+import s from './promo.module.css'
+import type { PopularMovieApiResponse } from '@/features/movies/api/popularMoviesApi.types.ts'
+import { SearchForm } from '@/common/components/SearchForm/SearchForm.tsx'
+
 type Props = {
   popularMovies: PopularMovieApiResponse
 }
-export const Search = ({ popularMovies }: Props) => {
-  const currentTheme = useAppSelector(selectThemeMode)
+export const Promo = ({ popularMovies }: Props) => {
   const backgroundPictureUrl = useMemo(() => {
     return getRandomBackgroundImageUrl(popularMovies?.results || [])
-  }, [])
-  const inputClasses = currentTheme === 'light' ? s.searchInputDay : s.searchInputNight
+  }, [popularMovies?.results])
+
   return (
     <section
       className={s.search + ' ' + s.backgroundImage}
@@ -25,12 +24,7 @@ export const Search = ({ popularMovies }: Props) => {
         <div className={s.contentWrapper}>
           <h1 className={s.title}>Welcome</h1>
           <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
-          <form action='#'>
-            <input className={s.searchInput + ' ' + inputClasses} type='search' placeholder={'Search for a movie'} />
-            <button className={s.btnSearch} type={'submit'}>
-              Search
-            </button>
-          </form>
+          <SearchForm />
         </div>
       </Container>
     </section>
