@@ -30,10 +30,10 @@ export const Header = () => {
   }
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `${s.link} ${isActive ? (currentTheme === 'light' ? s.activeDayLink + ' ' + s.linkDay : s.activeNightLink + ' ' + s.linkNight) : currentTheme === 'light' ? s.linkDay : s.linkNight}`
+    `${s.link} ${isActive ? (currentTheme === 'dark' ? s.activeNightLink + ' ' + s.linkNight : '') : currentTheme === 'dark' ? s.linkNight : ''}`
 
   return (
-    <header className={`${s.wrapper} ${currentTheme === 'light' ? s.backgroundDay : s.backgroundNight}`}>
+    <header className={`${s.wrapper} ${currentTheme === 'dark' ? s.backgroundNight : ''}`}>
       <Container>
         <div className={s.contentWrapper}>
           <Link to={Path.Main} aria-label={'Go to home page'}>

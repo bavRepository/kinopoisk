@@ -1,0 +1,52 @@
+.contentWrapper {
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.movies {
+    padding-top: 30px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.more {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: inherit;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    border: 1px solid #bdbfbf;
+    color: var(--color-day);
+}
+
+.more:hover {
+    background-color: #e4eceb;
+}
+
+.moreNightBorder {
+    border-color: var(--bg-color-night-btn-active2);
+}
+
+/*moreNightBorder {*/
+/*    border: 1px solid #b3c5c5;*/
+/*}*/
+
+.title {
+    transition: all 0.5s ease;
+    color: var(--color-day);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.colorNight {
+    color: var(--color-night);
+}
+

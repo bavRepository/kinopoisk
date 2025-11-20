@@ -6,11 +6,6 @@
   border-bottom: 1px solid var(--bg-color-day-divider);
 }
 
-.backgroundDay {
-  background-color: var( --bg-color-day-header-footer);
-  border-bottom: 1px solid var(--bg-color-day-divider);
-}
-
 .backgroundNight {
   background-color: var( --bg-color-night-header-footer);
   border-bottom: 1px solid var(--bg-color-night-divider);
@@ -42,16 +37,9 @@ nav {
 .link:hover {
   color: var(--hover-color-link);
 }
-.linkDay {
-  color: var(--color-day);
-}
+
 .linkNight {
   color: var(--color-night);
-}
-
-
-.activeDayLink {
-  background-color: var(--bg-color-day-btn-active);
 }
 
 .activeNightLink {
@@ -67,20 +55,19 @@ nav {
 
 .btnChangeMode {
   padding-top: 5px;
-
   width: 40px;
   height: 40px;
   min-width: 40px;
   border-radius: 50%;
   border: 1px solid rgba(0,0,0,0.2);
-  /*border-color: var(--bg-color-day-btn-active);*/
-  background-color: var(--bg-color-night);
+  background-color: #eae2e2;
   color: var(--color-day);
   cursor: pointer;
 }
 
 .btnChangeModeNight {
   border: 1px solid rgba(255,255,255,0.2);
+  background-color: var(--bg-color-night-btn-active2);
 }
 
 .btnChangeMode:hover {

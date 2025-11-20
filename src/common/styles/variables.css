@@ -9,11 +9,11 @@
     --bg-color-day-divider: rgba(0,0,0,0.2);
 
 
-    --color-night: #FFFFFF;
+    --color-night: rgba(255,255,255,0.90);
     --bg-color-night-header-footer: rgba(20,28,44,0.95);
 
     --bg-color-night-theme-btn-active: #E5E7EB;
     --bg-color-night-btn-active2: #2e394e;
-    --bg-color-night: rgba(255,255,255,0.1);
+    --bg-color-night: #0B1120;
     --bg-color-night-divider: rgba(255,255,255,0.2);
 }

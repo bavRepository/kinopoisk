@@ -15,7 +15,7 @@ export const Promo = ({ popularMovies }: Props) => {
 
   return (
     <section
-      className={s.search + ' ' + s.backgroundImage}
+      className={s.promo + ' ' + s.backgroundImage}
       style={{
         backgroundImage: `linear-gradient(rgba(4, 21, 45, 0) 0%, rgb(18, 18, 18) 79.17%), url("http://image.tmdb.org/t/p/original/${backgroundPictureUrl}")`,
       }}
