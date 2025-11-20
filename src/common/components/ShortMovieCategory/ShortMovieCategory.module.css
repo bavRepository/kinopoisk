@@ -1,15 +1,19 @@
-.contentWrapper {
-
+.contentWrapper:not(:first-child) {
+    padding-top: 30px;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 40px;
+}
+
+.header:not(:first-child) {
+    padding-top: 50px;
 }
 
 .movies {
-    padding-top: 30px;
     display: flex;
     gap: 24px;
     flex-wrap: wrap;

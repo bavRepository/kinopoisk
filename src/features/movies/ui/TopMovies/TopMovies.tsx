@@ -1,11 +1,11 @@
+import { useGetTopRatedMoviesQuery } from '@/features/movies/api/moviesApi.ts'
 import { ShortMovieCategory } from '@/common/components/ShortMovieCategory/ShortMovieCategory.tsx'
-import { useGetPopularMoviesQuery } from '@/features/movies/api/moviesApi.ts'
+import s from '@/common/components/ShortMovieCategory/ShortMovieCategory.module.css'
 import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
-import s from '@/common/components/ShortMovieCategory/ShortMovieCategory.module.css'
 
-export const PopularMovies = () => {
-  const { data, isLoading } = useGetPopularMoviesQuery()
+export const TopMovies = () => {
+  const { data, isLoading } = useGetTopRatedMoviesQuery()
   const currentTheme = useAppSelector(selectThemeMode)
   const themeColorClasses = currentTheme === 'dark' ? ' ' + s.colorNight : ''
   return (

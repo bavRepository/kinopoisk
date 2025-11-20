@@ -5,11 +5,11 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const baseApi = createApi({
   refetchOnReconnect: true,
   baseQuery: async (args, api, extraOptions) => {
-    // await new Promise<void>((resolve) => {
-    //   setTimeout(() => {
-    //     resolve()
-    //   }, 2200)
-    // })
+    await new Promise<void>((resolve) => {
+      setTimeout(() => {
+        resolve()
+      }, 1200)
+    })
     const res = await fetchBaseQuery({
       // await fetchBaseQuery({
       baseUrl: import.meta.env.VITE_BASE_URL,
