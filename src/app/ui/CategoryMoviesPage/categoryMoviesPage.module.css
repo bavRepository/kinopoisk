@@ -1,0 +1,7 @@
+.contentWrapper {
+    padding-top: 60px;
+    background-color: var(--bg-color-day);
+}
+.contentWrapper.night {
+    background-color: var(--bg-color-night);
+}

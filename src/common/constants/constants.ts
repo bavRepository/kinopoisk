@@ -19,4 +19,13 @@ export const IMAGES_API_SETTINGS = {
   IMAGE_SIZE: { w500: 'w500', w185: 'w185', original: 'original' },
 } as const
 
+export const MOVIES_CATEGORIES = {
+  PopularMovies: 'Popular Movies',
+  TopRatedMovies: 'Top Rated Movies',
+  UpcomingMovies: 'Upcoming Movies',
+  NowPlayingMovies: 'Now Playing Movies',
+} as const
+
+export type MoviesCategories = (typeof MOVIES_CATEGORIES)[keyof typeof MOVIES_CATEGORIES]
+
 export type SocketEvents = (typeof SOCKET_EVENTS)[keyof typeof SOCKET_EVENTS]

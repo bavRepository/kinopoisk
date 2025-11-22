@@ -1,11 +1,10 @@
 import s from './movies.module.css'
 import { Container } from '@/common/components/Container/Container.tsx'
-import { PopularMovies } from '@/features/movies/ui/PopularMovies/PopularMovies.tsx'
 import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
-import { TopMovies } from '@/features/movies/ui/TopMovies/TopMovies.tsx'
-import { UpcomingMovies } from '@/features/movies/ui/UpcomingMovies/UpcomingMovies.tsx'
-import { NowPlayingMovies } from '@/features/movies/ui/NowPlayingMovies/NowPlayingMovies.tsx'
+import { MoviesModel } from '@/features/movies/ui/MoviesModel/MoviesModel.tsx'
+import { MOVIES_CATEGORIES } from '@/common/constants'
+
 export const Movies = () => {
   const currentTheme = useAppSelector(selectThemeMode)
   const themeBgColorClasses = currentTheme === 'dark' ? ' ' + s.bgColorNight : ''
@@ -13,10 +12,9 @@ export const Movies = () => {
   return (
     <section className={s.movies + themeBgColorClasses}>
       <Container>
-        <PopularMovies />
-        <TopMovies />
-        <UpcomingMovies />
-        <NowPlayingMovies />
+        {Object.values(MOVIES_CATEGORIES).map((category) => {
+          return <MoviesModel key={category} full={false} category={category} />
+        })}
       </Container>
     </section>
   )

@@ -9,11 +9,11 @@ export const Box = ({ children, style }: Props) => {
     <div
       style={{
         display: 'flex',
-        gap: '24px',
+        gap: '22px',
         lineHeight: 3,
-        padding: '1rem',
         marginBottom: '0.5rem',
-        width: 100,
+        width: '100%',
+        flexWrap: 'wrap',
         ...style,
       }}
     >

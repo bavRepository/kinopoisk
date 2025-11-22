@@ -1,5 +1,5 @@
 import type { moviesApiResponse } from '@/features/movies/api/moviesApi.types.ts'
-import s from './ShortMovieCategory.module.css'
+import s from './ShortMovieCategoryModel.module.css'
 import { MovieItem } from '@/common/components/MovieItem/MovieItem.tsx'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -7,14 +7,14 @@ import { Box } from '@/common/components/SkeletonBox/SkeletonBox.tsx'
 
 type Props = {
   isLoading: boolean
-  popularMovies: moviesApiResponse | undefined
+  moviesResponse: moviesApiResponse | undefined
 }
-export const ShortMovieCategory = ({ popularMovies, isLoading }: Props) => {
-  const shortMoviesList = !isLoading ? popularMovies?.results.slice(0, 6) : []
+export const ShortMovieCategoryModel = ({ moviesResponse, isLoading }: Props) => {
+  const shortMoviesList = !isLoading ? moviesResponse?.results.slice(0, 6) : []
 
   const skeletonWrapped = (
     <Box>
-      {Array(6)
+      {Array(shortMoviesList?.length)
         .fill(null)
         .map((_, id) => (
           <div key={id}>
@@ -31,7 +31,9 @@ export const ShortMovieCategory = ({ popularMovies, isLoading }: Props) => {
         skeletonWrapped
       ) : (
         <div className={s.movies}>
-          <MovieItem shortMoviesList={shortMoviesList} />
+          {shortMoviesList?.map((movie) => {
+            return <MovieItem movie={movie} />
+          })}
         </div>
       )}
     </div>

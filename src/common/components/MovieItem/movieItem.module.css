@@ -1,9 +1,9 @@
 .itemWrapper {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    width: 178px;
-    min-height: 265px;
+    width: 175px;
+    min-height: 325px;
+    gap: 12px;
 }
 
 .img {
@@ -34,8 +34,9 @@
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    width: 178px;
-    height: 265px;
+    width: 175px;
+    min-height: 265px;
+
 }
 .imgWrapper:hover .heartWrapper {
    transform: translateY(0);
