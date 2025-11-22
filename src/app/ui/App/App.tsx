@@ -12,22 +12,21 @@ import { useGlobalLoading } from '@/common/hooks/useGlobalLoading.ts'
 import { LinearProgress } from '@/common/components/LinearProgress/LinearProgress.tsx'
 
 export const App = () => {
-  // const isGlobalLoading = useGlobalLoading()
-  // const [loaded, setLoaded] = useState(false)
+  const isGlobalLoading = useGlobalLoading()
+  const [loaded, setLoaded] = useState(false)
   const dispatch = useAppDispatch()
   const theme = restoreState('light')
   dispatch(changeThemeModeAC({ themeMode: theme }))
   // 'linear-gradient(90deg, #F3F4F6 40%, #FFFFFF 50%, #F3F4F6 60%)'
-  // useEffect(() => {
-  //   requestAnimationFrame(() => setLoaded(true))
-  // }, [])
+  useEffect(() => {
+    requestAnimationFrame(() => setLoaded(true))
+  }, [])
   // const skeletonGradientAnimation = 'linear-gradient(90deg, transparent, var(--skeleton-highlight), transparent)'
   return (
     <SkeletonTheme baseColor={'#c1c0c8'} highlightColor={'#E5E7EB'}>
-      {/*<div className={`${s.contentWrapper} ${loaded ? s.loaded : ''}`}>*/}
-      <div className={s.contentWrapper}>
+      <div className={`${s.contentWrapper} ${loaded ? s.loaded : ''}`}>
         <Header />
-        {/*{isGlobalLoading && <LinearProgress />}*/}
+        {isGlobalLoading && <LinearProgress />}
         {/*{isGlobalLoading && <LinearProgress />}*/}
         <Routing />
         <ToastContainer />

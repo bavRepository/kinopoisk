@@ -1,4 +1,3 @@
-import type { moviesApiResponse } from '@/features/movies/api/moviesApi.types.ts'
 import s from './movieCategoryModel.module.css'
 import { MovieItem } from '@/common/components/MovieItem/MovieItem.tsx'
 import Skeleton from 'react-loading-skeleton'
@@ -12,7 +11,6 @@ import {
   useGetTopRatedMoviesQuery,
   useGetUpcomingMoviesQuery,
 } from '@/features/movies/api/moviesApi.ts'
-import { useCallback } from 'react'
 
 const FULL_MOVIES_SIZE_ON_PAGE = 20
 const BRIEF_MOVIES_SIZE_ON_PAGE = 6

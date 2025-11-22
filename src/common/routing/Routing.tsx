@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router'
 import { MainPage } from '@/app/ui/MainPage/MainPage.tsx'
 import { PageNotFound } from '@/common/components'
 import { CategoryMoviesPage } from '@/app/ui/CategoryMoviesPage/CategoryMoviesPage.tsx'
-import { MovieCategoryModel } from '@/common/MovieCategoryModel/MovieCategoryModel.tsx'
 import { MoviesModel } from '@/features/movies/ui/MoviesModel/MoviesModel.tsx'
 import { MOVIES_CATEGORIES } from '@/common/constants'
 
@@ -52,11 +51,3 @@ export const Routing = () => (
     <Route path={Path.NotFound} element={<PageNotFound />} />
   </Routes>
 )
-
-const PopularDefault = () => {
-  return <>PopularDefault</>
-}
-
-const TopDefault = () => {
-  return <>TopDefault</>
-}
