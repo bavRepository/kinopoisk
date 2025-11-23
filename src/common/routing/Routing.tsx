@@ -4,6 +4,7 @@ import { PageNotFound } from '@/common/components'
 import { CategoryMoviesPage } from '@/app/ui/CategoryMoviesPage/CategoryMoviesPage.tsx'
 import { MoviesModel } from '@/features/movies/ui/MoviesModel/MoviesModel.tsx'
 import { MOVIES_CATEGORIES, type MoviesCategories } from '@/common/constants'
+import { FavoritesPage } from '@/app/ui/App/FavoritesPage/FavoritesPage.tsx'
 
 export const Path = {
   Main: '/',
@@ -40,6 +41,7 @@ export const Routing = () => (
         )
       })}
     </Route>
+    <Route path={Path.Favorites} element={<FavoritesPage />} />
 
     {/*<Route path='profile/*' element={<Profile />}>*/}
     {/*  <Route path='info' element={<ProfileInfo />} />*/}

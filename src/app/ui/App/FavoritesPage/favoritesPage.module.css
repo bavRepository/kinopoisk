@@ -1,0 +1,20 @@
+.movieList {
+    height: calc(100vh - 61px - 77px);
+    padding: 60px 0;
+    background-color: var(--bg-color-day);
+
+}
+.movieList.night {
+    background-color: var(--bg-color-night);
+}
+
+.title {
+    margin-bottom: 50px;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-day);
+}
+
+.title.night {
+    color: var(--color-night);
+}

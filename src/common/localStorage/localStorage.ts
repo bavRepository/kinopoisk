@@ -1,5 +1,7 @@
 const LOCAL_STORAGE_KEY = 'theme'
 
+export const localStorageFavoriteKey = 'favorites'
+
 export function saveState<T>(state: T, key: string = LOCAL_STORAGE_KEY) {
   const stateAsString = JSON.stringify(state)
   localStorage.setItem(key, stateAsString)

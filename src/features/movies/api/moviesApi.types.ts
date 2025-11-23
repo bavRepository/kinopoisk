@@ -1,4 +1,6 @@
 // Типы для данных фильма
+import { moviesApi } from '@/features/movies/api/moviesApi.ts'
+
 export type Movie = {
   adult: boolean
   backdrop_path: string
@@ -16,10 +18,21 @@ export type Movie = {
   vote_count: number
 }
 
+export type MovieDomainType = Movie & { favorite: boolean }
+
+export type BaseMoviesResponse<T = MovieDomainType[]> = {
+  page: number
+  results: T
+  total_pages: number
+  total_results: number
+}
+
 // common API answer
-export type moviesApiResponse = {
+export type MoviesApiResponse = {
   page: number
   results: Movie[]
   total_pages: number
   total_results: number
 }
+export type ApiEndpointName = keyof typeof moviesApi.endpoints
+// Domain data

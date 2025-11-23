@@ -3,21 +3,28 @@ import { MovieItem } from '@/common/components/MovieItem/MovieItem.tsx'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { Box } from '@/common/components/SkeletonBox/SkeletonBox.tsx'
-import { Container } from '@/common/components/Container/Container.tsx'
-import type { moviesApiResponse } from '@/features/movies/api/moviesApi.types.ts'
+import type { BaseMoviesResponse } from '@/features/movies/api/moviesApi.types.ts'
+import type { MoviesCategories } from '@/common/constants'
 
 const FULL_MOVIES_SIZE_ON_PAGE = 20
 const BRIEF_MOVIES_SIZE_ON_PAGE = 6
 
 type Props = {
-  full: boolean
+  full?: boolean
   style?: React.CSSProperties
-  data: moviesApiResponse | undefined
-  isLoading: boolean
+  apiResponseData: BaseMoviesResponse | undefined
+  isLoading?: boolean
+  categoryMovieItemName: MoviesCategories
 }
 
-export const MovieCategoryModel = ({ full, style, data, isLoading }: Props) => {
-  const movieList = data?.results
+export const MovieCategoryModel = ({
+  full = true,
+  style,
+  apiResponseData,
+  isLoading,
+  categoryMovieItemName,
+}: Props) => {
+  const movieList = apiResponseData?.results
 
   const formatedMovieList = full ? movieList : movieList?.slice(0, BRIEF_MOVIES_SIZE_ON_PAGE)
 
@@ -41,16 +48,18 @@ export const MovieCategoryModel = ({ full, style, data, isLoading }: Props) => {
   )
 
   return (
-    <Container>
+    <>
       {isLoading ? (
         skeletonWrapped
       ) : (
         <div className={s.movies}>
           {formatedMovieList?.map((movie) => {
-            return <MovieItem key={movie.id} movie={movie} style={style} />
+            return (
+              <MovieItem key={movie.id} movie={movie} style={style} categoryMovieItemName={categoryMovieItemName} />
+            )
           })}
         </div>
       )}
-    </Container>
+    </>
   )
 }

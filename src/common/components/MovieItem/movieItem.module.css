@@ -50,6 +50,7 @@
     position: absolute;
     top: 15px;
     right: 15px;
+    border: none;
     border-radius: 50%;
     justify-content: center;
     align-items: center;
@@ -58,7 +59,12 @@
     display: flex;
     opacity: 0;
     transform: translateY(-5px);
+
 }
+.heartWrapper.favoriteActive {
+    opacity: 1;
+}
+
 .heartWrapper:hover {
     background-color: var(--hover-color-link);
 }
@@ -67,7 +73,9 @@
     width: 20px;
     height: 20px;
     fill: var(--color-gray);
-
+}
+.heart.favoriteActive {
+    fill: var(--bg-color-active-favorite);
 }
 
 .rating {
@@ -85,6 +93,8 @@
     font-weight: 600;
     border-radius: 50%;
 }
+
+
 
 .rating.low {
     background-color: #a60416;

@@ -1,47 +1,60 @@
 import { baseApi } from '@/app/api/baseApi.ts'
-import type { moviesApiResponse } from './moviesApi.types.ts'
+import type { BaseMoviesResponse, Movie } from './moviesApi.types.ts'
 
 export const moviesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    // fetchPlaylists: build.query<PlaylistsResponse, FetchPlaylistsArgs>({
-    // удалим типизацию так как у нас уже есть responseSchema и перенесем аргументы
-    getPopularMovies: build.query<moviesApiResponse, void>({
+    getPopularMovies: build.query<BaseMoviesResponse, void>({
       query: () => {
-        // query: (params: FetchPlaylistsArgs) => {
-        // query: (params: FetchPlaylistsArgs) => {
         return {
           url: '/movie/popular',
         }
       },
+      transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
+        return {
+          ...data,
+          results: data.results.map((movie) => ({ ...movie, favorite: false })),
+        }
+      },
     }),
-    getTopRatedMovies: build.query<moviesApiResponse, void>({
+    getTopRatedMovies: build.query<BaseMoviesResponse, void>({
       query: () => {
-        // query: (params: FetchPlaylistsArgs) => {
-        // query: (params: FetchPlaylistsArgs) => {
         return {
           url: '/movie/top_rated',
         }
       },
+      transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
+        return {
+          ...data,
+          results: data.results.map((movie) => ({ ...movie, favorite: false })),
+        }
+      },
     }),
-    getUpcomingMovies: build.query<moviesApiResponse, void>({
+    getUpcomingMovies: build.query<BaseMoviesResponse, void>({
       query: () => {
-        // query: (params: FetchPlaylistsArgs) => {
-        // query: (params: FetchPlaylistsArgs) => {
         return {
           url: '/movie/upcoming',
         }
       },
+      transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
+        return {
+          ...data,
+          results: data.results.map((movie) => ({ ...movie, favorite: false })),
+        }
+      },
     }),
-    getNowPlayingMovies: build.query<moviesApiResponse, void>({
+    getNowPlayingMovies: build.query<BaseMoviesResponse, void>({
       query: () => {
-        // query: (params: FetchPlaylistsArgs) => {
-        // query: (params: FetchPlaylistsArgs) => {
         return {
           url: '/movie/now_playing',
         }
       },
+      transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
+        return {
+          ...data,
+          results: data.results.map((movie) => ({ ...movie, favorite: false })),
+        }
+      },
     }),
-    // { params?: { backdrop_path?: string }}
   }),
 })
 
