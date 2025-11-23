@@ -20,8 +20,8 @@ export const Promo = ({ popularMovies, isLoading }: Props) => {
   const skeletonWrapped = (
     <Box style={{ display: 'block' }}>
       <Skeleton count={1} width={250} height={40} />
-      <Skeleton count={1} width={405} height={30} />
-      <Skeleton count={1} width={568} height={50} borderRadius={20} />
+      <Skeleton count={1} width={405} height={30} style={{ marginTop: '45px' }} />
+      <Skeleton count={1} width={568} height={50} borderRadius={20} style={{ marginTop: '25px' }} />
     </Box>
   )
 

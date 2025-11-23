@@ -10,6 +10,7 @@ import { changeThemeModeAC } from '@/app/model/app-slice.ts'
 import { SkeletonTheme } from 'react-loading-skeleton'
 import { useGlobalLoading } from '@/common/hooks/useGlobalLoading.ts'
 import { LinearProgress } from '@/common/components/LinearProgress/LinearProgress.tsx'
+import { ScrollToTop } from '@/common/components/ScrollToTop/ScrollToTop.tsx'
 
 export const App = () => {
   const isGlobalLoading = useGlobalLoading()
@@ -25,6 +26,7 @@ export const App = () => {
   return (
     <SkeletonTheme baseColor={'#c1c0c8'} highlightColor={'#E5E7EB'}>
       <div className={`${s.contentWrapper} ${loaded ? s.loaded : ''}`}>
+        <ScrollToTop />
         <Header />
         {isGlobalLoading && <LinearProgress />}
         {/*{isGlobalLoading && <LinearProgress />}*/}

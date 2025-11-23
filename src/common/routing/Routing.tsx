@@ -3,7 +3,7 @@ import { MainPage } from '@/app/ui/MainPage/MainPage.tsx'
 import { PageNotFound } from '@/common/components'
 import { CategoryMoviesPage } from '@/app/ui/CategoryMoviesPage/CategoryMoviesPage.tsx'
 import { MoviesModel } from '@/features/movies/ui/MoviesModel/MoviesModel.tsx'
-import { MOVIES_CATEGORIES } from '@/common/constants'
+import { MOVIES_CATEGORIES, type MoviesCategories } from '@/common/constants'
 
 export const Path = {
   Main: '/',
@@ -19,22 +19,23 @@ export const Path = {
 } as const
 
 export const SubMovieNavItems = [
-  { path: Path.Popular, category: MOVIES_CATEGORIES.PopularMovies },
-  { path: Path.TopRated, category: MOVIES_CATEGORIES.TopRatedMovies },
-  { path: Path.Upcoming, category: MOVIES_CATEGORIES.UpcomingMovies },
-  { path: Path.NowPlaying, category: MOVIES_CATEGORIES.NowPlayingMovies },
+  { path: Path.Popular, name: MOVIES_CATEGORIES.PopularMovies },
+  { path: Path.TopRated, name: MOVIES_CATEGORIES.TopRatedMovies },
+  { path: Path.Upcoming, name: MOVIES_CATEGORIES.UpcomingMovies },
+  { path: Path.NowPlaying, name: MOVIES_CATEGORIES.NowPlayingMovies },
 ]
+
+export type SubMovieNavItemsType = { path: string; name: MoviesCategories }
 
 export const Routing = () => (
   <Routes>
     <Route path={Path.Main} element={<MainPage />} />
     <Route path={Path.Movies} element={<CategoryMoviesPage />}>
       {SubMovieNavItems.map((route) => {
-        const { path, category } = route
         return (
           <Route
-            path={path}
-            element={<MoviesModel category={category} style={{ width: '216px', height: '330.59px' }} />}
+            path={route.path}
+            element={<MoviesModel categoryMovieItem={route} style={{ width: '216px', height: '330.59px' }} />}
           />
         )
       })}

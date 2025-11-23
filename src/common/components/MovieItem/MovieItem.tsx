@@ -1,6 +1,6 @@
 import s from './movieItem.module.css'
 import type { Movie } from '@/features/movies/api/moviesApi.types.ts'
-import { IMAGES_API_SETTINGS, MOVIES_RAITING_VALUES } from '@/common/constants'
+import { IMAGES_API_SETTINGS, MOVIES_RATING_VALUES } from '@/common/constants'
 import { Link } from 'react-router'
 import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
@@ -14,9 +14,9 @@ export const MovieItem = ({ movie, style }: Props) => {
   const currentTheme = useAppSelector(selectThemeMode)
   const rating = Number(movie.vote_average.toFixed(1))
   const ratingClass =
-    rating <= MOVIES_RAITING_VALUES.low
+    rating <= MOVIES_RATING_VALUES.low
       ? ' ' + s.low
-      : rating <= MOVIES_RAITING_VALUES.medium
+      : rating <= MOVIES_RATING_VALUES.medium
         ? ' ' + s.medium
         : ' ' + s.high
   return (

@@ -3,7 +3,7 @@ import { Container } from '@/common/components/Container/Container.tsx'
 import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { MoviesModel } from '@/features/movies/ui/MoviesModel/MoviesModel.tsx'
-import { MOVIES_CATEGORIES } from '@/common/constants'
+import { SubMovieNavItems } from '@/common/routing'
 
 export const Movies = () => {
   const currentTheme = useAppSelector(selectThemeMode)
@@ -12,8 +12,8 @@ export const Movies = () => {
   return (
     <section className={s.movies + themeBgColorClasses}>
       <Container>
-        {Object.values(MOVIES_CATEGORIES).map((category) => {
-          return <MoviesModel key={category} full={false} category={category} />
+        {SubMovieNavItems.map((categoryMovieItem) => {
+          return <MoviesModel key={categoryMovieItem.path} full={false} categoryMovieItem={categoryMovieItem} />
         })}
       </Container>
     </section>

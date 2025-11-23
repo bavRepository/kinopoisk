@@ -20,7 +20,7 @@ export const MOVIES_CATEGORIES = {
   NowPlayingMovies: 'Now Playing Movies',
 } as const
 
-export const MOVIES_RAITING_VALUES = {
+export const MOVIES_RATING_VALUES = {
   low: 4,
   medium: 7,
 } as const

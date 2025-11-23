@@ -10,8 +10,8 @@ export const Box = ({ children, style }: Props) => {
       style={{
         display: 'flex',
         gap: '22px',
-        lineHeight: 3,
-        marginBottom: '0.5rem',
+        // lineHeight: 3,
+        // marginBottom: '0.5rem',
         width: '100%',
         flexWrap: 'wrap',
         ...style,

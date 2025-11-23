@@ -20,7 +20,7 @@ export const MovieMenu = ({ theme }: Props) => {
             return (
               <li key={menuItem.path}>
                 <NavLink to={menuItem.path} className={isActiveMenuItemClasses}>
-                  {menuItem.category}
+                  {menuItem.name}
                 </NavLink>
               </li>
             )

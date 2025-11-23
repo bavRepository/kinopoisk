@@ -32,6 +32,7 @@ export const MovieCategoryModel = ({ full, style, data, isLoading }: Props) => {
               width={style?.width ? style.width : 175}
               height={style?.height ? style.height : 265}
               borderRadius={16}
+              style={{ marginBottom: '10px' }}
             />
             <Skeleton count={1} width={110} height={24} borderRadius={6} />
           </div>
