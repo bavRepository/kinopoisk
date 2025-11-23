@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 175px;
-    min-height: 325px;
+    min-height: 265px;
     gap: 12px;
 }
 
@@ -35,7 +35,7 @@
     border-radius: 16px;
     overflow: hidden;
     width: 175px;
-    min-height: 265px;
+    height: 265px;
 
 }
 .imgWrapper:hover .heartWrapper {

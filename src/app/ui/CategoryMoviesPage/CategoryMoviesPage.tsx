@@ -9,11 +9,11 @@ export const CategoryMoviesPage = () => {
   const theme = useAppSelector(selectThemeMode)
 
   return (
-    <div className={s.contentWrapper + (theme === 'dark' ? ' ' + s.night : '')}>
+    <section className={s.movieList + (theme === 'dark' ? ' ' + s.night : '')}>
       <Container>
         <MovieMenu theme={theme} />
         <Outlet />
       </Container>
-    </div>
+    </section>
   )
 }

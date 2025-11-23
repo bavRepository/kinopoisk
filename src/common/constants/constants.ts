@@ -1,9 +1,3 @@
-export const AUTH_TOKEN = 'auth-token'
-export const AUTH_KEYS = {
-  accessToken: 'musicfun-access-token',
-  refreshToken: 'musicfun-refresh-token',
-} as const
-
 export const SOCKET_EVENTS = {
   TRACK_PUBLISHED: 'tracks.track-published',
   TRACK_ADDED_TO_PLAYLIST: 'tracks.track-added-to-playlist',
@@ -24,6 +18,11 @@ export const MOVIES_CATEGORIES = {
   TopRatedMovies: 'Top Rated Movies',
   UpcomingMovies: 'Upcoming Movies',
   NowPlayingMovies: 'Now Playing Movies',
+} as const
+
+export const MOVIES_RAITING_VALUES = {
+  low: 4,
+  medium: 7,
 } as const
 
 export type MoviesCategories = (typeof MOVIES_CATEGORIES)[keyof typeof MOVIES_CATEGORIES]

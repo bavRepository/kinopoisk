@@ -4,13 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { Box } from '@/common/components/SkeletonBox/SkeletonBox.tsx'
 import { Container } from '@/common/components/Container/Container.tsx'
-import { MOVIES_CATEGORIES, type MoviesCategories } from '@/common/constants'
-import {
-  useGetNowPlayingMoviesQuery,
-  useGetPopularMoviesQuery,
-  useGetTopRatedMoviesQuery,
-  useGetUpcomingMoviesQuery,
-} from '@/features/movies/api/moviesApi.ts'
+import type { moviesApiResponse } from '@/features/movies/api/moviesApi.types.ts'
 
 const FULL_MOVIES_SIZE_ON_PAGE = 20
 const BRIEF_MOVIES_SIZE_ON_PAGE = 6
@@ -18,33 +12,11 @@ const BRIEF_MOVIES_SIZE_ON_PAGE = 6
 type Props = {
   full: boolean
   style?: React.CSSProperties
-  category: MoviesCategories
+  data: moviesApiResponse | undefined
+  isLoading: boolean
 }
 
-export const MovieCategoryModel = ({ full, style, category }: Props) => {
-  const popularResponse = useGetPopularMoviesQuery()
-  const topRatedResponse = useGetTopRatedMoviesQuery()
-  const nowPlayingResponse = useGetNowPlayingMoviesQuery()
-  const upcomingResponse = useGetUpcomingMoviesQuery()
-
-  let response
-  switch (category) {
-    case `${MOVIES_CATEGORIES.NowPlayingMovies}`:
-      response = nowPlayingResponse
-      break
-    case `${MOVIES_CATEGORIES.TopRatedMovies}`:
-      response = topRatedResponse
-      break
-    case `${MOVIES_CATEGORIES.PopularMovies}`:
-      response = popularResponse
-      break
-    case `${MOVIES_CATEGORIES.UpcomingMovies}`:
-      response = upcomingResponse
-      break
-    default:
-      response = popularResponse
-  }
-  const { data, isLoading } = response
+export const MovieCategoryModel = ({ full, style, data, isLoading }: Props) => {
   const movieList = data?.results
 
   const formatedMovieList = full ? movieList : movieList?.slice(0, BRIEF_MOVIES_SIZE_ON_PAGE)
@@ -58,7 +30,7 @@ export const MovieCategoryModel = ({ full, style, category }: Props) => {
             <Skeleton
               count={1}
               width={style?.width ? style.width : 175}
-              height={style?.minHeight ? style.minHeight : 265}
+              height={style?.height ? style.height : 265}
               borderRadius={16}
             />
             <Skeleton count={1} width={110} height={24} borderRadius={6} />

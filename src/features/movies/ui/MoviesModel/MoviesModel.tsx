@@ -1,6 +1,7 @@
 import { type MoviesCategories } from '@/common/constants'
 import { MovieCategoryModel } from '@/common/MovieCategoryModel/MovieCategoryModel.tsx'
 import { MoviesHeader } from '@/features/movies/ui/MoviesHeader/MoviesHeader.tsx'
+import { useCategoryResponseData } from '@/common/hooks/useCategoryResponseData.ts'
 
 type Props = {
   full?: boolean
@@ -9,10 +10,11 @@ type Props = {
 }
 
 export const MoviesModel = ({ full = true, category, style }: Props) => {
+  const { data, isLoading } = useCategoryResponseData(category)
   return (
     <>
       <MoviesHeader full={full} title={category} />
-      <MovieCategoryModel full={full} style={style} category={category} />
+      <MovieCategoryModel full={full} style={style} data={data} isLoading={isLoading} />
     </>
   )
 }

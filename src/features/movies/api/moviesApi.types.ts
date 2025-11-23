@@ -16,7 +16,7 @@ export type Movie = {
   vote_count: number
 }
 
-// Тип для общего ответа API
+// common API answer
 export type moviesApiResponse = {
   page: number
   results: Movie[]

@@ -1,6 +1,6 @@
 import s from './movieItem.module.css'
 import type { Movie } from '@/features/movies/api/moviesApi.types.ts'
-import { IMAGES_API_SETTINGS } from '@/common/constants'
+import { IMAGES_API_SETTINGS, MOVIES_RAITING_VALUES } from '@/common/constants'
 import { Link } from 'react-router'
 import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
@@ -9,13 +9,19 @@ type Props = {
   style?: React.CSSProperties
   movie: Movie
 }
+
 export const MovieItem = ({ movie, style }: Props) => {
   const currentTheme = useAppSelector(selectThemeMode)
   const rating = Number(movie.vote_average.toFixed(1))
-  const ratingClass = rating <= 4 ? ' ' + s.low : rating <= 7 ? ' ' + s.medium : ' ' + s.high
+  const ratingClass =
+    rating <= MOVIES_RAITING_VALUES.low
+      ? ' ' + s.low
+      : rating <= MOVIES_RAITING_VALUES.medium
+        ? ' ' + s.medium
+        : ' ' + s.high
   return (
     <>
-      <div className={s.itemWrapper} style={style}>
+      <div className={s.itemWrapper} style={{ width: style?.width, minHeight: style?.height }}>
         <div className={s.imgWrapper} style={style}>
           <Link to={'#'}>
             <img
