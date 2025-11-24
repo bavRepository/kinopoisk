@@ -1,5 +1,5 @@
 .movieList {
-    height: calc(100vh - 61px - 77px);
+    min-height: calc(100vh - 61px - 77px);
     padding: 60px 0;
     background-color: var(--bg-color-day);
 
@@ -12,9 +12,9 @@
     margin-bottom: 50px;
     font-size: 32px;
     font-weight: 700;
-    color: var(--color-day);
+    color: var(--bg-color-night);
 }
 
 .title.night {
-    color: var(--color-night);
+    color: var(--bg-color-day);
 }

@@ -22,7 +22,7 @@ export const App = () => {
   useEffect(() => {
     requestAnimationFrame(() => setLoaded(true))
   }, [])
-  // const skeletonGradientAnimation = 'linear-gradient(90deg, transparent, var(--skeleton-highlight), transparent)'
+
   return (
     <SkeletonTheme baseColor={'#c1c0c8'} highlightColor={'#E5E7EB'}>
       <div className={`${s.contentWrapper} ${loaded ? s.loaded : ''}`}>

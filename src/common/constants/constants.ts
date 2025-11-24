@@ -8,11 +8,6 @@ export const SOCKET_EVENTS = {
   PLAYLIST_UPDATED: 'tracks.playlist-updated',
 } as const
 
-export const IMAGES_API_SETTINGS = {
-  API_PATH: 'https://image.tmdb.org/t/p/',
-  IMAGE_SIZE: { w500: 'w500', w185: 'w185', original: 'original' },
-} as const
-
 export const MOVIES_CATEGORIES = {
   PopularMovies: 'Popular Movies',
   TopRatedMovies: 'Top Rated Movies',
@@ -25,6 +20,6 @@ export const MOVIES_RATING_VALUES = {
   medium: 7,
 } as const
 
-export type MoviesCategories = (typeof MOVIES_CATEGORIES)[keyof typeof MOVIES_CATEGORIES]
+export type MoviesCategories = (typeof MOVIES_CATEGORIES)[keyof typeof MOVIES_CATEGORIES] | undefined
 
 export type SocketEvents = (typeof SOCKET_EVENTS)[keyof typeof SOCKET_EVENTS]

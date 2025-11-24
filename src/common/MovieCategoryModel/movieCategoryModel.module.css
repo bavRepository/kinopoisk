@@ -1,5 +1,4 @@
-
-.movies {
+.moviesCategory {
     display: flex;
     gap: 30px 22px;
     flex-wrap: wrap;

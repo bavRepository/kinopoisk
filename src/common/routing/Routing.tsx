@@ -36,7 +36,12 @@ export const Routing = () => (
         return (
           <Route
             path={route.path}
-            element={<MoviesModel categoryMovieItem={route} style={{ width: '216px', height: '330.59px' }} />}
+            element={
+              <MoviesModel
+                categoryMovieItem={route}
+                options={{ style: { width: '216px', height: '330px' }, full: true }}
+              />
+            }
           />
         )
       })}

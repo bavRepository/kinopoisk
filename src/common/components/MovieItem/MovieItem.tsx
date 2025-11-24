@@ -1,19 +1,19 @@
 import s from './movieItem.module.css'
 import type { MovieDomainType } from '@/features/movies/api/moviesApi.types.ts'
-import { IMAGES_API_SETTINGS, MOVIES_RATING_VALUES, type MoviesCategories } from '@/common/constants'
+import { MOVIES_RATING_VALUES } from '@/common/constants'
 import { Link } from 'react-router'
 import { useAppSelector } from '@/common/hooks'
-import { selectThemeMode } from '@/app/model/app-slice.ts'
+import { selectImageConfiguration, selectThemeMode } from '@/app/model/app-slice.ts'
 import { localStorageFavoriteKey, restoreState, saveState } from '@/common/localStorage/localStorage.ts'
 import { useUpdateCachedDataFavorite } from '@/common/hooks/useUpdateCachedDataFavorite.ts'
 
 type Props = {
   style?: React.CSSProperties
   movie: MovieDomainType
-  categoryMovieItemName: MoviesCategories
 }
 
-export const MovieItem = ({ movie, style, categoryMovieItemName }: Props) => {
+export const MovieItem = ({ movie, style }: Props) => {
+  const imageSettings = useAppSelector(selectImageConfiguration)
   const currentTheme = useAppSelector(selectThemeMode)
   const changeFavoriteCacheData = useUpdateCachedDataFavorite()
   const rating = Number(movie.vote_average.toFixed(1))
@@ -25,14 +25,17 @@ export const MovieItem = ({ movie, style, categoryMovieItemName }: Props) => {
       saveState(moviesIdFromLS, localStorageFavoriteKey)
     } else {
       if (moviesIdFromLS?.includes(movie.id)) {
-        changeFavoriteCacheData(categoryMovieItemName, movie, !movie.favorite)
+        changeFavoriteCacheData(movie.id, !movie.favorite)
         return
       }
       moviesIdFromLS.push(movie.id)
       saveState(moviesIdFromLS, localStorageFavoriteKey)
     }
-    changeFavoriteCacheData(categoryMovieItemName, movie, !movie.favorite)
+    changeFavoriteCacheData(movie.id, !movie.favorite)
   }
+
+  const posterSize =
+    imageSettings?.backdrop_sizes && imageSettings.poster_sizes.length > 0 ? imageSettings.backdrop_sizes[2] : 'w185'
 
   const ratingClasses =
     rating <= MOVIES_RATING_VALUES.low
@@ -40,7 +43,6 @@ export const MovieItem = ({ movie, style, categoryMovieItemName }: Props) => {
       : rating <= MOVIES_RATING_VALUES.medium
         ? ' ' + s.medium
         : ' ' + s.high
-
   return (
     <>
       <div className={s.itemWrapper} style={{ width: style?.width, minHeight: style?.height }}>
@@ -48,7 +50,7 @@ export const MovieItem = ({ movie, style, categoryMovieItemName }: Props) => {
           <Link to={'#'}>
             <img
               key={movie.id}
-              src={`${IMAGES_API_SETTINGS.API_PATH + IMAGES_API_SETTINGS.IMAGE_SIZE.w185}${movie.poster_path}`}
+              src={`${imageSettings?.secure_base_url}/${posterSize}/${movie.poster_path}`}
               alt={movie.title}
               className={s.img}
             />

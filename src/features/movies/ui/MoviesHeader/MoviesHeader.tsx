@@ -6,7 +6,7 @@ import { Path, type SubMovieNavItemsType } from '@/common/routing'
 
 type Props = {
   categoryMovieItem: SubMovieNavItemsType
-  full: boolean
+  full: boolean | undefined
 }
 
 export const MoviesHeader = ({ categoryMovieItem, full }: Props) => {
@@ -15,16 +15,14 @@ export const MoviesHeader = ({ categoryMovieItem, full }: Props) => {
   return (
     <div className={s.header}>
       <h2 className={s.title + themeColor}>{categoryMovieItem.name}</h2>
-      <a href='#'>
-        {!full && (
-          <Link
-            to={`${Path.Movies}/${categoryMovieItem.path}`}
-            className={s.more + (currentTheme === 'dark' ? themeColor + ' ' + s.moreNightBorder + ' ' + s.night : '')}
-          >
-            View more
-          </Link>
-        )}
-      </a>
+      {!full && (
+        <Link
+          to={`${Path.Movies}/${categoryMovieItem.path}`}
+          className={s.more + (currentTheme === 'dark' ? themeColor + ' ' + s.moreNightBorder + ' ' + s.night : '')}
+        >
+          View more
+        </Link>
+      )}
     </div>
   )
 }

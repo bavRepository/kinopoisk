@@ -2,7 +2,7 @@ import { MOVIES_CATEGORIES, type MoviesCategories } from '@/common/constants'
 import { moviesApi } from '@/features/movies/api/moviesApi.ts'
 import type { ApiEndpointName } from '@/features/movies/api/moviesApi.types.ts'
 
-export const changeFavorite = (category: MoviesCategories) => {
+export const getEndPointName = (category: MoviesCategories) => {
   let actionType
   switch (category) {
     case MOVIES_CATEGORIES.PopularMovies:

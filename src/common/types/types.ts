@@ -1,5 +1,5 @@
-import * as z from 'zod'
-import type { coverSchema, currentUserReactionSchema, imagesSchema, tagSchema, userSchema } from '@/common/shemas'
+// import * as z from 'zod'
+// import type { coverSchema, currentUserReactionSchema, imagesSchema, tagSchema, userSchema } from '@/common/shemas'
 // export type Tag = {
 //   id: string
 //   name: string
@@ -22,10 +22,10 @@ import type { coverSchema, currentUserReactionSchema, imagesSchema, tagSchema, u
 //   url: string
 // }
 
-export type Tag = z.infer<typeof tagSchema>
-export type User = z.infer<typeof userSchema>
-export type Cover = z.infer<typeof coverSchema>
-export type Images = z.infer<typeof imagesSchema>
-export type CurrentUserReaction = z.infer<typeof currentUserReactionSchema>
-
+// export type Tag = z.infer<typeof tagSchema>
+// export type User = z.infer<typeof userSchema>
+// export type Cover = z.infer<typeof coverSchema>
+// // export type Images = z.infer<typeof imagesSchema>
+// export type CurrentUserReaction = z.infer<typeof currentUserReactionSchema>
+//
 export type RequestStatus = 'idle' | 'loading' | 'succeeded' | 'failed'

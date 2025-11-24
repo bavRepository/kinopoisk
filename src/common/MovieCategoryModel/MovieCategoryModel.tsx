@@ -3,30 +3,25 @@ import { MovieItem } from '@/common/components/MovieItem/MovieItem.tsx'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { Box } from '@/common/components/SkeletonBox/SkeletonBox.tsx'
-import type { BaseMoviesResponse } from '@/features/movies/api/moviesApi.types.ts'
-import type { MoviesCategories } from '@/common/constants'
-
+import type { MovieDomainType } from '@/features/movies/api/moviesApi.types.ts'
+import type { OptionsType } from '@/features/movies/ui/MoviesCategory.tsx'
+//
 const FULL_MOVIES_SIZE_ON_PAGE = 20
 const BRIEF_MOVIES_SIZE_ON_PAGE = 6
-
+//
 type Props = {
-  full?: boolean
-  style?: React.CSSProperties
-  apiResponseData: BaseMoviesResponse | undefined
+  options?: OptionsType
+  responseMovieApiData: MovieDomainType[] | undefined
   isLoading?: boolean
-  categoryMovieItemName: MoviesCategories
 }
 
-export const MovieCategoryModel = ({
-  full = true,
-  style,
-  apiResponseData,
-  isLoading,
-  categoryMovieItemName,
-}: Props) => {
-  const movieList = apiResponseData?.results
+export const MovieCategoryModel = ({ options, responseMovieApiData, isLoading }: Props) => {
+  const movieList = responseMovieApiData
 
-  const formatedMovieList = full ? movieList : movieList?.slice(0, BRIEF_MOVIES_SIZE_ON_PAGE)
+  const full = options?.full ?? false
+  const style = options?.style ?? undefined
+
+  const formatedSizeMovieList = full ? movieList : movieList?.slice(0, BRIEF_MOVIES_SIZE_ON_PAGE)
 
   const skeletonWrapped = (
     <Box>
@@ -46,19 +41,18 @@ export const MovieCategoryModel = ({
         ))}
     </Box>
   )
+  const mappedMovies = formatedSizeMovieList?.map((movie) => {
+    return <MovieItem key={movie.id} movie={movie} style={style} />
+  })
 
   return (
     <>
       {isLoading ? (
         skeletonWrapped
+      ) : options?.favoritesOnly ? (
+        mappedMovies
       ) : (
-        <div className={s.movies}>
-          {formatedMovieList?.map((movie) => {
-            return (
-              <MovieItem key={movie.id} movie={movie} style={style} categoryMovieItemName={categoryMovieItemName} />
-            )
-          })}
-        </div>
+        <div className={s.moviesCategory}>{mappedMovies}</div>
       )}
     </>
   )

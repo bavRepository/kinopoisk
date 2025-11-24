@@ -2,17 +2,20 @@ import { useMemo } from 'react'
 import { getRandomBackgroundImageUrl } from '@/common/utils/getRandomImage.ts'
 import { Container } from '@/common/components/Container/Container.tsx'
 import s from './promo.module.css'
-import type { moviesApiResponse } from '@/features/movies/api/moviesApi.types.ts'
 import { SearchForm } from '@/common/components/SearchForm/SearchForm.tsx'
 import Skeleton from 'react-loading-skeleton'
 import { Box } from '@/common/components/SkeletonBox/SkeletonBox.tsx'
-import { IMAGES_API_SETTINGS } from '@/common/constants'
+import type { BaseMoviesResponse } from '@/features/movies/api/moviesApi.types.ts'
+import { useAppSelector } from '@/common/hooks'
+import { selectImageConfiguration } from '@/app/model/app-slice.ts'
 
 type Props = {
-  popularMovies: moviesApiResponse | undefined
+  popularMovies: BaseMoviesResponse | undefined
   isLoading: boolean
 }
 export const Promo = ({ popularMovies, isLoading }: Props) => {
+  const imageSettings = useAppSelector(selectImageConfiguration)
+
   const backgroundPictureUrl = useMemo(() => {
     return getRandomBackgroundImageUrl(popularMovies?.results || [])
   }, [popularMovies?.results])
@@ -25,23 +28,32 @@ export const Promo = ({ popularMovies, isLoading }: Props) => {
     </Box>
   )
 
+  const containerStyles = { display: 'flex', alignItems: 'center', width: '100%' }
+
+  const backdropSize =
+    imageSettings?.backdrop_sizes && imageSettings.backdrop_sizes.length > 0
+      ? imageSettings.backdrop_sizes[3]
+      : 'original'
+  if (isLoading)
+    return (
+      <section className={s.promo}>
+        <Container style={containerStyles}>{skeletonWrapped}</Container>
+      </section>
+    )
+
   return (
     <section
       className={s.promo + ' ' + s.backgroundImage}
       style={{
-        backgroundImage: `linear-gradient(rgba(4, 21, 45, 0) 0%, rgb(18, 18, 18) 79.17%), url("${IMAGES_API_SETTINGS.API_PATH}/${IMAGES_API_SETTINGS.IMAGE_SIZE.original}/${backgroundPictureUrl}")`,
+        backgroundImage: `linear-gradient(rgba(4, 21, 45, 0) 0%, rgb(18, 18, 18) 79.17%), url("${imageSettings?.secure_base_url}/${backdropSize}/${backgroundPictureUrl}")`,
       }}
     >
-      <Container style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-        {isLoading ? (
-          skeletonWrapped
-        ) : (
-          <div className={s.contentWrapper}>
-            <h1 className={s.title}>Welcome</h1>
-            <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
-            <SearchForm />
-          </div>
-        )}
+      <Container style={containerStyles}>
+        <div className={s.contentWrapper}>
+          <h1 className={s.title}>Welcome</h1>
+          <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
+          <SearchForm />
+        </div>
       </Container>
     </section>
   )

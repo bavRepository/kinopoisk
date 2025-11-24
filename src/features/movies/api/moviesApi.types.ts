@@ -21,10 +21,14 @@ export type Movie = {
 export type MovieDomainType = Movie & { favorite: boolean }
 
 export type BaseMoviesResponse<T = MovieDomainType[]> = {
-  page: number
   results: T
-  total_pages: number
-  total_results: number
+  dates?: {
+    maximum: string
+    minimum: string
+  }
+  page?: number
+  total_pages?: number
+  total_results?: number
 }
 
 // common API answer

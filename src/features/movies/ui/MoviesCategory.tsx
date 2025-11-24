@@ -1,19 +1,25 @@
-import s from './movies.module.css'
+import s from './moviesCategory.module.css'
 import { Container } from '@/common/components/Container/Container.tsx'
 import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { MoviesModel } from '@/features/movies/ui/MoviesModel/MoviesModel.tsx'
 import { SubMovieNavItems } from '@/common/routing'
 
-export const Movies = () => {
+export type OptionsType = { full: boolean; favoritesOnly?: boolean; style?: React.CSSProperties }
+
+type PropsType = {
+  options?: OptionsType
+}
+
+export const MoviesCategory = ({ options }: PropsType) => {
   const currentTheme = useAppSelector(selectThemeMode)
   const themeBgColorClasses = currentTheme === 'dark' ? ' ' + s.bgColorNight : ''
 
   return (
-    <section className={s.movies + themeBgColorClasses}>
-      <Container>
+    <section className={s.movies + themeBgColorClasses} style={options?.style}>
+      <Container style={options?.favoritesOnly ? options?.style : undefined}>
         {SubMovieNavItems.map((categoryMovieItem) => {
-          return <MoviesModel key={categoryMovieItem.path} full={false} categoryMovieItem={categoryMovieItem} />
+          return <MoviesModel key={categoryMovieItem.path} options={options} categoryMovieItem={categoryMovieItem} />
         })}
       </Container>
     </section>
