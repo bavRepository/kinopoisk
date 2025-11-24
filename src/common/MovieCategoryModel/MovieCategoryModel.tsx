@@ -1,27 +1,32 @@
 import s from './movieCategoryModel.module.css'
-import { MovieItem } from '@/common/components/MovieItem/MovieItem.tsx'
+import { type modifiedMovieType, MovieItem } from '@/common/components/MovieItem/MovieItem.tsx'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { Box } from '@/common/components/SkeletonBox/SkeletonBox.tsx'
 import type { MovieDomainType } from '@/features/movies/api/moviesApi.types.ts'
 import type { OptionsType } from '@/features/movies/ui/MoviesCategory.tsx'
+import { useEffect, useState } from 'react'
 //
 const FULL_MOVIES_SIZE_ON_PAGE = 20
 const BRIEF_MOVIES_SIZE_ON_PAGE = 6
 //
 type Props = {
   options?: OptionsType
-  responseMovieApiData: MovieDomainType[] | undefined
+  movies: MovieDomainType[]
   isLoading?: boolean
 }
 
-export const MovieCategoryModel = ({ options, responseMovieApiData, isLoading }: Props) => {
-  const movieList = responseMovieApiData
+export const MovieCategoryModel = ({ options, movies, isLoading }: Props) => {
+  const [favoriteMoviesListFromLS, setFavoriteMoviesListFromLS] = useState<modifiedMovieType[]>([])
+
+  useEffect(() => {
+    setFavoriteMoviesListFromLS(options?.isFavorite ? movies : [])
+  }, [movies])
 
   const full = options?.full ?? false
   const style = options?.style ?? undefined
 
-  const formatedSizeMovieList = full ? movieList : movieList?.slice(0, BRIEF_MOVIES_SIZE_ON_PAGE)
+  const formatedSizeMovieList = full ? movies : movies?.slice(0, BRIEF_MOVIES_SIZE_ON_PAGE)
 
   const skeletonWrapped = (
     <Box>
@@ -41,19 +46,17 @@ export const MovieCategoryModel = ({ options, responseMovieApiData, isLoading }:
         ))}
     </Box>
   )
-  const mappedMovies = formatedSizeMovieList?.map((movie) => {
-    return <MovieItem key={movie.id} movie={movie} style={style} />
+  const mappedMovies = (options?.isFavorite ? favoriteMoviesListFromLS : formatedSizeMovieList)?.map((movie) => {
+    return (
+      <MovieItem
+        key={movie.id}
+        movie={movie}
+        style={style}
+        options={options}
+        setFavoriteMoviesListFromLS={setFavoriteMoviesListFromLS}
+      />
+    )
   })
 
-  return (
-    <>
-      {isLoading ? (
-        skeletonWrapped
-      ) : options?.favoritesOnly ? (
-        mappedMovies
-      ) : (
-        <div className={s.moviesCategory}>{mappedMovies}</div>
-      )}
-    </>
-  )
+  return <>{isLoading ? skeletonWrapped : <div className={s.moviesCategory}>{mappedMovies}</div>})</>
 }

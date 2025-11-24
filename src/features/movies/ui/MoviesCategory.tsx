@@ -5,7 +5,7 @@ import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { MoviesModel } from '@/features/movies/ui/MoviesModel/MoviesModel.tsx'
 import { SubMovieNavItems } from '@/common/routing'
 
-export type OptionsType = { full: boolean; favoritesOnly?: boolean; style?: React.CSSProperties }
+export type OptionsType = { full: boolean; isFavorite?: boolean; style?: React.CSSProperties }
 
 type PropsType = {
   options?: OptionsType
@@ -17,7 +17,7 @@ export const MoviesCategory = ({ options }: PropsType) => {
 
   return (
     <section className={s.movies + themeBgColorClasses} style={options?.style}>
-      <Container style={options?.favoritesOnly ? options?.style : undefined}>
+      <Container>
         {SubMovieNavItems.map((categoryMovieItem) => {
           return <MoviesModel key={categoryMovieItem.path} options={options} categoryMovieItem={categoryMovieItem} />
         })}

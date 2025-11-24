@@ -18,7 +18,6 @@ export const App = () => {
   const dispatch = useAppDispatch()
   const theme = restoreState('light')
   dispatch(changeThemeModeAC({ themeMode: theme }))
-  // 'linear-gradient(90deg, #F3F4F6 40%, #FFFFFF 50%, #F3F4F6 60%)'
   useEffect(() => {
     requestAnimationFrame(() => setLoaded(true))
   }, [])
@@ -29,7 +28,6 @@ export const App = () => {
         <ScrollToTop />
         <Header />
         {isGlobalLoading && <LinearProgress />}
-        {/*{isGlobalLoading && <LinearProgress />}*/}
         <Routing />
         <ToastContainer />
         <Footer />

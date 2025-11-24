@@ -6,32 +6,67 @@ import { useAppSelector } from '@/common/hooks'
 import { selectImageConfiguration, selectThemeMode } from '@/app/model/app-slice.ts'
 import { localStorageFavoriteKey, restoreState, saveState } from '@/common/localStorage/localStorage.ts'
 import { useUpdateCachedDataFavorite } from '@/common/hooks/useUpdateCachedDataFavorite.ts'
+import type { OptionsType } from '@/features/movies/ui/MoviesCategory.tsx'
 
 type Props = {
   style?: React.CSSProperties
-  movie: MovieDomainType
+  movie: MovieDomainType | modifiedMovieType
+  options: OptionsType | undefined
+  setFavoriteMoviesListFromLS: React.Dispatch<React.SetStateAction<modifiedMovieType[]>>
 }
 
-export const MovieItem = ({ movie, style }: Props) => {
+export type modifiedMovieType = {
+  id: MovieDomainType['id']
+  title: MovieDomainType['title']
+  poster_path: MovieDomainType['poster_path']
+  vote_average: MovieDomainType['vote_average']
+  favorite?: boolean
+}
+
+export const MovieItem = ({ movie, style, options, setFavoriteMoviesListFromLS }: Props) => {
   const imageSettings = useAppSelector(selectImageConfiguration)
   const currentTheme = useAppSelector(selectThemeMode)
   const changeFavoriteCacheData = useUpdateCachedDataFavorite()
-  const rating = Number(movie.vote_average.toFixed(1))
+
+  const isFavorite = options?.isFavorite || false
+  const rating = movie.vote_average != null ? Number(movie.vote_average.toFixed(1)) : 0
 
   const toggleLikeHandler = () => {
-    let moviesIdFromLS: number[] = restoreState([], localStorageFavoriteKey)
-    if (movie.favorite) {
-      moviesIdFromLS = moviesIdFromLS?.filter((item) => item !== movie.id)
+    let moviesIdFromLS: modifiedMovieType[] = restoreState([], localStorageFavoriteKey)
+
+    // Логика такая если в пропсах в options мы получаем isFavorite true значит мы запускаем этот компонент со страницы Favorite и значит у нас отрисуется массив элементов который пришел с Локала и лёг в useState в компаненте выше и который мы передали сюда в качестве data для отрисовки если снова же isFavorite в компаненте выше
+    if (isFavorite) {
+      setFavoriteMoviesListFromLS(() => {
+        return moviesIdFromLS.filter((movieFromLs) => movieFromLs.id !== movie.id)
+      })
+
+      moviesIdFromLS = moviesIdFromLS?.filter((movieLS) => movieLS.id !== movie.id)
       saveState(moviesIdFromLS, localStorageFavoriteKey)
+      changeFavoriteCacheData(movie.id, false)
     } else {
-      if (moviesIdFromLS?.includes(movie.id)) {
-        changeFavoriteCacheData(movie.id, !movie.favorite)
-        return
+      if (movie.favorite) {
+        moviesIdFromLS = moviesIdFromLS?.filter((movieLS) => movieLS.id !== movie.id)
+
+        saveState(moviesIdFromLS, localStorageFavoriteKey)
+      } else {
+        const index = moviesIdFromLS.findIndex((lsItem) => lsItem.id === movie.id)
+
+        if (index != -1) {
+          changeFavoriteCacheData(movie.id, !movie.favorite)
+          return
+        }
+
+        const modifiedMovie = {
+          id: movie.id,
+          title: movie.title,
+          poster_path: movie.poster_path,
+          vote_average: movie.vote_average,
+        }
+        moviesIdFromLS.push(modifiedMovie)
+        saveState(moviesIdFromLS, localStorageFavoriteKey)
       }
-      moviesIdFromLS.push(movie.id)
-      saveState(moviesIdFromLS, localStorageFavoriteKey)
+      changeFavoriteCacheData(movie.id, !movie.favorite)
     }
-    changeFavoriteCacheData(movie.id, !movie.favorite)
   }
 
   const posterSize =
@@ -56,9 +91,12 @@ export const MovieItem = ({ movie, style }: Props) => {
             />
           </Link>
 
-          <button className={`${s.heartWrapper} ${movie.favorite ? s.favoriteActive : ''}`} onClick={toggleLikeHandler}>
+          <button
+            className={`${s.heartWrapper} ${isFavorite || movie.favorite ? s.favoriteActive : ''}`}
+            onClick={toggleLikeHandler}
+          >
             <svg
-              className={`${s.heart} ${movie.favorite ? s.favoriteActive : ''}`}
+              className={`${s.heart} ${isFavorite || movie.favorite ? s.favoriteActive : ''}`}
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 24 24'
               aria-hidden='true'
