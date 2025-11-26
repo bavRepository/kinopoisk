@@ -6,18 +6,18 @@ import { Box } from '@/common/components/SkeletonBox/SkeletonBox.tsx'
 import type { MovieDomainType } from '@/features/movies/api/moviesApi.types.ts'
 import type { OptionsType } from '@/features/movies/ui/MoviesCategory.tsx'
 import { useEffect, useState } from 'react'
-//
+
 const FULL_MOVIES_SIZE_ON_PAGE = 20
 const BRIEF_MOVIES_SIZE_ON_PAGE = 6
-//
+
 type Props = {
   options?: OptionsType
-  movies: MovieDomainType[]
+  movies: MovieDomainType[] | undefined
   isLoading?: boolean
 }
 
 export const MovieCategoryModel = ({ options, movies, isLoading }: Props) => {
-  const [favoriteMoviesListFromLS, setFavoriteMoviesListFromLS] = useState<modifiedMovieType[]>([])
+  const [favoriteMoviesListFromLS, setFavoriteMoviesListFromLS] = useState<modifiedMovieType[] | undefined>([])
 
   useEffect(() => {
     setFavoriteMoviesListFromLS(options?.isFavorite ? movies : [])
@@ -58,5 +58,5 @@ export const MovieCategoryModel = ({ options, movies, isLoading }: Props) => {
     )
   })
 
-  return <>{isLoading ? skeletonWrapped : <div className={s.moviesCategory}>{mappedMovies}</div>})</>
+  return <>{isLoading ? skeletonWrapped : <div className={s.moviesCategory}>{mappedMovies}</div>}</>
 }

@@ -1,6 +1,11 @@
 // Типы для данных фильма
 import { moviesApi } from '@/features/movies/api/moviesApi.ts'
 
+export type FetchMoviesArgs = {
+  query?: string
+  page?: number
+}
+
 export type Movie = {
   adult: boolean
   backdrop_path: string

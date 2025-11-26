@@ -1,24 +1,27 @@
-import { useMemo } from 'react'
+import { useEffect } from 'react'
 import { getRandomBackgroundImageUrl } from '@/common/utils/getRandomImage.ts'
 import { Container } from '@/common/components/Container/Container.tsx'
 import s from './promo.module.css'
 import { SearchForm } from '@/common/components/SearchForm/SearchForm.tsx'
 import Skeleton from 'react-loading-skeleton'
 import { Box } from '@/common/components/SkeletonBox/SkeletonBox.tsx'
-import type { BaseMoviesResponse } from '@/features/movies/api/moviesApi.types.ts'
 import { useAppSelector } from '@/common/hooks'
 import { selectImageConfiguration } from '@/app/model/app-slice.ts'
+import { useGetPromoMoviesQuery } from '@/features/movies/api/moviesApi.ts'
 
 type Props = {
-  popularMovies: BaseMoviesResponse | undefined
-  isLoading: boolean
+  isLoadingHandler: (isLoading: boolean) => void
 }
-export const Promo = ({ popularMovies, isLoading }: Props) => {
+export const Promo = ({ isLoadingHandler }: Props) => {
   const imageSettings = useAppSelector(selectImageConfiguration)
 
-  const backgroundPictureUrl = useMemo(() => {
-    return getRandomBackgroundImageUrl(popularMovies?.results || [])
-  }, [popularMovies?.results])
+  const { data, isLoading } = useGetPromoMoviesQuery()
+
+  useEffect(() => {
+    isLoadingHandler(isLoading)
+  }, [isLoading])
+
+  const backgroundPictureUrl = getRandomBackgroundImageUrl(data?.results || [])
 
   const skeletonWrapped = (
     <Box style={{ display: 'block' }}>
@@ -52,7 +55,9 @@ export const Promo = ({ popularMovies, isLoading }: Props) => {
         <div className={s.contentWrapper}>
           <h1 className={s.title}>Welcome</h1>
           <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
-          <SearchForm />
+          <div className={s.formWrapper}>
+            <SearchForm />
+          </div>
         </div>
       </Container>
     </section>

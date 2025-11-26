@@ -2,9 +2,13 @@ import { Route, Routes } from 'react-router'
 import { MainPage } from '@/app/ui/MainPage/MainPage.tsx'
 import { PageNotFound } from '@/common/components'
 import { CategoryMoviesPage } from '@/app/ui/CategoryMoviesPage/CategoryMoviesPage.tsx'
-import { MoviesModel } from '@/features/movies/ui/MoviesModel/MoviesModel.tsx'
 import { MOVIES_CATEGORIES, type MoviesCategories } from '@/common/constants'
 import { FavoritesPage } from '@/app/ui/App/FavoritesPage/FavoritesPage.tsx'
+import { PopularMovies } from '@/app/ui/CategoryMoviesPage/PopularMovies/PopularMovies.tsx'
+import { UpcomingMovies } from '@/app/ui/CategoryMoviesPage/UpcomingMovies/UpcomingMovies.tsx'
+import { TopRatedMovies } from '@/app/ui/CategoryMoviesPage/TopRatedMovies/TopRatedMovies.tsx'
+import { NowPlayingMovies } from '@/app/ui/CategoryMoviesPage/NowPlayingMovies/NowPlayingMovies.tsx'
+import { SearchPage } from '@/app/ui/SearchPage/SearchPage.tsx'
 
 export const Path = {
   Main: '/',
@@ -32,30 +36,13 @@ export const Routing = () => (
   <Routes>
     <Route path={Path.Main} element={<MainPage />} />
     <Route path={Path.Movies} element={<CategoryMoviesPage />}>
-      {SubMovieNavItems.map((route) => {
-        return (
-          <Route
-            path={route.path}
-            element={
-              <MoviesModel
-                categoryMovieItem={route}
-                options={{ style: { width: '216px', height: '330px' }, full: true }}
-              />
-            }
-          />
-        )
-      })}
+      <Route path={Path.Popular} element={<PopularMovies />} />
+      <Route path={Path.Upcoming} element={<UpcomingMovies />} />
+      <Route path={Path.TopRated} element={<TopRatedMovies />} />
+      <Route path={Path.NowPlaying} element={<NowPlayingMovies />} />
     </Route>
+    <Route path={Path.Search} element={<SearchPage />} />
     <Route path={Path.Favorites} element={<FavoritesPage />} />
-
-    {/*<Route path='profile/*' element={<Profile />}>*/}
-    {/*  <Route path='info' element={<ProfileInfo />} />*/}
-    {/*  <Route path='settings' element={<ProfileSettings />} />*/}
-    {/*</Route>*/}
-
-    {/*<Route path={Path.Tracks} element={<TracksPage />} />*/}
-    {/*<Route path={Path.Profile} element={<ProfilePage />} />*/}
-    {/*<Route path={Path.OauthRedirect} element={<OAuthCallback />} />*/}
     <Route path={Path.NotFound} element={<PageNotFound />} />
   </Routes>
 )

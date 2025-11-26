@@ -15,6 +15,7 @@
     font-size: 24px;
     font-weight: 600;
     color: var(--color-night);
+    margin-top: 35px;
 }
 
 .backgroundImage {
@@ -25,9 +26,9 @@
 
 .contentWrapper {
     width: 100%;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
 }
 
+
+.formWrapper {
+    margin-top: 25px;
+}

@@ -13,6 +13,7 @@ export const MOVIES_CATEGORIES = {
   TopRatedMovies: 'Top Rated Movies',
   UpcomingMovies: 'Upcoming Movies',
   NowPlayingMovies: 'Now Playing Movies',
+  SearchMovies: 'Search Movies',
 } as const
 
 export const MOVIES_RATING_VALUES = {

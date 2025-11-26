@@ -28,9 +28,11 @@ nav {
 }
 
 .link {
-  padding: 8px 10px;
+  display: flex;
+  padding: 4px 12px;
   font-weight: 500;
-  border-radius: 999px;
+  font-size: 16px;
+  line-height: 24px;
   color: var(--color-day);
   margin-left: 10px;
 }
@@ -38,14 +40,22 @@ nav {
   color: var(--hover-color-link);
 }
 
-.linkNight {
+.link.night {
+  color: rgba(200, 205, 211, 0.68);
+}
+
+.link.active {
+  border-radius: 999px;
+}
+
+.link.active.night {
+  background-color: var(--bg-color-night-btn-active2);
   color: var(--color-night);
 }
 
-.activeNightLink {
-  background-color: var(--bg-color-night-btn-active2);
+.link.active.day {
+  background-color: rgb(221, 230, 227);
 }
-
 
 .loginContainer {
   display: flex;
@@ -54,7 +64,7 @@ nav {
 }
 
 .btnChangeMode {
-  padding-top: 5px;
+  padding-top: 3px;
   width: 40px;
   height: 40px;
   min-width: 40px;
@@ -65,7 +75,8 @@ nav {
   cursor: pointer;
 }
 
-.btnChangeModeNight {
+
+.btnChangeMode.night{
   border: 1px solid rgba(255,255,255,0.2);
   background-color: var(--bg-color-night-btn-active2);
 }

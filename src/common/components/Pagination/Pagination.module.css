@@ -4,6 +4,8 @@
   align-items: center;
   margin: 0 auto;
   gap: 40px;
+  justify-content: center;
+  width: 100%;
 }
 
 .pagination {
@@ -14,15 +16,23 @@
 
 .pageButton {
   padding: 4px 10px;
-  background: white;
-  border: 1px solid #aaa;
+  border: 1px solid #878686;
   border-radius: 4px;
   cursor: pointer;
+  background-color: rgba(224, 224, 241, 0.66);
 }
 
-.pageButtonActive {
-  background: #ececec;
+.pageButton.night {
+  background-color: #c7cfd5;
+  color: var(--color-day);
+}
+
+.pageButton.active {
+  background: #301cb1;
   cursor: default;
+  box-shadow: 0 0 2px rgba(0,0,0,2) inset;
+  border-color: rgba(56, 58, 56, 0.44);
+  color: #e8e3e3;
 }
 
 .ellipsis {
@@ -31,3 +41,13 @@
   user-select: none;
 }
 
+.typography {
+  font-size: 20px;
+  font-weight: 300;
+  padding: 4px 10px;
+  min-width: 40px;
+}
+
+.typography.colorNight {
+  color: var(--color-night);
+}

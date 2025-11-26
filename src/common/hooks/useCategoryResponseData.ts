@@ -5,12 +5,13 @@ import {
   useGetUpcomingMoviesQuery,
 } from '@/features/movies/api/moviesApi.ts'
 import { MOVIES_CATEGORIES, type MoviesCategories } from '@/common/constants'
+import type { FetchMoviesArgs } from '@/features/movies/api/moviesApi.types.ts'
 
-export const useCategoryResponseData = (category: MoviesCategories) => {
-  const popularResponse = useGetPopularMoviesQuery()
-  const topRatedResponse = useGetTopRatedMoviesQuery()
-  const nowPlayingResponse = useGetNowPlayingMoviesQuery()
-  const upcomingResponse = useGetUpcomingMoviesQuery()
+export const useCategoryResponseData = (category: MoviesCategories, params: FetchMoviesArgs) => {
+  const popularResponse = useGetPopularMoviesQuery(params)
+  const topRatedResponse = useGetTopRatedMoviesQuery(params)
+  const nowPlayingResponse = useGetNowPlayingMoviesQuery(params)
+  const upcomingResponse = useGetUpcomingMoviesQuery(params)
 
   let response
   switch (category) {

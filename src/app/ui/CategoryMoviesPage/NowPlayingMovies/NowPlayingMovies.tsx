@@ -1,0 +1,36 @@
+import { MOVIES_CATEGORIES } from '@/common/constants'
+import s from '../categoryMoviesPage.module.css'
+import { movieItemsStyleBig } from '@/common/styles'
+import { useGetNowPlayingMoviesQuery } from '@/features/movies/api/moviesApi.ts'
+import { useAppSelector } from '@/common/hooks'
+import { selectThemeMode } from '@/app/model/app-slice.ts'
+import { MovieCategoryModel } from '@/common/MovieCategoryModel/MovieCategoryModel.tsx'
+import { Pagination } from '@/common/components'
+import { useState } from 'react'
+
+export const NowPlayingMovies = () => {
+  const { data, isLoading } = useGetNowPlayingMoviesQuery({ page: 1 })
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const currentTheme = useAppSelector(selectThemeMode)
+  const themeColor = currentTheme === 'dark' ? ' ' + s.colorNight : ''
+
+  return (
+    <div className={s.contentWrapper}>
+      <h1 className={s.title + themeColor}>{MOVIES_CATEGORIES.NowPlayingMovies}</h1>
+      <MovieCategoryModel
+        movies={data?.results}
+        options={{ style: movieItemsStyleBig, full: true }}
+        isLoading={isLoading}
+      />
+      <div className={s.paginationWrapper}>
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          pagesCount={data?.total_pages || 0}
+          totalResults={data?.total_results}
+        />
+      </div>
+    </div>
+  )
+}

@@ -5,3 +5,26 @@
 .movieList.night {
     background-color: var(--bg-color-night);
 }
+
+.title {
+    transition: all 0.3s ease;
+    color: var(--color-day);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.title.colorNight {
+    color: var(--color-night);
+}
+
+.contentWrapper {
+    padding-top: 40px;
+}
+
+
+.paginationWrapper {
+    padding-top: 40px;
+    display: flex;
+    gap: 15px;
+}

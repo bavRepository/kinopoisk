@@ -17,6 +17,9 @@ export const getEndPointName = (category: MoviesCategories) => {
     case MOVIES_CATEGORIES.NowPlayingMovies:
       actionType = moviesApi.endpoints.getNowPlayingMovies.name
       break
+    case MOVIES_CATEGORIES.SearchMovies:
+      actionType = moviesApi.endpoints.getSearchMovie.name
+      break
     default:
       actionType = moviesApi.endpoints.getPopularMovies.name
   }

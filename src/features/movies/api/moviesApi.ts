@@ -1,12 +1,13 @@
 import { baseApi } from '@/app/api/baseApi.ts'
-import type { BaseMoviesResponse, Movie } from './moviesApi.types.ts'
+import type { BaseMoviesResponse, FetchMoviesArgs, Movie } from './moviesApi.types.ts'
 
 export const moviesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getPopularMovies: build.query<BaseMoviesResponse, void>({
-      query: () => {
+    getPopularMovies: build.query<BaseMoviesResponse, FetchMoviesArgs>({
+      query: (params: FetchMoviesArgs) => {
         return {
           url: '/movie/popular',
+          params,
         }
       },
       transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
@@ -16,10 +17,11 @@ export const moviesApi = baseApi.injectEndpoints({
         }
       },
     }),
-    getTopRatedMovies: build.query<BaseMoviesResponse, void>({
-      query: () => {
+    getTopRatedMovies: build.query<BaseMoviesResponse, FetchMoviesArgs>({
+      query: (params: FetchMoviesArgs) => {
         return {
           url: '/movie/top_rated',
+          params,
         }
       },
       transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
@@ -29,10 +31,11 @@ export const moviesApi = baseApi.injectEndpoints({
         }
       },
     }),
-    getUpcomingMovies: build.query<BaseMoviesResponse, void>({
-      query: () => {
+    getUpcomingMovies: build.query<BaseMoviesResponse, FetchMoviesArgs>({
+      query: (params: FetchMoviesArgs) => {
         return {
           url: '/movie/upcoming',
+          params,
         }
       },
       transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
@@ -42,10 +45,11 @@ export const moviesApi = baseApi.injectEndpoints({
         }
       },
     }),
-    getNowPlayingMovies: build.query<BaseMoviesResponse, void>({
-      query: () => {
+    getNowPlayingMovies: build.query<BaseMoviesResponse, FetchMoviesArgs>({
+      query: (params: FetchMoviesArgs) => {
         return {
           url: '/movie/now_playing',
+          params,
         }
       },
       transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
@@ -54,6 +58,25 @@ export const moviesApi = baseApi.injectEndpoints({
           results: data.results.map((movie) => ({ ...movie, favorite: false })),
         }
       },
+    }),
+
+    getSearchMovie: build.query<BaseMoviesResponse, FetchMoviesArgs>({
+      query: (params: FetchMoviesArgs) => {
+        return {
+          url: '/search/movie',
+          params,
+        }
+      },
+      transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
+        return {
+          ...data,
+          results: data.results.map((movie) => ({ ...movie, favorite: false })),
+        }
+      },
+    }),
+
+    getPromoMovies: build.query<BaseMoviesResponse, void>({
+      query: () => '/movie/popular',
     }),
   }),
 })
@@ -63,4 +86,6 @@ export const {
   useGetTopRatedMoviesQuery,
   useGetUpcomingMoviesQuery,
   useGetNowPlayingMoviesQuery,
+  useGetPromoMoviesQuery,
+  useGetSearchMovieQuery,
 } = moviesApi

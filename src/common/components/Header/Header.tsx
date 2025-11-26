@@ -31,7 +31,7 @@ export const Header = () => {
   }
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `${s.link} ${isActive ? (currentTheme === 'dark' ? s.activeNightLink + ' ' + s.linkNight : '') : currentTheme === 'dark' ? s.linkNight : ''}`
+    `${s.link} ${isActive ? (currentTheme === 'dark' ? s.active + ' ' + s.night : s.active + ' ' + s.day) : currentTheme === 'dark' ? s.night : ''}`
 
   return (
     <header className={`${s.wrapper} ${currentTheme === 'dark' ? s.backgroundNight : ''}`}>
@@ -42,16 +42,6 @@ export const Header = () => {
           </Link>
 
           <nav>
-            {/*<ul className={s.list}>*/}
-            {/*  {navItems.map((item, index) => (*/}
-            {/*    <li key={item.to}>*/}
-            {/*      <NavLink to={item.to} className={navLinkClasses}>*/}
-            {/*        {item.label}*/}
-            {/*      </NavLink>*/}
-            {/*      {index !== navItems.length - 1 && <span className={s.separator}>|</span>}*/}
-            {/*    </li>*/}
-            {/*  ))}*/}
-            {/*</ul>*/}
             {navItems.map((item, index) => (
               <div key={item.to} className={s.list}>
                 <NavLink to={item.to} className={navLinkClasses}>
@@ -62,19 +52,12 @@ export const Header = () => {
             ))}
           </nav>
           <button
-            className={`${s.btnChangeMode} ${currentTheme === 'light' ? s.activeDayLink : s.activeNightLink + ' ' + s.btnChangeModeNight}`}
+            className={`${s.btnChangeMode} ${currentTheme === 'dark' ? s.night : +' '}`}
             onClick={changeThemeHandler}
           >
             <img src={currentTheme === 'light' ? MoonIcon : SunIcon} alt='icon' />
           </button>
         </div>
-        {/*{data && (*/}
-        {/*  <div className={s.loginContainer}>*/}
-        {/*    <Link to={Path.Profile}>{data.login}</Link>*/}
-        {/*    <button onClick={logoutHandler}>logout</button>*/}
-        {/*  </div>*/}
-        {/*)}*/}
-        {/*{!data && <Login />}*/}
       </Container>
     </header>
   )

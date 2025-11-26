@@ -1,7 +1,7 @@
 .itemWrapper {
     display: flex;
     flex-direction: column;
-    width: 175px;
+    width: 180px;
     min-height: 265px;
     gap: 12px;
 }

@@ -15,7 +15,6 @@ export const FavoritesPage = () => {
     <section className={s.movieList + (currentTheme === 'dark' ? ' ' + s.night : '')}>
       <Container>
         <h1 className={themeColors}>Favorites movies</h1>
-
         <MovieCategoryModel options={{ full: true, isFavorite: true }} movies={moviesFromLS} isLoading={false} />
       </Container>
     </section>

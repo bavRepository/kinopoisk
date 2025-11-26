@@ -4,8 +4,9 @@ import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { MoviesModel } from '@/features/movies/ui/MoviesModel/MoviesModel.tsx'
 import { SubMovieNavItems } from '@/common/routing'
+import type { FetchMoviesArgs } from '@/features/movies/api/moviesApi.types.ts'
 
-export type OptionsType = { full: boolean; isFavorite?: boolean; style?: React.CSSProperties }
+export type OptionsType = { full: boolean; isFavorite?: boolean; style?: React.CSSProperties; params?: FetchMoviesArgs }
 
 type PropsType = {
   options?: OptionsType

@@ -1,18 +1,22 @@
 import { getPaginationPages } from '@/common/utils'
 import s from './Pagination.module.css'
+import { useAppSelector } from '@/common/hooks'
+import { selectThemeMode } from '@/app/model/app-slice.ts'
 
 type Props = {
   currentPage: number
   setCurrentPage: (page: number) => void
   pagesCount: number
-  pageSize: number
-  changePageSize: (size: number) => void
+  totalResults?: number
 }
 
 export const Pagination = (props: Props) => {
-  const { currentPage, setCurrentPage, pagesCount, changePageSize, pageSize } = props
-
+  const { currentPage, setCurrentPage, pagesCount, totalResults } = props
+  const currentTheme = useAppSelector(selectThemeMode)
   if (pagesCount <= 1) return null
+
+  const themeColor = currentTheme === 'dark' ? ' ' + s.colorNight : ''
+  const pageButtonClasses = currentTheme === 'dark' ? ' ' + s.night : ''
 
   const pages = getPaginationPages(currentPage, pagesCount)
 
@@ -27,7 +31,11 @@ export const Pagination = (props: Props) => {
           ) : (
             <button
               key={page}
-              className={page === currentPage ? `${s.pageButton} ${s.pageButtonActive}` : s.pageButton}
+              className={
+                page === currentPage
+                  ? `${s.pageButton} ${s.active}${pageButtonClasses}`
+                  : s.pageButton + pageButtonClasses
+              }
               onClick={() => page !== currentPage && setCurrentPage(Number(page))}
               disabled={page === currentPage}
               type='button'
@@ -37,17 +45,7 @@ export const Pagination = (props: Props) => {
           ),
         )}
       </div>
-      <label>
-        Show
-        <select value={pageSize} onChange={(e) => changePageSize(Number(e.target.value))}>
-          {[2, 4, 8, 16, 32].map((size) => (
-            <option value={size} key={size}>
-              {size}
-            </option>
-          ))}
-        </select>
-        per page
-      </label>
+      {totalResults && <div className={s.typography + themeColor}>total: {totalResults}</div>}
     </div>
   )
 }
