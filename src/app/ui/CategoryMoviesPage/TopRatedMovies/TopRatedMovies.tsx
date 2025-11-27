@@ -9,8 +9,8 @@ import { Pagination } from '@/common/components'
 import { useState } from 'react'
 
 export const TopRatedMovies = () => {
-  const { data, isLoading } = useGetTopRatedMoviesQuery({ page: 1 })
   const [currentPage, setCurrentPage] = useState(1)
+  const { data, isLoading } = useGetTopRatedMoviesQuery({ page: currentPage })
 
   const currentTheme = useAppSelector(selectThemeMode)
   const themeColor = currentTheme === 'dark' ? ' ' + s.colorNight : ''

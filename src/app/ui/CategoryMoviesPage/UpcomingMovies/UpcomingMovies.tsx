@@ -1,7 +1,7 @@
 import { MOVIES_CATEGORIES } from '@/common/constants'
 import s from '../categoryMoviesPage.module.css'
 import { movieItemsStyleBig } from '@/common/styles'
-import { useGetPopularMoviesQuery } from '@/features/movies/api/moviesApi.ts'
+import { useGetTopRatedMoviesQuery } from '@/features/movies/api/moviesApi.ts'
 import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { MovieCategoryModel } from '@/common/MovieCategoryModel/MovieCategoryModel.tsx'
@@ -9,8 +9,8 @@ import { Pagination } from '@/common/components'
 import { useState } from 'react'
 
 export const UpcomingMovies = () => {
-  const { data, isLoading } = useGetPopularMoviesQuery({ page: 1 })
   const [currentPage, setCurrentPage] = useState(1)
+  const { data, isLoading } = useGetTopRatedMoviesQuery({ page: currentPage })
 
   const currentTheme = useAppSelector(selectThemeMode)
   const themeColor = currentTheme === 'dark' ? ' ' + s.colorNight : ''
