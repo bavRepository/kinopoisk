@@ -3,12 +3,13 @@ import { MainPage } from '@/app/ui/MainPage/MainPage.tsx'
 import { PageNotFound } from '@/common/components'
 import { CategoryMoviesPage } from '@/app/ui/CategoryMoviesPage/CategoryMoviesPage.tsx'
 import { MOVIES_CATEGORIES, type MoviesCategories } from '@/common/constants'
-import { FavoritesPage } from '@/app/ui/App/FavoritesPage/FavoritesPage.tsx'
+import { FavoritesPage } from '@/app/ui/FavoritesPage/FavoritesPage.tsx'
 import { PopularMovies } from '@/app/ui/CategoryMoviesPage/PopularMovies/PopularMovies.tsx'
 import { UpcomingMovies } from '@/app/ui/CategoryMoviesPage/UpcomingMovies/UpcomingMovies.tsx'
 import { TopRatedMovies } from '@/app/ui/CategoryMoviesPage/TopRatedMovies/TopRatedMovies.tsx'
 import { NowPlayingMovies } from '@/app/ui/CategoryMoviesPage/NowPlayingMovies/NowPlayingMovies.tsx'
 import { SearchPage } from '@/app/ui/SearchPage/SearchPage.tsx'
+import { MovieDetails } from '@/app/ui/MovieDetailsPage/MovieDetails.tsx'
 
 export const Path = {
   Main: '/',
@@ -16,6 +17,7 @@ export const Path = {
   FilteredMovies: '/filtered-movies',
   Search: '/search',
   Favorites: '/favorites',
+  Movie: '/movie',
   Popular: 'popular',
   TopRated: 'top-rated',
   Upcoming: 'upcoming',
@@ -43,6 +45,7 @@ export const Routing = () => (
     </Route>
     <Route path={Path.Search} element={<SearchPage />} />
     <Route path={Path.Favorites} element={<FavoritesPage />} />
+    <Route path={Path.Movie + '/:id'} element={<MovieDetails />} />
     <Route path={Path.NotFound} element={<PageNotFound />} />
   </Routes>
 )

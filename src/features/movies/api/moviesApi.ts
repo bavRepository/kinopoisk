@@ -1,5 +1,15 @@
 import { baseApi } from '@/app/api/baseApi.ts'
-import type { BaseMoviesResponse, FetchMoviesArgs, Movie } from './moviesApi.types.ts'
+import type {
+  BaseMoviesResponse,
+  CastMemberWithFavorite,
+  CastResponse,
+  FetchMoviesArgs,
+  Movie,
+  MovieDetails,
+  MovieDetailsWithFavorite,
+  SimilarMovie,
+  SimilarMovieWithFavoriteType,
+} from './moviesApi.types.ts'
 
 export const moviesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -74,6 +84,46 @@ export const moviesApi = baseApi.injectEndpoints({
         }
       },
     }),
+    getMovie: build.query<MovieDetailsWithFavorite, { id: number }>({
+      query: ({ id }: FetchMoviesArgs) => {
+        return {
+          url: `movie/${id}`,
+        }
+      },
+      transformResponse: (movie: MovieDetails): MovieDetailsWithFavorite => {
+        return {
+          ...movie,
+          favorite: false,
+        }
+      },
+    }),
+    getCredits: build.query<CastResponse<CastMemberWithFavorite[]>, { id: number }>({
+      query: ({ id }: FetchMoviesArgs) => {
+        return {
+          url: `movie/${id}/credits`,
+        }
+      },
+      transformResponse: (data: CastResponse): CastResponse<CastMemberWithFavorite[]> => {
+        return {
+          ...data,
+          cast: data.cast.map((castMember) => ({ ...castMember, favorite: false })),
+        }
+      },
+    }),
+
+    getSimilar: build.query<BaseMoviesResponse<SimilarMovieWithFavoriteType[]>, { id: number }>({
+      query: ({ id }) => ({
+        url: `movie/${id}/similar`,
+      }),
+      transformResponse: (
+        data: BaseMoviesResponse<SimilarMovie[]>,
+      ): BaseMoviesResponse<SimilarMovieWithFavoriteType[]> => {
+        return {
+          ...data,
+          results: data.results.map((similar) => ({ ...similar, favorite: false })),
+        }
+      },
+    }),
 
     getPromoMovies: build.query<BaseMoviesResponse, void>({
       query: () => '/movie/popular',
@@ -88,4 +138,7 @@ export const {
   useGetNowPlayingMoviesQuery,
   useGetPromoMoviesQuery,
   useGetSearchMovieQuery,
+  useGetMovieQuery,
+  useGetCreditsQuery,
+  useGetSimilarQuery,
 } = moviesApi

@@ -1,5 +1,10 @@
 import { MOVIES_CATEGORIES, type MoviesCategories } from '@/common/constants'
-import type { ApiEndpointName, FetchMoviesArgs, MovieDomainType } from '@/features/movies/api/moviesApi.types.ts'
+import type {
+  ApiEndpointName,
+  BaseMoviesResponse,
+  FetchMoviesArgs,
+  MovieDomainType,
+} from '@/features/movies/api/moviesApi.types.ts'
 import { getEndPointName } from '@/common/utils/getEndPointName.ts'
 import { useAppDispatch } from '@/common/hooks/useAppDispatch.ts'
 import { moviesApi } from '@/features/movies/api/moviesApi.ts'
@@ -16,12 +21,15 @@ export const useUpdateCachedDataFavorite = () => {
   ) => {
     const moviesApiUpdateQueryData = (category: MoviesCategories) => {
       const endPointName: ApiEndpointName = getEndPointName(category)
+      console.log(endPointName)
       dispatch(
         moviesApi.util.updateQueryData(endPointName, params, (data) => {
-          const index = data.results.findIndex((cachedMovie: MovieDomainType) => movieId === cachedMovie.id)
-
-          if (index !== -1) {
-            data.results[index].favorite = favorite
+          if (data && 'results' in data) {
+            const response = data as BaseMoviesResponse
+            const index = response.results.findIndex((cachedMovie) => movieId === cachedMovie.id)
+            if (index !== -1) {
+              response.results[index].favorite = favorite
+            }
           }
         }),
       )

@@ -16,18 +16,18 @@ import { useSearchParams } from 'react-router'
 export const SearchPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState('')
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const currentTheme = useAppSelector(selectThemeMode)
   const [skip, setSkip] = useState(true)
-  const { data, isLoading } = useGetSearchMovieQuery({ query: searchQuery, page: currentPage }, { skip: skip })
+  const { data, isLoading } = useGetSearchMovieQuery({ query: searchQuery, page: currentPage }, { skip })
 
   useEffect(() => {
-    const params = Object.fromEntries(searchParams)
-    if (params.query) {
-      setSearchQuery(params.query)
+    const q = searchParams.get('query') ?? ''
+    if (q.trim()) {
+      setSearchQuery(q)
       setSkip(false)
     }
-  }, [])
+  }, [searchParams])
 
   const changeFavoriteCacheData = useUpdateCachedDataFavorite()
   updateRequestCache(data, changeFavoriteCacheData, MOVIES_CATEGORIES.SearchMovies, {
@@ -42,7 +42,7 @@ export const SearchPage = () => {
         <div className={s.infoContainer}>
           <h1 className={s.title + themeColorClasses}>Search Results</h1>
           <SearchForm setSkip={setSkip} searchQueryOuter={searchQuery} />
-          {!isLoading && data && <h2 className={s.searchResults + themeColorClasses}>Results for "{searchQuery}"</h2>}
+          {data && <h2 className={s.searchResults + themeColorClasses}>Results for "{searchQuery}"</h2>}
         </div>
 
         <MovieCategoryModel
@@ -50,6 +50,7 @@ export const SearchPage = () => {
           options={{
             style: movieItemsStyleBig,
             full: true,
+            skeleton: false,
             params: {
               query: searchQuery,
               page: currentPage,
@@ -57,7 +58,7 @@ export const SearchPage = () => {
           }}
           isLoading={isLoading}
         />
-        {!isLoading && !data && <p className={s.desc + themeColorClasses}>Enter a movie title to start searching.</p>}
+        {skip && <p className={s.desc + themeColorClasses}>Enter a movie title to start searching.</p>}
         <div className={s.paginationWrapper}>
           <Pagination
             currentPage={currentPage}

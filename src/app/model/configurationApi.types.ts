@@ -1,4 +1,3 @@
-// Тип для объекта images
 export type MoviesImages =
   | {
       base_url: string
@@ -11,8 +10,9 @@ export type MoviesImages =
     }
   | undefined
 
-// Сам основной тип ответа
-export type ApiResponse = {
-  change_keys: string[]
-  images: MoviesImages
-}
+export type ApiConfigurationResponse =
+  | {
+      change_keys: string[]
+      images: MoviesImages
+    }
+  | undefined

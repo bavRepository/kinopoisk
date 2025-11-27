@@ -1,0 +1,60 @@
+.movieDetails {
+    padding-block: 24px;
+    min-height: calc(100vh - 61px - 77px);
+
+}
+
+
+
+.cast {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+
+}
+
+
+.castHeader {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-day);
+ }
+.castCard {
+    width: 180px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+.castContent{
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.castImg{
+    width: 160px;
+    height: 160px;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.castImgDescWrapper {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+}
+
+.castName{
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.castRole{
+    font-size: 14px;
+    color: var(--color-gray);
+    text-align: center;
+}

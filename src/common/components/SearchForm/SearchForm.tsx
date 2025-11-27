@@ -46,7 +46,7 @@ export const SearchForm = ({ setSkip, searchQueryOuter }: SearchFormProps) => {
     if (event.key === 'Enter') {
       // Отправляем текущий value формы
       handleSubmit((data) => {
-        navigateToPageWithQueryData(Path.Search, data)
+        onSubmit(data)
       })()
     }
   }

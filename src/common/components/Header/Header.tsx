@@ -20,10 +20,6 @@ export const Header = () => {
   const dispatch = useAppDispatch()
   const currentTheme = useAppSelector(selectThemeMode)
 
-  // const { data } = useGetMeQuery()
-  // const [logout] = useLogoutMutation()
-  // const logoutHandler = () => logout()
-
   const changeThemeHandler = () => {
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
     dispatch(changeThemeModeAC({ themeMode: newTheme }))

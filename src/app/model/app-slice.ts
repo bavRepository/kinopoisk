@@ -21,9 +21,9 @@ export const appSlice = createSlice({
     // selectIsLoggedIn: (state) => state.isLoggedIn,
   },
   reducers: (create) => ({
-    setConfigurationData: create.reducer<{ imageConfiguration: MoviesImages }>((state, action) => {
-      state.imageConfiguration = action.payload.imageConfiguration
-    }),
+    // setConfigurationData: create.reducer<{ imageConfiguration: MoviesImages }>((state, action) => {
+    //   state.imageConfiguration = action.payload.imageConfiguration
+    // }),
     changeThemeModeAC: create.reducer<{ themeMode: ThemeMode }>((state, action) => {
       state.themeMode = action.payload.themeMode
     }),
@@ -92,8 +92,8 @@ export const appSlice = createSlice({
   },
 })
 
-export const { selectThemeMode, selectAppStatus, selectAppError, selectImageConfiguration } = appSlice.selectors
-export const { changeThemeModeAC, setAppStatusAC, setAppErrorAC, setConfigurationData } = appSlice.actions
+export const { selectThemeMode, selectAppStatus, selectAppError /* selectImageConfiguration */ } = appSlice.selectors
+export const { changeThemeModeAC, setAppStatusAC, setAppErrorAC /*setConfigurationData*/ } = appSlice.actions
 export const appReducer = appSlice.reducer
 
 export type ThemeMode = 'dark' | 'light'

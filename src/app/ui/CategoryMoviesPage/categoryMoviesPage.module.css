@@ -1,6 +1,7 @@
 .movieList {
     padding: 60px 0;
     background-color: var(--bg-color-day);
+    min-height: calc(100vh - 61px - 77px);
 }
 .movieList.night {
     background-color: var(--bg-color-night);

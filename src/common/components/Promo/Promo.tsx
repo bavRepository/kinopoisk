@@ -5,21 +5,21 @@ import s from './promo.module.css'
 import { SearchForm } from '@/common/components/SearchForm/SearchForm.tsx'
 import Skeleton from 'react-loading-skeleton'
 import { Box } from '@/common/components/SkeletonBox/SkeletonBox.tsx'
-import { useAppSelector } from '@/common/hooks'
-import { selectImageConfiguration } from '@/app/model/app-slice.ts'
+
 import { useGetPromoMoviesQuery } from '@/features/movies/api/moviesApi.ts'
+import { useGetConfigurationQuery } from '@/app/model/configurationApi.ts'
 
 type Props = {
   isLoadingHandler: (isLoading: boolean) => void
 }
 export const Promo = ({ isLoadingHandler }: Props) => {
-  const imageSettings = useAppSelector(selectImageConfiguration)
-
+  const { data: configuration, isLoading: isConfigurationLoading } = useGetConfigurationQuery()
   const { data, isLoading } = useGetPromoMoviesQuery()
 
   useEffect(() => {
     isLoadingHandler(isLoading)
   }, [isLoading])
+  const imageConfiguration = configuration?.images ?? undefined
 
   const backgroundPictureUrl = getRandomBackgroundImageUrl(data?.results || [])
 
@@ -33,11 +33,7 @@ export const Promo = ({ isLoadingHandler }: Props) => {
 
   const containerStyles = { display: 'flex', alignItems: 'center', width: '100%' }
 
-  const backdropSize =
-    imageSettings?.backdrop_sizes && imageSettings.backdrop_sizes.length > 0
-      ? imageSettings.backdrop_sizes[3]
-      : 'original'
-  if (isLoading)
+  if (isLoading || isConfigurationLoading)
     return (
       <section className={s.promo}>
         <Container style={containerStyles}>{skeletonWrapped}</Container>
@@ -48,7 +44,7 @@ export const Promo = ({ isLoadingHandler }: Props) => {
     <section
       className={s.promo + ' ' + s.backgroundImage}
       style={{
-        backgroundImage: `linear-gradient(rgba(4, 21, 45, 0) 0%, rgb(18, 18, 18) 79.17%), url("${imageSettings?.secure_base_url}/${backdropSize}/${backgroundPictureUrl}")`,
+        backgroundImage: `linear-gradient(rgba(4, 21, 45, 0) 0%, rgb(18, 18, 18) 79.17%), url("${imageConfiguration?.secure_base_url}/${imageConfiguration?.backdrop_sizes[3]}/${backgroundPictureUrl}")`,
       }}
     >
       <Container style={containerStyles}>

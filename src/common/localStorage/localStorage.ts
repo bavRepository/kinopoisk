@@ -25,9 +25,9 @@ export const delMovieFromLS = (movieId: MovieDomainType['id']) => {
   let favoriteMovieFromLS = getFavoriteMoviesFromLs()
 
   const index = favoriteMovieFromLS.findIndex((lsMovie) => lsMovie.id === movieId)
-  if (index) favoriteMovieFromLS = favoriteMovieFromLS?.filter((movieLS) => movieLS.id !== movieId)
+  if (index != -1) favoriteMovieFromLS = favoriteMovieFromLS?.filter((movieLS) => movieLS.id !== movieId)
   saveState(favoriteMovieFromLS, localStorageFavoriteKey)
   const resultItemsFromLS = getFavoriteMoviesFromLs()
-  !!resultItemsFromLS.length && localStorage.removeItem(localStorageFavoriteKey)
+  resultItemsFromLS.length === 0 && localStorage.removeItem(localStorageFavoriteKey)
   return favoriteMovieFromLS
 }

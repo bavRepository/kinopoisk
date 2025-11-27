@@ -1,9 +1,9 @@
 import { baseApi } from '@/app/api/baseApi.ts'
-import type { ApiResponse } from './configurationApi.types.ts'
+import type { ApiConfigurationResponse } from './configurationApi.types.ts'
 
 export const configurationApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getConfiguration: build.query<ApiResponse, void>({
+    getConfiguration: build.query<ApiConfigurationResponse, void>({
       query: () => {
         return {
           url: '/configuration',

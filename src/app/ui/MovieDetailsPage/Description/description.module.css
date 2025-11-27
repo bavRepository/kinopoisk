@@ -1,0 +1,117 @@
+
+.movieDescWrapper {
+    display: flex;
+    gap: 32px;
+}
+
+.movieImg {
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 280px;
+    max-height: 420px;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+}
+
+.descWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.descHeader {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+
+}
+
+.title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.1;
+}
+
+.backBtn {
+    padding: 4px 12px;
+    background-color: transparent;
+    border:1px solid #27354f;
+    /*color: #e2e8f0; dla night*/
+    color: var(--color-day);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.releaseWrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 16px;
+    color: var(--color-day);
+}
+
+.releaseDesc {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-day);
+    font-weight: 500;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-night);
+    background-color: #ef4444;
+    /*box-shadow: 0 4px 16px rgb(37,99, 235, 0.9); night*/
+}
+
+
+
+.desc {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-day);
+}
+
+.genreWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.genresTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-day);
+}
+
+.genresItems {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.genre {
+    padding: 6px 12px;
+    border-radius: 999px;
+    background-color: #E5E7EB;
+    /*background-color: #435f87; night */
+    font-size: 14px;
+    color: var(--color-day);
+    /*color: var(--color-night);*/
+}

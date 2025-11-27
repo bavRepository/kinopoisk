@@ -14,6 +14,7 @@ export const MOVIES_CATEGORIES = {
   UpcomingMovies: 'Upcoming Movies',
   NowPlayingMovies: 'Now Playing Movies',
   SearchMovies: 'Search Movies',
+  SimilarMovies: 'Similar Movies',
 } as const
 
 export const MOVIES_RATING_VALUES = {

@@ -5,8 +5,16 @@ import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { MoviesModel } from '@/features/movies/ui/MoviesModel/MoviesModel.tsx'
 import { SubMovieNavItems } from '@/common/routing'
 import type { FetchMoviesArgs } from '@/features/movies/api/moviesApi.types.ts'
+import type { ApiConfigurationResponse } from '@/app/model/configurationApi.types.ts'
 
-export type OptionsType = { full: boolean; isFavorite?: boolean; style?: React.CSSProperties; params?: FetchMoviesArgs }
+export type OptionsType = {
+  full?: boolean
+  isFavorite?: boolean
+  style?: React.CSSProperties
+  params?: FetchMoviesArgs
+  configuration?: ApiConfigurationResponse
+  skeleton?: boolean
+}
 
 type PropsType = {
   options?: OptionsType

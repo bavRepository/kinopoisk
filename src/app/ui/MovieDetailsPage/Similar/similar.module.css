@@ -1,0 +1,25 @@
+
+.similarMovies {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+}
+
+.similarMoviesHeader {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-day);
+}
+
+.similarMoviesContent {
+  display: flex;
+  gap: 24px;
+
+}
+
+.similarMoviesImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .2s ease;
+}
