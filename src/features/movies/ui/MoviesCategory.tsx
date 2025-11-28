@@ -14,6 +14,8 @@ export type OptionsType = {
   params?: FetchMoviesArgs
   configuration?: ApiConfigurationResponse
   skeleton?: boolean
+  skeletonSize?: number
+  round?: boolean
 }
 
 type PropsType = {

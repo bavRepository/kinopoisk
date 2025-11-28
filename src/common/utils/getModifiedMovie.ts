@@ -1,14 +1,14 @@
-import type { modifiedMovieType } from '@/common/components/MovieItem/MovieItem.tsx'
 import { isMovieWithProperty } from '@/common/utils/isErrorWithProperty.ts'
 import type {
   CastMemberWithFavorite,
+  ModifiedMovieType,
   MovieDomainType,
   SimilarMovieWithFavoriteType,
 } from '@/features/movies/api/moviesApi.types.ts'
 
 export const getModifiedMovieForLS = (
-  movie: MovieDomainType | modifiedMovieType | SimilarMovieWithFavoriteType | CastMemberWithFavorite,
-): modifiedMovieType => {
+  movie: MovieDomainType | ModifiedMovieType | SimilarMovieWithFavoriteType | CastMemberWithFavorite,
+): ModifiedMovieType => {
   return {
     id: movie?.id,
     title: isMovieWithProperty(movie, 'title') ? (movie as any).title : '',

@@ -142,3 +142,11 @@ export type ApiSimilarResponse = {
 }
 
 export type SimilarMovieWithFavoriteType = SimilarMovie & { favorite: boolean }
+
+export type ModifiedMovieType = {
+  id: MovieDomainType['id'] | undefined
+  title: MovieDomainType['title'] | undefined
+  poster_path: MovieDomainType['poster_path'] | undefined
+  vote_average: MovieDomainType['vote_average'] | undefined
+  favorite?: boolean | undefined
+}

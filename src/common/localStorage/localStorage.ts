@@ -1,5 +1,4 @@
-import type { modifiedMovieType } from '@/common/components/MovieItem/MovieItem.tsx'
-import type { MovieDomainType } from '@/features/movies/api/moviesApi.types.ts'
+import type { ModifiedMovieType, MovieDomainType } from '@/features/movies/api/moviesApi.types.ts'
 
 const LOCAL_STORAGE_KEY = 'theme'
 
@@ -8,6 +7,7 @@ export const localStorageFavoriteKey = 'favorites'
 export function saveState<T>(state: T, key: string = LOCAL_STORAGE_KEY) {
   const stateAsString = JSON.stringify(state)
   localStorage.setItem(key, stateAsString)
+  broadcastFavUpdate()
 }
 
 export function restoreState<T>(defaultState: T, key: string = LOCAL_STORAGE_KEY) {
@@ -17,7 +17,7 @@ export function restoreState<T>(defaultState: T, key: string = LOCAL_STORAGE_KEY
   return state
 }
 
-export const getFavoriteMoviesFromLs = (): modifiedMovieType[] => {
+export const getFavoriteMoviesFromLs = (): ModifiedMovieType[] => {
   return restoreState([], localStorageFavoriteKey)
 }
 
@@ -30,4 +30,10 @@ export const delMovieFromLS = (movieId: MovieDomainType['id']) => {
   const resultItemsFromLS = getFavoriteMoviesFromLs()
   resultItemsFromLS.length === 0 && localStorage.removeItem(localStorageFavoriteKey)
   return favoriteMovieFromLS
+}
+
+export const FAV_UPDATED_EVENT = 'fav-updated'
+
+export function broadcastFavUpdate() {
+  window.dispatchEvent(new Event(FAV_UPDATED_EVENT))
 }

@@ -2,11 +2,14 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router'
 
 export const ScrollToTop = () => {
-  const { pathname } = useLocation()
+  const { pathname, key } = useLocation() // key меняется при каждом шаге истории
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [pathname])
+    const id = requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    })
+    return () => cancelAnimationFrame(id)
+  }, [pathname, key]) // добавляем key, чтобы срабатывало и при «Назад»
 
   return null
 }

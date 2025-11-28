@@ -12,6 +12,7 @@ import { MOVIES_CATEGORIES } from '@/common/constants'
 import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { useSearchParams } from 'react-router'
+import { SkeletonMovie } from '@/common/components/Skeleton/SkeletonMovie.tsx'
 
 export const SearchPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -29,6 +30,8 @@ export const SearchPage = () => {
     }
   }, [searchParams])
 
+  const results = data?.results
+
   const changeFavoriteCacheData = useUpdateCachedDataFavorite()
   updateRequestCache(data, changeFavoriteCacheData, MOVIES_CATEGORIES.SearchMovies, {
     query: searchQuery,
@@ -44,20 +47,24 @@ export const SearchPage = () => {
           <SearchForm setSkip={setSkip} searchQueryOuter={searchQuery} />
           {data && <h2 className={s.searchResults + themeColorClasses}>Results for "{searchQuery}"</h2>}
         </div>
+        {isLoading ? (
+          <SkeletonMovie options={{ skeletonSize: results?.length || 0, full: true, skeleton: !!results?.length }} />
+        ) : (
+          <MovieCategoryModel
+            movies={data?.results}
+            options={{
+              style: movieItemsStyleBig,
+              full: true,
+              skeleton: false,
+              params: {
+                query: searchQuery,
+                page: currentPage,
+              },
+            }}
+            isLoading={isLoading}
+          />
+        )}
 
-        <MovieCategoryModel
-          movies={data?.results}
-          options={{
-            style: movieItemsStyleBig,
-            full: true,
-            skeleton: false,
-            params: {
-              query: searchQuery,
-              page: currentPage,
-            },
-          }}
-          isLoading={isLoading}
-        />
         {skip && <p className={s.desc + themeColorClasses}>Enter a movie title to start searching.</p>}
         <div className={s.paginationWrapper}>
           <Pagination

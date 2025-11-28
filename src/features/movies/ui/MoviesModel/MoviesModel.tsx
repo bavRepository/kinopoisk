@@ -15,7 +15,6 @@ export const MoviesModel = ({ options, categoryMovieItem }: Props) => {
   const { data, isLoading } = useCategoryResponseData(categoryMovieItem.name, { page: 1 })
   const changeFavoriteCacheData = useUpdateCachedDataFavorite()
   updateRequestCache(data, changeFavoriteCacheData, categoryMovieItem.name)
-
   return (
     <>
       <MoviesHeader full={options?.full} categoryMovieItem={categoryMovieItem} />

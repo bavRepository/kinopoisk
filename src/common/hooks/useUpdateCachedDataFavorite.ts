@@ -21,7 +21,7 @@ export const useUpdateCachedDataFavorite = () => {
   ) => {
     const moviesApiUpdateQueryData = (category: MoviesCategories) => {
       const endPointName: ApiEndpointName = getEndPointName(category)
-      console.log(endPointName)
+
       dispatch(
         moviesApi.util.updateQueryData(endPointName, params, (data) => {
           if (data && 'results' in data) {

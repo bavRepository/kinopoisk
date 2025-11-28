@@ -1,22 +1,32 @@
-import s from '@/app/ui/MovieDetailsPage/movieDetails.module.css'
+import s from './cast.module.css'
 import type { CastMember } from '@/features/movies/api/moviesApi.types.ts'
+import { type ThemeMode } from '@/app/model/app-slice.ts'
+import { SkeletonMovie } from '@/common/components/Skeleton/SkeletonMovie.tsx'
 
 type Props = {
   castMemberListCut: CastMember[] | undefined
   getImg: (movie: string | null) => string
+  currentTheme: ThemeMode
+  isSimilarLoading: boolean
 }
-export const Cast = (props: Props) => {
-  const { castMemberListCut, getImg } = props
+
+export const Cast = ({ currentTheme, getImg, castMemberListCut, isSimilarLoading }: Props) => {
+  const colorNightClass = currentTheme === 'dark' ? ' ' + s.night : ''
+  // const loading = useAppSelector(selectAppStatus)
   return (
     <div className={s.cast}>
-      <div className={s.castHeader}>Cast</div>
+      <h1 className={s.castHeader + colorNightClass}>Cast</h1>
       <div className={s.castContent}>
+        {isSimilarLoading && (
+          <SkeletonMovie options={{ round: true, style: { borderRadius: 999, width: 180, height: 180 } }} />
+        )}
+
         {castMemberListCut?.map((cast) => {
           return (
             <div key={cast.id} className={s.castCard}>
               <img src={getImg(cast?.profile_path)} alt='#' className={s.castImg} />
               <div className={s.castImgDescWrapper}>
-                <p className={s.castName}>{cast.name}</p>
+                <p className={s.castName + colorNightClass}>{cast.name}</p>
                 <p className={s.castRole}>{cast.character}</p>
               </div>
             </div>

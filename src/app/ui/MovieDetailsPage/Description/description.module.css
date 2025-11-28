@@ -4,6 +4,7 @@
     gap: 32px;
 }
 
+
 .movieImg {
     border-radius: 12px;
     cursor: pointer;
@@ -33,22 +34,10 @@
     color: #111827;
     line-height: 1.1;
 }
-
-.backBtn {
-    padding: 4px 12px;
-    background-color: transparent;
-    border:1px solid #27354f;
-    /*color: #e2e8f0; dla night*/
-    color: var(--color-day);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border-radius: 999px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all .3s ease;
+.title.night {
+    color: var(--color-night);
 }
+
 
 .releaseWrapper {
     display: flex;
@@ -66,6 +55,10 @@
     font-weight: 500;
 }
 
+.releaseDesc.night {
+    color: rgba(162, 164, 172, 0.8);
+}
+
 .rating {
     display: flex;
     align-items: center;
@@ -80,13 +73,31 @@
     /*box-shadow: 0 4px 16px rgb(37,99, 235, 0.9); night*/
 }
 
-
+.rating.low {
+    background-color: #a60416;
+    color: var(--color-night);
+}
+.rating.medium {
+    background-color: #b69b00;
+}
+.rating.high {
+    background-color: #66b505;
+    color: var(--color-night);
+}
 
 .desc {
     font-size: 18px;
     line-height: 1.6;
     color: var(--color-day);
 }
+
+.desc.night {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-night);
+}
+
+
 
 .genreWrapper {
     display: flex;
@@ -98,6 +109,9 @@
     font-size: 20px;
     font-weight: 600;
     color: var(--color-day);
+}
+.genresTitle.night {
+    color: #7b91bc;
 }
 
 .genresItems {
@@ -115,3 +129,37 @@
     color: var(--color-day);
     /*color: var(--color-night);*/
 }
+
+.backBtn {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: inherit;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #bdbfbf;
+    color: var(--color-day);
+    user-select: none;
+}
+
+
+.backBtn:hover {
+    background-color: #e2e8f0;
+}
+
+.backBtn.night {
+    color: #B5B7BFFF;
+}
+
+
+
+.backBtn.night:hover {
+    background-color: #1d2940;
+}
+
+.backBtn.moreNightBorder {
+    border-color: var(--bg-color-night-btn-active2);
+}
+
+

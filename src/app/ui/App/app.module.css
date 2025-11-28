@@ -1,10 +1,8 @@
 .contentWrapper {
-  background-color: #000000;
-  opacity: 0.5;
-  transition: all 1s ease;
+  opacity: 0;
+  transition: all 0.5s ease-out;
 }
 
 .contentWrapper.loaded {
-  background-color: transparent;
   opacity: 1;
 }

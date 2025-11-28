@@ -4,7 +4,7 @@ import { Container } from '@/common/components/Container/Container.tsx'
 import s from './promo.module.css'
 import { SearchForm } from '@/common/components/SearchForm/SearchForm.tsx'
 import Skeleton from 'react-loading-skeleton'
-import { Box } from '@/common/components/SkeletonBox/SkeletonBox.tsx'
+import { Box } from '@/common/components/Skeleton/Box.tsx'
 
 import { useGetPromoMoviesQuery } from '@/features/movies/api/moviesApi.ts'
 import { useGetConfigurationQuery } from '@/app/model/configurationApi.ts'

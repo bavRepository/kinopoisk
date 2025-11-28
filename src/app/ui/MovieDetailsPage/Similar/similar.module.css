@@ -11,6 +11,10 @@
   color: var(--color-day);
 }
 
+.similarMoviesHeader.night {
+  color: var(--color-night);
+}
+
 .similarMoviesContent {
   display: flex;
   gap: 24px;

@@ -1,28 +1,25 @@
 import s from './movieCategoryModel.module.css'
-import { type modifiedMovieType, MovieItem } from '@/common/components/MovieItem/MovieItem.tsx'
+import { type ModifiedMovieType, MovieItem } from '@/common/components/MovieItem/MovieItem.tsx'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { Box } from '@/common/components/SkeletonBox/SkeletonBox.tsx'
+import { Box } from '@/common/components/Skeleton/Box.tsx'
 import type { MovieDomainType, SimilarMovieWithFavoriteType } from '@/features/movies/api/moviesApi.types.ts'
 import type { OptionsType } from '@/features/movies/ui/MoviesCategory.tsx'
 import { useEffect, useState } from 'react'
 import { useGetConfigurationQuery } from '@/app/model/configurationApi.ts'
 import type { ApiConfigurationResponse } from '@/app/model/configurationApi.types.ts'
-
-const FULL_MOVIES_SIZE_ON_PAGE = 20
-const BRIEF_MOVIES_SIZE_ON_PAGE = 6
+import { SkeletonMovie } from '@/common/components/Skeleton/SkeletonMovie.tsx'
 
 type Props = {
   options?: OptionsType
-  movies: MovieDomainType[] | SimilarMovieWithFavoriteType[] | undefined
+  movies: MovieDomainType[] | SimilarMovieWithFavoriteType[] | ModifiedMovieType[] | undefined
   isLoading?: boolean
 }
-//
-// <modifiedMovieType[] | SimilarMovieWithFavoriteType[] | undefined
-// >
+const BRIEF_MOVIES_SIZE_ON_PAGE = 6
+
 export const MovieCategoryModel = ({ options, movies, isLoading }: Props) => {
   const [favoriteMoviesListFromLS, setFavoriteMoviesListFromLS] = useState<
-    modifiedMovieType[] | SimilarMovieWithFavoriteType[] | MovieDomainType[] | undefined
+    ModifiedMovieType[] | SimilarMovieWithFavoriteType[] | MovieDomainType[] | undefined
   >([])
   const { data } = useGetConfigurationQuery(undefined, { skip: !movies || movies.length === 0 })
   useEffect(() => {
@@ -32,28 +29,9 @@ export const MovieCategoryModel = ({ options, movies, isLoading }: Props) => {
   const configuration: ApiConfigurationResponse = data
   const full = options?.full ?? false
   const style = options?.style ?? undefined
-  const skeleton = options?.skeleton ?? undefined
 
   const formatedSizeMovieList = full ? movies : movies?.slice(0, BRIEF_MOVIES_SIZE_ON_PAGE)
 
-  const skeletonWrapped = (
-    <Box>
-      {Array(full ? FULL_MOVIES_SIZE_ON_PAGE : BRIEF_MOVIES_SIZE_ON_PAGE)
-        .fill(null)
-        .map((_, id) => (
-          <div key={id}>
-            <Skeleton
-              count={1}
-              width={style?.width ? style.width : 175}
-              height={style?.height ? style.height : 265}
-              borderRadius={16}
-              style={{ marginBottom: '10px' }}
-            />
-            <Skeleton count={1} width={110} height={24} borderRadius={6} />
-          </div>
-        ))}
-    </Box>
-  )
   const mappedMovies = (options?.isFavorite ? favoriteMoviesListFromLS : formatedSizeMovieList)?.map((movie) => {
     return (
       <MovieItem
@@ -66,5 +44,13 @@ export const MovieCategoryModel = ({ options, movies, isLoading }: Props) => {
     )
   })
 
-  return <>{isLoading && skeleton ? skeletonWrapped : <div className={s.moviesCategory}>{mappedMovies}</div>}</>
+  return (
+    <>
+      {isLoading ? (
+        <SkeletonMovie options={{ skeletonSize: movies?.length }} />
+      ) : (
+        <div className={s.moviesCategory}>{mappedMovies}</div>
+      )}
+    </>
+  )
 }
