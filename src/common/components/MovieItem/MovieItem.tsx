@@ -55,7 +55,7 @@ export const MovieItem = ({ movie, style, options, setFavoriteMoviesListFromLS }
     <>
       <div className={s.itemWrapper} style={{ width: style?.width, minHeight: style?.height }}>
         <div className={s.imgWrapper} style={style}>
-          <Link to={`${Path.Movie}/${movie?.id}`}>
+          <Link to={`${Path.Movie}/${movie?.id}`} state={{ backTo: location.pathname }}>
             <img
               key={movie?.id}
               src={isPosterPathNotExist ? noPoster : posterImgPath}

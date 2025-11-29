@@ -5,23 +5,20 @@ import { ToastContainer } from 'react-toastify'
 import { useEffect, useState } from 'react'
 import { Footer } from '@/common/components/Footer/Footer.tsx'
 import { restoreState } from '@/common/localStorage/localStorage.ts'
-import { useAppDispatch, useAppSelector } from '@/common/hooks'
-import { changeThemeModeAC, selectAppStatus } from '@/app/model/app-slice.ts'
+import { useAppDispatch } from '@/common/hooks'
+import { changeThemeModeAC } from '@/app/model/app-slice.ts'
 import { SkeletonTheme } from 'react-loading-skeleton'
 import { LinearProgress } from '@/common/components/LinearProgress/LinearProgress.tsx'
 import { ScrollToTop } from '@/common/components/ScrollToTop/ScrollToTop.tsx'
-import { useNavigate } from 'react-router'
+import { useGlobalLoading } from '@/common/hooks/useGlobalLoading.ts'
 
 export const App = () => {
-  const originalNavigate = useNavigate
-
-  // const isGlobalLoading = useGlobalLoading()
+  const isGlobalLoading = useGlobalLoading()
   const dispatch = useAppDispatch()
 
   const [loaded, setLoaded] = useState(false)
 
   const theme = restoreState('light')
-  const loadingStatus = useAppSelector(selectAppStatus)
 
   useEffect(() => {
     requestAnimationFrame(() => setLoaded(true))
@@ -33,8 +30,8 @@ export const App = () => {
       <div className={`${s.contentWrapper} ${loaded ? s.loaded : ''}`}>
         <ScrollToTop />
         <Header />
-
-        {loadingStatus === 'loading' && <LinearProgress />}
+        {isGlobalLoading && <LinearProgress />}
+        {/*{loadingStatus === 'loading' && <LinearProgress />}*/}
         <Routing />
         <ToastContainer />
         <Footer />

@@ -1,9 +1,11 @@
 import s from './movieCategoryModel.module.css'
-import { type ModifiedMovieType, MovieItem } from '@/common/components/MovieItem/MovieItem.tsx'
-import Skeleton from 'react-loading-skeleton'
+import { MovieItem } from '@/common/components/MovieItem/MovieItem.tsx'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { Box } from '@/common/components/Skeleton/Box.tsx'
-import type { MovieDomainType, SimilarMovieWithFavoriteType } from '@/features/movies/api/moviesApi.types.ts'
+import type {
+  ModifiedMovieType,
+  MovieDomainType,
+  SimilarMovieWithFavoriteType,
+} from '@/features/movies/api/moviesApi.types.ts'
 import type { OptionsType } from '@/features/movies/ui/MoviesCategory.tsx'
 import { useEffect, useState } from 'react'
 import { useGetConfigurationQuery } from '@/app/model/configurationApi.ts'
