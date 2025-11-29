@@ -29,15 +29,11 @@ type ChangingLocalStorageMovies = (params: {
 export const changingLocalStorageMovies: ChangingLocalStorageMovies = ({
   movie,
   isFavorite,
-  setFavoriteMoviesListFromLS,
   changeFavoriteCacheData,
   params,
 }): void => {
   const movieId = isMovieWithProperty(movie, 'id') ? movie.id : 0
   if (isFavorite) {
-    // if (setFavoriteMoviesListFromLS) {
-    //   setFavoriteMoviesListFromLS(delMovieFromLS(movieId))
-    // } else
     delMovieFromLS(movieId)
 
     changeFavoriteCacheData(movieId, false, undefined, params)

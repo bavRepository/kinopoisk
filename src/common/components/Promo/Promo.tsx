@@ -14,7 +14,7 @@ type Props = {
 }
 export const Promo = ({ isLoadingHandler }: Props) => {
   const { data: configuration, isLoading: isConfigurationLoading } = useGetConfigurationQuery()
-  const { data, isLoading } = useGetPromoMoviesQuery()
+  const { data, isLoading } = useGetPromoMoviesQuery({ page: 1 })
 
   useEffect(() => {
     isLoadingHandler(isLoading)

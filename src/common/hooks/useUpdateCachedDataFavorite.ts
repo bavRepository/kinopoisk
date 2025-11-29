@@ -1,6 +1,6 @@
 import { MOVIES_CATEGORIES, type MoviesCategories } from '@/common/constants'
 import type {
-  ApiEndpointName,
+  MoviesApiEndpointName,
   BaseMoviesResponse,
   FetchMoviesArgs,
   MovieDomainType,
@@ -20,7 +20,7 @@ export const useUpdateCachedDataFavorite = () => {
     params: FetchMoviesArgs = { page: 1 },
   ) => {
     const moviesApiUpdateQueryData = (category: MoviesCategories) => {
-      const endPointName: ApiEndpointName = getEndPointName(category)
+      const endPointName: MoviesApiEndpointName = getEndPointName(category)
 
       dispatch(
         moviesApi.util.updateQueryData(endPointName, params, (data) => {

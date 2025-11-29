@@ -1,6 +1,6 @@
 import { MOVIES_CATEGORIES, type MoviesCategories } from '@/common/constants'
 import { moviesApi } from '@/features/movies/api/moviesApi.ts'
-import type { ApiEndpointName } from '@/features/movies/api/moviesApi.types.ts'
+import type { MoviesApiEndpointName } from '@/features/movies/api/moviesApi.types.ts'
 
 export const getEndPointName = (category: MoviesCategories) => {
   let actionType
@@ -27,5 +27,5 @@ export const getEndPointName = (category: MoviesCategories) => {
       actionType = moviesApi.endpoints.getPopularMovies.name
   }
 
-  return actionType as ApiEndpointName
+  return actionType as MoviesApiEndpointName
 }

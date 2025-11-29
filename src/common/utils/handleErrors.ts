@@ -16,42 +16,24 @@ export const handleErrors = (error: FetchBaseQueryError) => {
       case 400:
         if (isErrorWithDetailArray(error.data)) {
           const errorMessage = error.data.errors[0].detail
-          console.log(errorMessage, ' 400   isErrorWithDetailArray')
           if (errorMessage.includes('refresh')) return
           errorToast(trimToMaxLength(error.data.errors[0].detail))
-          console.log(errorMessage, ' 400   isErrorWithDetailArray trimToMaxLength')
         } else {
           errorToast(JSON.stringify(error.data))
-          console.log(error.data, ' 400   noDetailArray')
-        }
-        break
-      case 403:
-        if (isErrorWithDetailArray(error.data)) {
-          const errorMessage = error.data.errors[0].detail // del
-          console.log(errorMessage, ' 400   isErrorWithDetailArray')
-          errorToast(trimToMaxLength(error.data.errors[0].detail))
-          console.log(errorMessage, ' 403   isErrorWithDetailArray trimToMaxLength')
-        } else {
-          errorToast(JSON.stringify(error.data))
-          console.log(error.data, ' 403  noDetailArray')
         }
         break
       case 404:
         if (isErrorWithProperty(error.data, 'error')) {
-          console.log(error.data, ' 404   isErrorWithProperty')
           errorToast(error.data.error)
         } else {
-          console.log(error.data + ' 404')
           errorToast(JSON.stringify(error.data))
         }
         break
       case 429:
         if (isErrorWithProperty(error.data, 'message')) {
-          console.log(error.data, ' 429   isErrorWithProperty')
           errorToast(error.data.message)
         } else {
           errorToast(JSON.stringify(error.data))
-          console.log(error.data + ' 429')
         }
         break
 
