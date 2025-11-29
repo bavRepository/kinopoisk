@@ -31,7 +31,6 @@ export const App = () => {
         <ScrollToTop />
         <Header />
         {isGlobalLoading && <LinearProgress />}
-        {/*{loadingStatus === 'loading' && <LinearProgress />}*/}
         <Routing />
         <ToastContainer />
         <Footer />

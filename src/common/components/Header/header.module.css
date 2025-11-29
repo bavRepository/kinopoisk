@@ -36,7 +36,7 @@ nav {
   color: var(--color-day);
   margin-left: 10px;
 }
-.link:hover {
+.link:hover, .link.night:hover  {
   color: var(--hover-color-link);
 }
 

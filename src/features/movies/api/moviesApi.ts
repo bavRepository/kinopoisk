@@ -1,132 +1,92 @@
-import { baseApi } from '@/app/api/baseApi.ts'
+import { baseApi } from '@/app/api/baseApi'
+import { withZodCatch } from '@/common/utils/withZodCatch'
+import {
+  castResponseWithFavoriteSchema,
+  movieDetailsWithFavoriteSchema,
+  moviesListResponseSchema,
+  similarListResponseSchema,
+} from '../model/movies.shemas.ts'
 import type {
   BaseMoviesResponse,
-  CastMemberWithFavorite,
   CastResponse,
-  FetchMoviesArgs,
   Movie,
-  MovieDetails,
   MovieDetailsWithFavorite,
-  SimilarMovie,
-  SimilarMovieWithFavoriteType,
-} from './moviesApi.types.ts'
+} from '@/features/movies/api/moviesApi.types.ts'
 
 export const moviesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getPopularMovies: build.query<BaseMoviesResponse, FetchMoviesArgs>({
-      query: (params: FetchMoviesArgs) => {
-        return {
-          url: '/movie/popular',
-          params,
-        }
-      },
-      transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
-        return {
-          ...data,
-          results: data.results.map((movie) => ({ ...movie, favorite: false })),
-        }
-      },
-    }),
-    getTopRatedMovies: build.query<BaseMoviesResponse, FetchMoviesArgs>({
-      query: (params: FetchMoviesArgs) => {
-        return {
-          url: '/movie/top_rated',
-          params,
-        }
-      },
-      transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
-        return {
-          ...data,
-          results: data.results.map((movie) => ({ ...movie, favorite: false })),
-        }
-      },
-    }),
-    getUpcomingMovies: build.query<BaseMoviesResponse, FetchMoviesArgs>({
-      query: (params: FetchMoviesArgs) => {
-        return {
-          url: '/movie/upcoming',
-          params,
-        }
-      },
-      transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
-        return {
-          ...data,
-          results: data.results.map((movie) => ({ ...movie, favorite: false })),
-        }
-      },
-    }),
-    getNowPlayingMovies: build.query<BaseMoviesResponse, FetchMoviesArgs>({
-      query: (params: FetchMoviesArgs) => {
-        return {
-          url: '/movie/now_playing',
-          params,
-        }
-      },
-      transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
-        return {
-          ...data,
-          results: data.results.map((movie) => ({ ...movie, favorite: false })),
-        }
-      },
-    }),
-
-    getSearchMovie: build.query<BaseMoviesResponse, FetchMoviesArgs>({
-      query: (params: FetchMoviesArgs) => {
-        return {
-          url: '/search/movie',
-          params,
-        }
-      },
-      transformResponse: (data: BaseMoviesResponse<Movie[]>): BaseMoviesResponse => {
-        return {
-          ...data,
-          results: data.results.map((movie) => ({ ...movie, favorite: false })),
-        }
-      },
-    }),
-    getMovie: build.query<MovieDetailsWithFavorite, { id: number }>({
-      query: ({ id }: FetchMoviesArgs) => {
-        return {
-          url: `movie/${id}`,
-        }
-      },
-      transformResponse: (movie: MovieDetails): MovieDetailsWithFavorite => {
-        return {
-          ...movie,
-          favorite: false,
-        }
-      },
-    }),
-    getCredits: build.query<CastResponse<CastMemberWithFavorite[]>, { id: number }>({
-      query: ({ id }: FetchMoviesArgs) => {
-        return {
-          url: `movie/${id}/credits`,
-        }
-      },
-      transformResponse: (data: CastResponse): CastResponse<CastMemberWithFavorite[]> => {
-        return {
-          ...data,
-          cast: data.cast.map((castMember) => ({ ...castMember, favorite: false })),
-        }
-      },
-    }),
-
-    getSimilar: build.query<BaseMoviesResponse<SimilarMovieWithFavoriteType[]>, { id: number }>({
-      query: ({ id }) => ({
-        url: `movie/${id}/similar`,
+    getPopularMovies: build.query({
+      query: (params) => ({ url: '/movie/popular', params }),
+      transformResponse: (res) => ({
+        ...res,
+        results: res.results.map((m: BaseMoviesResponse<Movie[]>) => ({ ...m, favorite: false })),
       }),
-      transformResponse: (
-        data: BaseMoviesResponse<SimilarMovie[]>,
-      ): BaseMoviesResponse<SimilarMovieWithFavoriteType[]> => {
-        return {
-          ...data,
-          results: data.results.map((similar) => ({ ...similar, favorite: false })),
-        }
-      },
+      ...withZodCatch(moviesListResponseSchema),
     }),
 
-    getPromoMovies: build.query<BaseMoviesResponse, void>({
+    getTopRatedMovies: build.query({
+      query: (params) => ({ url: '/movie/top_rated', params }),
+      transformResponse: (res) => ({
+        ...res,
+        results: res.results.map((m: BaseMoviesResponse<Movie[]>) => ({ ...m, favorite: false })),
+      }),
+      ...withZodCatch(moviesListResponseSchema),
+    }),
+
+    getUpcomingMovies: build.query({
+      query: (params) => ({ url: '/movie/upcoming', params }),
+      transformResponse: (res) => ({
+        ...res,
+        results: res.results.map((m: BaseMoviesResponse<Movie[]>) => ({ ...m, favorite: false })),
+      }),
+      ...withZodCatch(moviesListResponseSchema),
+    }),
+
+    getNowPlayingMovies: build.query({
+      query: (params) => ({ url: '/movie/now_playing', params }),
+      transformResponse: (res) => ({
+        ...res,
+        results: res.results.map((m: BaseMoviesResponse<Movie[]>) => ({ ...m, favorite: false })),
+      }),
+      ...withZodCatch(moviesListResponseSchema),
+    }),
+
+    getSearchMovie: build.query({
+      query: (params) => ({ url: '/search/movie', params }),
+      transformResponse: (res) => ({
+        ...res,
+        results: res.results.map((m: BaseMoviesResponse<Movie[]>) => ({ ...m, favorite: false })),
+      }),
+      ...withZodCatch(moviesListResponseSchema),
+    }),
+
+    getMovie: build.query({
+      query: ({ id }) => ({ url: `movie/${id}` }),
+      transformResponse: (res: MovieDetailsWithFavorite) => ({ ...res, favorite: false }),
+      ...withZodCatch(movieDetailsWithFavoriteSchema),
+    }),
+
+    getCredits: build.query({
+      query: ({ id }) => ({ url: `movie/${id}/credits` }),
+      transformResponse: (res) => ({
+        ...res,
+        cast: res.cast.map((c: CastResponse) => ({ ...c, favorite: false })),
+      }),
+      ...withZodCatch(castResponseWithFavoriteSchema),
+    }),
+
+    getSimilar: build.query({
+      query: ({ id }) => ({ url: `movie/${id}/similar` }),
+      transformResponse: (res) => ({
+        ...res,
+        results: res.results.map((s: BaseMoviesResponse<Movie[]>) => ({ ...s, favorite: false })),
+      }),
+      ...withZodCatch(similarListResponseSchema),
+    }),
+
+    getPromoMovies: build.query({
       query: () => '/movie/popular',
+      ...withZodCatch(moviesListResponseSchema),
     }),
   }),
 })
