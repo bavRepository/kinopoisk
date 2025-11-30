@@ -13,7 +13,7 @@ import { MovieCategoryModel } from '@/common/MovieCategoryModel/MovieCategoryMod
 import { filterSettingsKey, restoreState, saveState } from '@/common/localStorage/localStorage.ts'
 import type { filterSettingsObjType, SortValuesType } from '@/app/ui/FilteredPage/filteredPage.types.ts'
 
-export const sortQueryName = {
+export const sortOptionsName = {
   Popularity: { desc: 'popularity.desc', asc: 'popularity.asc' },
   Rating: { desc: 'vote_average.gte', asc: 'vote_average.lte' },
   ReleaseDate: { desc: 'release_date.desc', asc: 'release_date.asc' },
@@ -39,7 +39,7 @@ export type GenreWithClicked = {
 const defaultRangeValues: [number, number] = [0, 10]
 
 export const FilteredPage = () => {
-  const [sortBy, setSortBy] = useState<SortValuesType>(sortQueryName.Popularity.desc)
+  const [sortBy, setSortBy] = useState<SortValuesType>(sortOptionsName.Popularity.desc)
   const [range, setRange] = useState(defaultRangeValues)
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedGenres, setSelectedGenres] = useState<number[]>([])
@@ -70,8 +70,8 @@ export const FilteredPage = () => {
 
   const queryParams = {
     sortBy: sortBy,
-    [sortQueryName.Rating.desc]: debounceRange[0],
-    [sortQueryName.Rating.asc]: debounceRange[1],
+    [sortOptionsName.Rating.desc]: debounceRange[0],
+    [sortOptionsName.Rating.asc]: debounceRange[1],
     with_genres: debounceGenres.join(','),
     page: currentPage,
   } as const
@@ -80,12 +80,16 @@ export const FilteredPage = () => {
     skip: !selectedGenres.length && !sortBy,
   })
 
+  const genresWithState =
+    genresResp?.genres.map((genre) => ({
+      ...genre,
+      isClicked: selectedGenres.includes(genre.id),
+    })) ?? []
+
   const handleSort = (e: ChangeEvent<HTMLSelectElement>) => {
     const newSort = e.target.value as SortValuesType
-    console.log(newSort)
     setSortBy(newSort)
     filterSettingsObj.sortBy = sortBy
-    // saveState({ sortBy: newSort, selectedGenres, page: currentPage, range }, filterSettingsKey)
     saveState(filterSettingsObj, filterSettingsKey)
   }
 
@@ -100,11 +104,6 @@ export const FilteredPage = () => {
     saveState(updatedSettings, filterSettingsKey)
     setSelectedGenres((prev) => (prev.includes(id) ? prev.filter((g) => g !== id) : [...prev, id]))
   }
-  const genresWithState =
-    genresResp?.genres.map((genre) => ({
-      ...genre,
-      isClicked: selectedGenres.includes(genre.id),
-    })) ?? []
 
   const setCurrentPageHandler = (page: number) => {
     setCurrentPage(page)
@@ -120,7 +119,7 @@ export const FilteredPage = () => {
 
   const resetHandler = () => {
     localStorage.removeItem(filterSettingsKey)
-    setSortBy(sortQueryName.Popularity.desc)
+    setSortBy(sortOptionsName.Popularity.desc)
     setRange(defaultRangeValues)
     setSelectedGenres([])
   }
