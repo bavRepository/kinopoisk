@@ -20,7 +20,7 @@ export const NowPlayingMovies = () => {
       <h1 className={s.title + themeColor}>{MOVIES_CATEGORIES.NowPlayingMovies}</h1>
       <MovieCategoryModel
         movies={data?.results}
-        options={{ style: movieItemsStyleBig, full: true }}
+        options={{ style: movieItemsStyleBig, full: true, params: { page: currentPage } }}
         isLoading={isFetching}
       />
       <div className={s.paginationWrapper}>
