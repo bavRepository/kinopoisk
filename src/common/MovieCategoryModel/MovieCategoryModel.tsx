@@ -46,13 +46,5 @@ export const MovieCategoryModel = ({ options, movies, isLoading }: Props) => {
     )
   })
 
-  return (
-    <>
-      {isLoading ? (
-        <SkeletonMovie options={{ skeletonSize: movies?.length }} />
-      ) : (
-        <div className={s.moviesCategory}>{mappedMovies}</div>
-      )}
-    </>
-  )
+  return <>{isLoading ? <SkeletonMovie options={options} /> : <div className={s.moviesCategory}>{mappedMovies}</div>}</>
 }

@@ -3,7 +3,7 @@ import { useGetSearchMovieQuery } from '@/features/movies/api/moviesApi.ts'
 import { MovieCategoryModel } from '@/common/MovieCategoryModel/MovieCategoryModel.tsx'
 import { movieItemsStyleBig } from '@/common/styles'
 import s from './searchPage.module.css'
-import { Pagination } from '@/common/components'
+import { Pagination, Spinner } from '@/common/components'
 import { useEffect, useState } from 'react'
 import { Container } from '@/common/components/Container/Container.tsx'
 import { useUpdateCachedDataFavorite } from '@/common/hooks/useUpdateCachedDataFavorite.ts'
@@ -12,7 +12,6 @@ import { MOVIES_CATEGORIES } from '@/common/constants'
 import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { useSearchParams } from 'react-router'
-import { SkeletonMovie } from '@/common/components/Skeleton/SkeletonMovie.tsx'
 
 export const SearchPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -20,7 +19,7 @@ export const SearchPage = () => {
   const [searchParams] = useSearchParams()
   const currentTheme = useAppSelector(selectThemeMode)
   const [skip, setSkip] = useState(true)
-  const { data, isLoading } = useGetSearchMovieQuery({ query: searchQuery, page: currentPage }, { skip })
+  const { data, isFetching } = useGetSearchMovieQuery({ query: searchQuery, page: currentPage }, { skip })
 
   useEffect(() => {
     const q = searchParams.get('query') ?? ''
@@ -37,6 +36,7 @@ export const SearchPage = () => {
     query: searchQuery,
     page: currentPage,
   })
+
   const themeBgColorClasses = currentTheme === 'dark' ? ' ' + s.bgColorNight : ''
   const themeColorClasses = currentTheme === 'dark' ? ' ' + s.colorNight : ''
   return (
@@ -47,23 +47,24 @@ export const SearchPage = () => {
           <SearchForm setSkip={setSkip} searchQueryOuter={searchQuery} />
           {data && <h2 className={s.searchResults + themeColorClasses}>Results for "{searchQuery}"</h2>}
         </div>
-        {isLoading ? (
-          <SkeletonMovie options={{ skeletonSize: results?.length || 0, full: true, skeleton: !!results?.length }} />
-        ) : (
-          <MovieCategoryModel
-            movies={data?.results}
-            options={{
-              style: movieItemsStyleBig,
-              full: true,
-              skeleton: false,
-              params: {
-                query: searchQuery,
-                page: currentPage,
-              },
-            }}
-            isLoading={isLoading}
-          />
-        )}
+        <div className={s.searchResultList}>
+          {isFetching ? (
+            <Spinner style={{ paddingTop: '5vh' }} />
+          ) : (
+            <MovieCategoryModel
+              movies={results}
+              options={{
+                style: movieItemsStyleBig,
+                full: true,
+                skeleton: false,
+                params: {
+                  query: searchQuery,
+                  page: currentPage,
+                },
+              }}
+            />
+          )}
+        </div>
 
         {skip && <p className={s.desc + themeColorClasses}>Enter a movie title to start searching.</p>}
         <div className={s.paginationWrapper}>

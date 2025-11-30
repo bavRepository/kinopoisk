@@ -1,4 +1,5 @@
 export { PageNotFound } from './PageNotFound/PageNotFound.tsx'
 export { Header } from './Header/Header.tsx'
 export { Pagination } from './Pagination/Pagination.tsx'
+export { Spinner } from './Spinner/Spinner.tsx'
 export * from './Skeleton/Box.tsx'

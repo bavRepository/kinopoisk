@@ -44,7 +44,6 @@ export const SearchForm = ({ setSkip, searchQueryOuter }: SearchFormProps) => {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      // Отправляем текущий value формы
       handleSubmit((data) => {
         onSubmit(data)
       })()

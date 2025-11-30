@@ -124,3 +124,10 @@ export const similarMovieWithFavoriteSchema = movieSchema.extend({
 })
 
 export const similarListResponseSchema = baseMoviesResponseSchema(z.array(similarMovieWithFavoriteSchema))
+
+export const genresResponseSchema = z.object({
+  genres: z.array(genreSchema),
+})
+
+export type Genre = z.infer<typeof genreSchema>
+export type GenresResponse = z.infer<typeof genresResponseSchema>

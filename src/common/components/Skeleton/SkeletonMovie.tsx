@@ -11,7 +11,7 @@ const BRIEF_MOVIES_SIZE_ON_PAGE = 6
 
 export const SkeletonMovie = ({ options }: Props) => {
   const style = options?.style
-  const skeleton = options?.skeleton && true
+  const skeleton = options?.skeleton ?? true
   return (
     <>
       {skeleton ? (

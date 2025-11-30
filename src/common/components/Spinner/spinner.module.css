@@ -1,0 +1,6 @@
+.spinnerWrapper {
+    display: block;
+    padding-top: calc(50vh - 200px);
+    margin: 0 auto;
+    background: none;
+}

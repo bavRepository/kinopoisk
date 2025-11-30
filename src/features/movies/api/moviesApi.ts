@@ -2,6 +2,8 @@ import { baseApi } from '@/app/api/baseApi'
 import { withZodCatch } from '@/common/utils/withZodCatch'
 import {
   castResponseWithFavoriteSchema,
+  type GenresResponse,
+  genresResponseSchema,
   movieDetailsWithFavoriteSchema,
   moviesListResponseSchema,
   similarListResponseSchema,
@@ -88,6 +90,20 @@ export const moviesApi = baseApi.injectEndpoints({
       query: () => '/movie/popular',
       ...withZodCatch(moviesListResponseSchema),
     }),
+
+    getMovieListByFilter: build.query({
+      query: (params) => ({ url: '/discover/movie', params }),
+      transformResponse: (res) => ({
+        ...res,
+        results: res.results.map((s: BaseMoviesResponse<Movie[]>) => ({ ...s, favorite: false })),
+      }),
+      ...withZodCatch(moviesListResponseSchema),
+    }),
+
+    getGenres: build.query<GenresResponse, void>({
+      query: () => ({ url: `/genre/movie/list` }),
+      ...withZodCatch(genresResponseSchema),
+    }),
   }),
 })
 
@@ -101,4 +117,6 @@ export const {
   useGetMovieQuery,
   useGetCreditsQuery,
   useGetSimilarQuery,
+  useGetGenresQuery,
+  useGetMovieListByFilterQuery,
 } = moviesApi

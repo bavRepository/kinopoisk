@@ -1,0 +1,42 @@
+.filterLabel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    color: var(--color-day);
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+.sortSelect {
+    flex: 1;
+    min-width: 200px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #324061;
+    font-size: 14px;
+    background-color: var(--bg-color-day-input);
+    color: var(--color-day);
+    transition: all .2s ease;
+}
+
+.sortSelect:hover {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgb(37, 99, 235, .1);
+}
+
+
+.sortSelect.nightBgAndColor {
+    background-color: #1F2B40;
+    color: var(--color-night);
+}
+
+.nightColor{
+    color: var(--color-night);
+}
+
+.nightBgAndColor{
+    background-color: var(--color-night);
+    color: var(--color-night);
+}

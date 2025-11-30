@@ -1,0 +1,51 @@
+.ratingRangeWrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-self: stretch;
+}
+
+.ratingHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-day);
+}
+
+.ratingHeader.colorNight {
+    color: var(--color-night);
+}
+
+.myRange {
+    height: 7px;
+}
+
+.myRange.nightBgAndColor {
+    background-color:#1F2B40;
+}
+
+.myRange :global(.range-slider__thumb) {
+    width: 22px;
+    height: 22px;
+}
+
+.myRange :global(.range-slider__tooltip) {
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #1f2937;
+    color: #fff;
+}
+
+
+.nightColor{
+    color: var(--color-night);
+}
+
+.nightBgAndColor {
+    color: var(--color-night);
+    background-color: #1F2B40;
+}

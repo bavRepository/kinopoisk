@@ -10,6 +10,7 @@ import { TopRatedMovies } from '@/app/ui/CategoryMoviesPage/TopRatedMovies/TopRa
 import { NowPlayingMovies } from '@/app/ui/CategoryMoviesPage/NowPlayingMovies/NowPlayingMovies.tsx'
 import { SearchPage } from '@/app/ui/SearchPage/SearchPage.tsx'
 import { MovieDetails } from '@/app/ui/MovieDetailsPage/MovieDetails.tsx'
+import { FilteredPage } from '@/app/ui/FilteredPage/FilteredPage.tsx'
 
 export const Path = {
   Main: '/',
@@ -46,6 +47,7 @@ export const Routing = () => (
     <Route path={Path.Search} element={<SearchPage />} />
     <Route path={Path.Favorites} element={<FavoritesPage />} />
     <Route path={Path.Movie + '/:id'} element={<MovieDetails />} />
+    <Route path={Path.FilteredMovies} element={<FilteredPage />} />
     <Route path={Path.NotFound} element={<PageNotFound />} />
   </Routes>
 )

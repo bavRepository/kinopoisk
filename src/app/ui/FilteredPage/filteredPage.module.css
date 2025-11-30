@@ -1,0 +1,69 @@
+.filteredMovies {
+    padding-block: 50px;
+    min-height: calc(100vh - 61px - 77px);
+}
+
+.contentWrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+    gap: 24px;
+}
+.filters {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    background-color: var(--bg-color-day-header-footer);
+    align-items: flex-start;
+}
+.filters.nightBgAndColor {
+    background-color: var(--bg-color-night-header-footer);
+}
+
+.title {
+color: var(--color-day);
+}
+
+.title.colorNight {
+color: var(--color-night);
+}
+
+.resetBtn {
+    transition: all .2s ease;
+    display: inline-block;
+    border: none;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #f8fafc;
+    background-color: #2563eb;
+}
+
+.resetBtn:hover {
+    background-color: #4f7cf1;
+}
+
+.movies {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+
+
+.nightBgAndColor {
+    background-color: var(--bg-color-night);
+}
+
+.paginationWrapper {
+    padding-top: 30px;
+    display: flex;
+    gap: 15px;
+}
