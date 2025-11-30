@@ -114,14 +114,16 @@ export const FilteredPage = () => {
             )}
           </div>
         </div>
-        <div className={s.paginationWrapper}>
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            pagesCount={moviesData?.total_pages || 0}
-            totalResults={moviesData?.total_results}
-          />
-        </div>
+        {!moviesLoading && (
+          <div className={s.paginationWrapper}>
+            <Pagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              pagesCount={moviesData?.total_pages || 0}
+              totalResults={moviesData?.total_results}
+            />
+          </div>
+        )}
       </Container>
     </section>
   )
