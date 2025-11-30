@@ -6,14 +6,13 @@ import { SearchForm } from '@/common/components/SearchForm/SearchForm.tsx'
 import Skeleton from 'react-loading-skeleton'
 import { Box } from '@/common/components/Skeleton/Box.tsx'
 
-import { useGetPromoMoviesQuery } from '@/features/movies/api/moviesApi.ts'
-import { useGetConfigurationQuery } from '@/app/model/configurationApi.ts'
+import { useGetMovieConfigurationQuery, useGetPromoMoviesQuery } from '@/features/movies/api/moviesApi.ts'
 
 type Props = {
   isLoadingHandler: (isLoading: boolean) => void
 }
 export const Promo = ({ isLoadingHandler }: Props) => {
-  const { data: configuration, isLoading: isConfigurationLoading } = useGetConfigurationQuery()
+  const { data: configuration, isLoading: isConfigurationLoading } = useGetMovieConfigurationQuery()
   const { data, isLoading } = useGetPromoMoviesQuery({ page: 1 })
 
   useEffect(() => {

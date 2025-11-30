@@ -131,3 +131,20 @@ export const genresResponseSchema = z.object({
 
 export type Genre = z.infer<typeof genreSchema>
 export type GenresResponse = z.infer<typeof genresResponseSchema>
+
+const imagesSchema = z.object({
+  base_url: z.string(),
+  secure_base_url: z.string(),
+  backdrop_sizes: z.array(z.string()),
+  logo_sizes: z.array(z.string()),
+  poster_sizes: z.array(z.string()),
+  profile_sizes: z.array(z.string()),
+  still_sizes: z.array(z.string()),
+})
+
+const fullConfigurationSchema = z.object({
+  change_keys: z.array(z.string()),
+  images: imagesSchema,
+})
+
+export const apiConfigurationResponseSchema = z.union([fullConfigurationSchema, z.undefined()])

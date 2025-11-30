@@ -1,6 +1,7 @@
 import type { z } from 'zod'
 
 import {
+  apiConfigurationResponseSchema,
   castMemberSchema,
   castMemberWithFavoriteSchema,
   genresResponseSchema,
@@ -10,6 +11,7 @@ import {
   movieSchema,
   similarMovieWithFavoriteSchema,
 } from '../model/movies.shemas.ts'
+import { moviesApi } from '@/features/movies/api/moviesApi.ts'
 
 export type Movie = z.infer<typeof movieSchema>
 export type MovieDomainType = z.infer<typeof movieDomainSchema>
@@ -71,3 +73,8 @@ export type ModifiedMovieType = {
   vote_average: MovieDomainType['vote_average'] | undefined
   favorite?: boolean | undefined
 }
+
+export type MoviesApiEndpointName = keyof typeof moviesApi.endpoints
+
+/* ------------------- TypeScript-тип ------------------- */
+export type ApiConfigurationResponse = z.infer<typeof apiConfigurationResponseSchema>

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { moviesApi } from '@/features/movies/api/moviesApi.ts'
 
 // Список эндпоинтов для исключения из глобального индикатора
-const excludedEndpoints: any = [moviesApi.endpoints.getNowPlayingMovies.name]
+const excludedEndpoints: any = [moviesApi.endpoints.getSearchMovie.name]
 export const useGlobalLoading = () => {
   return useSelector((state: RootState) => {
     const queries = Object.values(state.baseApi.queries || {})

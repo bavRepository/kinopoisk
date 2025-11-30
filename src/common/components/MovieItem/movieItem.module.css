@@ -36,8 +36,8 @@
     overflow: hidden;
     width: 175px;
     height: 265px;
-
 }
+
 .imgWrapper:hover .heartWrapper {
    transform: translateY(0);
    opacity: 1;
@@ -93,8 +93,6 @@
     font-weight: 600;
     border-radius: 50%;
 }
-
-
 
 .rating.low {
     background-color: #a60416;

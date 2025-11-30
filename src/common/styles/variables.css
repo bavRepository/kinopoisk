@@ -2,19 +2,16 @@
     --hover-color-link: #2563eb;
     --color-gray: #c1c0c8;
     --color-gray-border: rgba(52, 164, 161, 0.5);
-
     --color-day: #31506e;
+    --color-night: #dee1ef;
 
     --bg-color-active-favorite: #FACC15;
     --bg-color-day: #FFFFFF;
     --bg-color-day-header-footer: #F3F4F6;
     --bg-color-day-btn-active: #E5E7EB;
     --bg-color-day-divider: rgba(0,0,0,0.2);
-
     --bg-color-day-input: #F9F9F9;
-    --color-night: #dee1ef;
     --bg-color-night-header-footer: rgba(20,28,44,0.95);
-
     --bg-color-night-theme-btn-active: #E5E7EB;
     --bg-color-night-btn-active2: #2c4d71;
     --bg-color-night: #0B1120;

@@ -1,5 +1,5 @@
 import { MoviesHeader } from '@/features/movies/ui/MoviesHeader/MoviesHeader.tsx'
-import { useCategoryResponseData } from '@/common/hooks/useCategoryResponseData.ts'
+import { useChooseResponseData } from '@/common/hooks/useCategoryResponseData.ts'
 import type { SubMovieNavItemsType } from '@/common/routing'
 import { useUpdateCachedDataFavorite } from '@/common/hooks/useUpdateCachedDataFavorite.ts'
 import type { OptionsType } from '@/features/movies/ui/MoviesCategory.tsx'
@@ -12,7 +12,7 @@ type Props = {
 }
 
 export const MoviesModel = ({ options, categoryMovieItem }: Props) => {
-  const { data, isLoading } = useCategoryResponseData(categoryMovieItem.name, { page: 1 })
+  const { data, isLoading } = useChooseResponseData(categoryMovieItem.name, { page: 1 })
   const changeFavoriteCacheData = useUpdateCachedDataFavorite()
   updateRequestCache(data, changeFavoriteCacheData, categoryMovieItem.name)
   return (

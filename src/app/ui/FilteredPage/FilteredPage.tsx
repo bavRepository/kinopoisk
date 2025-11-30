@@ -1,6 +1,6 @@
 import 'react-range-slider-input/dist/style.css'
 import s from './filteredPage.module.css'
-import { useAppSelector } from '@/common/hooks'
+import { useAppSelector, useDebounceValue } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { Container } from '@/common/components/Container/Container.tsx'
 import { type ChangeEvent, useState } from 'react'
@@ -10,6 +10,13 @@ import { SortControl } from '@/app/ui/FilteredPage/SortControl/SortControl.tsx'
 import { RatingRangeSlider } from '@/app/ui/FilteredPage/RatingWrapper/RatingRangeSlider.tsx'
 import { Genres } from '@/app/ui/FilteredPage/Genres/Genres.tsx'
 import { MovieCategoryModel } from '@/common/MovieCategoryModel/MovieCategoryModel.tsx'
+
+export const sortQueryName = {
+  Popularity: { desc: 'popularity.desc', asc: 'popularity.asc' },
+  Rating: { desc: 'vote_average.gte', asc: 'vote_average.lte' },
+  ReleaseDate: { desc: 'release_date.desc', asc: 'release_date.asc' },
+  TITLE: { desc: 'original_title.desc', asc: 'original_title.asc' },
+}
 
 export const SortMovies = [
   { name: 'Popularity ↓', value: 'popularity.desc' },
@@ -27,19 +34,22 @@ export type GenreWithClicked = {
   isClicked: boolean
 }
 export const FilteredPage = () => {
-  const [sortBy, setSortBy] = useState(SortMovies[0].value)
+  const [sortBy, setSortBy] = useState(sortQueryName.Popularity.desc)
   const [range, setRange] = useState<[number, number]>([0, 10])
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedGenres, setSelectedGenres] = useState<number[]>([])
   const currentTheme = useAppSelector(selectThemeMode)
 
+  const debounceRange = useDebounceValue(range)
+  const debounceGenres = useDebounceValue(selectedGenres)
+
   const { data: genresResp, isFetching: genresLoading } = useGetGenresQuery()
 
   const queryParams = {
     sort_by: sortBy,
-    'vote_average.gte': range[0],
-    'vote_average.lte': range[1],
-    with_genres: selectedGenres.join(','),
+    [sortQueryName.Rating.desc]: debounceRange[0],
+    [sortQueryName.Rating.asc]: debounceRange[1],
+    with_genres: debounceGenres.join(','),
     page: currentPage,
   }
 
@@ -53,9 +63,9 @@ export const FilteredPage = () => {
     setSelectedGenres((prev) => (prev.includes(id) ? prev.filter((g) => g !== id) : [...prev, id]))
 
   const genresWithState =
-    genresResp?.genres.map((g) => ({
-      ...g,
-      isClicked: selectedGenres.includes(g.id),
+    genresResp?.genres.map((genre) => ({
+      ...genre,
+      isClicked: selectedGenres.includes(genre.id),
     })) ?? []
 
   const nightColor = currentTheme === 'dark' ? ' ' + s.nightColor : ''
@@ -96,7 +106,11 @@ export const FilteredPage = () => {
             {moviesLoading ? (
               <Spinner />
             ) : (
-              <MovieCategoryModel isLoading={false} movies={moviesData?.results ?? []} options={{ full: true }} />
+              <MovieCategoryModel
+                isLoading={false}
+                movies={moviesData?.results ?? []}
+                options={{ full: true, params: queryParams }}
+              />
             )}
           </div>
         </div>

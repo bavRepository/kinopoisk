@@ -1,9 +1,9 @@
 import { MOVIES_CATEGORIES, type MoviesCategories } from '@/common/constants'
 import type {
-  MoviesApiEndpointName,
   BaseMoviesResponse,
   FetchMoviesArgs,
   MovieDomainType,
+  MoviesApiEndpointName,
 } from '@/features/movies/api/moviesApi.types.ts'
 import { getEndPointName } from '@/common/utils/getEndPointName.ts'
 import { useAppDispatch } from '@/common/hooks/useAppDispatch.ts'

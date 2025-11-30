@@ -2,15 +2,15 @@ import s from './movieCategoryModel.module.css'
 import { MovieItem } from '@/common/components/MovieItem/MovieItem.tsx'
 import 'react-loading-skeleton/dist/skeleton.css'
 import type {
+  ApiConfigurationResponse,
   ModifiedMovieType,
   MovieDomainType,
   SimilarMovieWithFavoriteType,
 } from '@/features/movies/api/moviesApi.types.ts'
 import type { OptionsType } from '@/features/movies/ui/MoviesCategory.tsx'
 import { useEffect, useState } from 'react'
-import { useGetConfigurationQuery } from '@/app/model/configurationApi.ts'
-import type { ApiConfigurationResponse } from '@/app/model/configurationApi.types.ts'
 import { SkeletonMovie } from '@/common/components/Skeleton/SkeletonMovie.tsx'
+import { useGetMovieConfigurationQuery } from '@/features/movies/api/moviesApi.ts'
 
 type Props = {
   options?: OptionsType
@@ -23,7 +23,7 @@ export const MovieCategoryModel = ({ options, movies, isLoading }: Props) => {
   const [favoriteMoviesListFromLS, setFavoriteMoviesListFromLS] = useState<
     ModifiedMovieType[] | SimilarMovieWithFavoriteType[] | MovieDomainType[] | undefined
   >([])
-  const { data } = useGetConfigurationQuery(undefined, { skip: !movies || movies.length === 0 })
+  const { data } = useGetMovieConfigurationQuery(undefined, { skip: !movies || movies.length === 0 })
   useEffect(() => {
     setFavoriteMoviesListFromLS(options?.isFavorite ? movies : [])
   }, [movies])

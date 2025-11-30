@@ -1,6 +1,7 @@
 import { baseApi } from '@/app/api/baseApi'
 import { withZodCatch } from '@/common/utils/withZodCatch'
 import {
+  apiConfigurationResponseSchema,
   castResponseWithFavoriteSchema,
   type GenresResponse,
   genresResponseSchema,
@@ -9,6 +10,7 @@ import {
   similarListResponseSchema,
 } from '../model/movies.shemas.ts'
 import type {
+  ApiConfigurationResponse,
   BaseMoviesResponse,
   CastResponse,
   Movie,
@@ -104,6 +106,14 @@ export const moviesApi = baseApi.injectEndpoints({
       query: () => ({ url: `/genre/movie/list` }),
       ...withZodCatch(genresResponseSchema),
     }),
+    getMovieConfiguration: build.query<ApiConfigurationResponse, void>({
+      query: () => {
+        return {
+          url: '/configuration',
+        }
+      },
+      ...withZodCatch(apiConfigurationResponseSchema),
+    }),
   }),
 })
 
@@ -119,4 +129,5 @@ export const {
   useGetSimilarQuery,
   useGetGenresQuery,
   useGetMovieListByFilterQuery,
+  useGetMovieConfigurationQuery,
 } = moviesApi

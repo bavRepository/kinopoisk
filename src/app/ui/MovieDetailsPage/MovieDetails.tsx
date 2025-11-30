@@ -2,8 +2,12 @@ import s from './movieDetails.module.css'
 import { Container } from '@/common/components/Container/Container.tsx'
 import noPoster from '@/assets/images/noposter.jpg'
 import { useParams } from 'react-router'
-import { useGetCreditsQuery, useGetMovieQuery, useGetSimilarQuery } from '@/features/movies/api/moviesApi.ts'
-import { useGetConfigurationQuery } from '@/app/model/configurationApi.ts'
+import {
+  useGetCreditsQuery,
+  useGetMovieConfigurationQuery,
+  useGetMovieQuery,
+  useGetSimilarQuery,
+} from '@/features/movies/api/moviesApi.ts'
 import { Cast } from '@/app/ui/MovieDetailsPage/Cast/Cast.tsx'
 import { useUpdateCachedDataFavorite } from '@/common/hooks/useUpdateCachedDataFavorite.ts'
 import { updateRequestCache } from '@/common/utils/updateRequestCache.ts'
@@ -21,7 +25,7 @@ export const MovieDetails = () => {
   const id = { id: Number(uriParams?.id) }
   const { data: detailedMovieInfo } = useGetMovieQuery(id)
   const { data: credits } = useGetCreditsQuery(id)
-  const { data: configuration } = useGetConfigurationQuery()
+  const { data: configuration } = useGetMovieConfigurationQuery()
   const { data: similar, isLoading: isSimilarLoading } = useGetSimilarQuery(id)
   const changeFavoriteCacheData = useUpdateCachedDataFavorite()
   const currentTheme = useAppSelector(selectThemeMode)

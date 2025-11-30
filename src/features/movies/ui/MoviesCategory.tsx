@@ -4,8 +4,7 @@ import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { MoviesModel } from '@/features/movies/ui/MoviesModel/MoviesModel.tsx'
 import { SubMovieNavItems } from '@/common/routing'
-import type { FetchMoviesArgs } from '@/features/movies/api/moviesApi.types.ts'
-import type { ApiConfigurationResponse } from '@/app/model/configurationApi.types.ts'
+import type { ApiConfigurationResponse, FetchMoviesArgs } from '@/features/movies/api/moviesApi.types.ts'
 
 export type OptionsType = {
   full?: boolean

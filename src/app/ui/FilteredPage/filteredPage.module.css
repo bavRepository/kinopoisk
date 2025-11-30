@@ -56,8 +56,6 @@ color: var(--color-night);
     flex-wrap: wrap;
 }
 
-
-
 .nightBgAndColor {
     background-color: var(--bg-color-night);
 }

@@ -1,1 +1,0 @@
-export { loginShema } from "./loginShema"

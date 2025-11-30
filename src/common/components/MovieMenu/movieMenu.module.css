@@ -25,9 +25,8 @@
 
 .link.active {
     background-color: var(--hover-color-link);
+    color: var(--color-night);
 }
-
-
 
 .link.night {
     color: var(--color-night);

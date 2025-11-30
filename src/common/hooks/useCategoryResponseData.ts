@@ -7,7 +7,7 @@ import {
 import { MOVIES_CATEGORIES, type MoviesCategories } from '@/common/constants'
 import type { FetchMoviesArgs } from '@/features/movies/api/moviesApi.types.ts'
 
-export const useCategoryResponseData = (category: MoviesCategories, params: FetchMoviesArgs) => {
+export const useChooseResponseData = (category: MoviesCategories, params: FetchMoviesArgs) => {
   const popularResponse = useGetPopularMoviesQuery(params)
   const topRatedResponse = useGetTopRatedMoviesQuery(params)
   const nowPlayingResponse = useGetNowPlayingMoviesQuery(params)

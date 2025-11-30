@@ -10,7 +10,7 @@ import { useState } from 'react'
 
 export const PopularMovies = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const { data, isLoading } = useGetPopularMoviesQuery({ page: currentPage })
+  const { data, isFetching } = useGetPopularMoviesQuery({ page: currentPage })
 
   const currentTheme = useAppSelector(selectThemeMode)
   const themeColor = currentTheme === 'dark' ? ' ' + s.colorNight : ''
@@ -20,7 +20,7 @@ export const PopularMovies = () => {
       <MovieCategoryModel
         movies={data?.results}
         options={{ style: movieItemsStyleBig, full: true }}
-        isLoading={isLoading}
+        isLoading={isFetching}
       />
       <div className={s.paginationWrapper}>
         <Pagination

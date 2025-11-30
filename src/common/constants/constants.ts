@@ -1,13 +1,3 @@
-export const SOCKET_EVENTS = {
-  TRACK_PUBLISHED: 'tracks.track-published',
-  TRACK_ADDED_TO_PLAYLIST: 'tracks.track-added-to-playlist',
-  TRACK_LIKED: 'tracks.track-liked',
-  TRACK_IMAGE_PROCESSED: 'tracks.track-image-processed',
-  PLAYLIST_IMAGE_PROCESSED: 'tracks.playlist-image-processed',
-  PLAYLIST_CREATED: 'tracks.playlist-created',
-  PLAYLIST_UPDATED: 'tracks.playlist-updated',
-} as const
-
 export const MOVIES_CATEGORIES = {
   PopularMovies: 'Popular Movies',
   TopRatedMovies: 'Top Rated Movies',
@@ -15,6 +5,7 @@ export const MOVIES_CATEGORIES = {
   NowPlayingMovies: 'Now Playing Movies',
   SearchMovies: 'Search Movies',
   SimilarMovies: 'Similar Movies',
+  FilteredMovies: 'Filtered Movies',
 } as const
 
 export const MOVIES_RATING_VALUES = {
@@ -23,5 +14,3 @@ export const MOVIES_RATING_VALUES = {
 } as const
 
 export type MoviesCategories = (typeof MOVIES_CATEGORIES)[keyof typeof MOVIES_CATEGORIES] | undefined
-
-export type SocketEvents = (typeof SOCKET_EVENTS)[keyof typeof SOCKET_EVENTS]

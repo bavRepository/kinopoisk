@@ -15,13 +15,14 @@ import noPoster from '@/assets/images/noposter.jpg'
 import { isMovieWithProperty } from '@/common/utils/isErrorWithProperty.ts'
 import { changingLocalStorageMovies } from '@/common/utils/ChangingLocalStorageMovies.ts'
 import { MOVIES_RATING_VALUES } from '@/common/constants'
+import type { CSSProperties, Dispatch, SetStateAction } from 'react'
 
 type Props = {
-  style?: React.CSSProperties
+  style?: CSSProperties
   movie: MovieDomainType | ModifiedMovieType | SimilarMovieWithFavoriteType | CastMemberWithFavorite
   options?: OptionsType | undefined
-  setFavoriteMoviesListFromLS?: React.Dispatch<
-    React.SetStateAction<ModifiedMovieType[] | SimilarMovieWithFavoriteType[] | MovieDomainType[] | undefined>
+  setFavoriteMoviesListFromLS?: Dispatch<
+    SetStateAction<ModifiedMovieType[] | SimilarMovieWithFavoriteType[] | MovieDomainType[] | undefined>
   >
 }
 export const MovieItem = ({ movie, style, options, setFavoriteMoviesListFromLS }: Props) => {
