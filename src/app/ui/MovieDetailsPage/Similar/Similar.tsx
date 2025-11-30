@@ -13,7 +13,9 @@ export const Similar = ({ similarMovieResponse, id, isSimilarLoading, currentThe
   const colorNightClass = currentTheme === 'dark' ? ' ' + s.night : ''
   return (
     <div className={s.similarMovies}>
-      <h1 className={s.similarMoviesHeader + colorNightClass}>Similar Movies</h1>
+      {similarMovieResponse && similarMovieResponse?.results.length > 0 ? (
+        <h1 className={s.similarMoviesHeader + colorNightClass}>Similar Movies</h1>
+      ) : null}
       <div className={s.similarMoviesContent}>
         <MovieCategoryModel
           movies={similarMovieResponse?.results}

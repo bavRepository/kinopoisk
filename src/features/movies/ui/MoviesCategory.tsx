@@ -26,7 +26,7 @@ export const MoviesCategory = ({ options }: PropsType) => {
   const themeBgColorClasses = currentTheme === 'dark' ? ' ' + s.bgColorNight : ''
 
   return (
-    <section className={s.movies + themeBgColorClasses} style={options?.style}>
+    <section className={s.movies + themeBgColorClasses}>
       <Container>
         {SubMovieNavItems.map((categoryMovieItem) => {
           return <MoviesModel key={categoryMovieItem.path} options={options} categoryMovieItem={categoryMovieItem} />

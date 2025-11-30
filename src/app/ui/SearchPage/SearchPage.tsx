@@ -1,7 +1,6 @@
 import { SearchForm } from '@/common/components/SearchForm/SearchForm.tsx'
 import { useGetSearchMovieQuery } from '@/features/movies/api/moviesApi.ts'
 import { MovieCategoryModel } from '@/common/MovieCategoryModel/MovieCategoryModel.tsx'
-import { movieItemsStyleBig } from '@/common/styles'
 import s from './searchPage.module.css'
 import { Pagination, Spinner } from '@/common/components'
 import { useEffect, useState } from 'react'
@@ -12,6 +11,7 @@ import { MOVIES_CATEGORIES } from '@/common/constants'
 import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { useSearchParams } from 'react-router'
+import { movieItemSize } from '@/common/styles'
 
 export const SearchPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -54,7 +54,7 @@ export const SearchPage = () => {
             <MovieCategoryModel
               movies={results}
               options={{
-                style: movieItemsStyleBig,
+                style: movieItemSize.categoryPageMovieItemSize,
                 full: true,
                 skeleton: false,
                 params: {
@@ -68,12 +68,14 @@ export const SearchPage = () => {
 
         {skip && <p className={s.desc + themeColorClasses}>Enter a movie title to start searching.</p>}
         <div className={s.paginationWrapper}>
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            pagesCount={data?.total_pages || 0}
-            totalResults={data?.total_results}
-          />
+          {!isFetching && (
+            <Pagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              pagesCount={data?.total_pages || 0}
+              totalResults={data?.total_results}
+            />
+          )}
         </div>
       </Container>
     </section>

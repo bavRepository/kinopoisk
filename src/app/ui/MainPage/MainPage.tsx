@@ -3,6 +3,7 @@ import { MoviesCategory } from '@/features/movies/ui/MoviesCategory.tsx'
 import { LinearProgress } from '@/common/components/LinearProgress/LinearProgress.tsx'
 import { useState } from 'react'
 import s from './mainPage.module.css'
+import { movieItemSize } from '@/common/styles/styles.ts'
 
 export const MainPage = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -14,7 +15,7 @@ export const MainPage = () => {
     <section className={s.main}>
       {isLoading && <LinearProgress />}
       <Promo isLoadingHandler={isLoadingHandler} />
-      <MoviesCategory options={{ full: false }} />
+      <MoviesCategory options={{ full: false, style: movieItemSize.mainPageMovieItemSize }} />
     </section>
   )
 }

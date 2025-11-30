@@ -1,1 +1,1 @@
-export { movieItemsStyleBig } from './styles.ts'
+export { movieItemSize } from './styles.ts'

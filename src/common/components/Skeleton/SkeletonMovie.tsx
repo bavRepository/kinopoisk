@@ -28,7 +28,7 @@ export const SkeletonMovie = ({ options }: Props) => {
               <div key={id}>
                 <Skeleton
                   count={1}
-                  width={style?.width ? style.width : 175}
+                  width={style?.width ? style.width : 180}
                   height={style?.height ? style.height : 265}
                   borderRadius={style?.borderRadius || 16}
                   style={{ marginBottom: '10px' }}

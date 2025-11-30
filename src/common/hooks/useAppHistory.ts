@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 
-const MAX_STACK = 10
+const MAX_STACK = 999
 
 export const useAppHistory = () => {
   const location = useLocation()

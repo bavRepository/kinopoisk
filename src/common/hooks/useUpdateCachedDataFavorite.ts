@@ -34,7 +34,9 @@ export const useUpdateCachedDataFavorite = () => {
         }),
       )
     }
-
+    // У нас и так есть уже цикл который перебирает наши 4 главные запроса за фильмами в main page
+    // Поэтому мы уже внутри цикла и передаем одну категорию
+    // else все остальные страницы где мы не в цикле обращаемся к серверу цикл запускаем уже здесь
     if (categoryName) {
       moviesApiUpdateQueryData(categoryName)
     } else {

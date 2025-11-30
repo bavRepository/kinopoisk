@@ -12,7 +12,9 @@ type Props = {
 }
 
 export const MoviesModel = ({ options, categoryMovieItem }: Props) => {
+  // Перебераем запросы на сервер для main page
   const { data, isLoading } = useChooseResponseData(categoryMovieItem.name, { page: 1 })
+  // Проверяем есть совпадение с Локал сторейджем тогда добавляем поле favorite:true
   const changeFavoriteCacheData = useUpdateCachedDataFavorite()
   updateRequestCache(data, changeFavoriteCacheData, categoryMovieItem.name)
   return (

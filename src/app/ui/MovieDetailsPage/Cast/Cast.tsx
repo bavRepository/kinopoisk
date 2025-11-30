@@ -12,10 +12,11 @@ type Props = {
 
 export const Cast = ({ currentTheme, getImg, castMemberListCut, isSimilarLoading }: Props) => {
   const colorNightClass = currentTheme === 'dark' ? ' ' + s.night : ''
-  // const loading = useAppSelector(selectAppStatus)
   return (
     <div className={s.cast}>
-      <h1 className={s.castHeader + colorNightClass}>Cast</h1>
+      {castMemberListCut && castMemberListCut.length > 0 ? (
+        <h1 className={s.castHeader + colorNightClass}>Cast</h1>
+      ) : null}
       <div className={s.castContent}>
         {isSimilarLoading && (
           <SkeletonMovie options={{ round: true, style: { borderRadius: 999, width: 180, height: 180 } }} />
