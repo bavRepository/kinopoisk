@@ -82,6 +82,7 @@ export const FilteredPage = () => {
 
   const handleSort = (e: ChangeEvent<HTMLSelectElement>) => {
     const newSort = e.target.value as SortValuesType
+    console.log(newSort)
     setSortBy(newSort)
     filterSettingsObj.sortBy = sortBy
     // saveState({ sortBy: newSort, selectedGenres, page: currentPage, range }, filterSettingsKey)
@@ -118,13 +119,11 @@ export const FilteredPage = () => {
   }
 
   const resetHandler = () => {
+    localStorage.removeItem(filterSettingsKey)
     setSortBy(sortQueryName.Popularity.desc)
     setRange(defaultRangeValues)
     setSelectedGenres([])
-    localStorage.removeItem(filterSettingsKey)
   }
-
-  console.log(genresLoading)
 
   const nightColor = currentTheme === 'dark' ? ' ' + s.nightColor : ''
   const nightBgAndColor = currentTheme === 'dark' ? ' ' + s.nightBgAndColor : ''

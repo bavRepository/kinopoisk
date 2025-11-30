@@ -20,8 +20,10 @@ export const SortControl = ({ sortMovies, currentTheme, sortHandler, currentValu
     <label className={s.filterLabel + nightColor}>
       Sort by
       <select className={s.sortSelect + nightBgAndColor} value={currentValue} onChange={sortHandler}>
-        {sortMovies.map((sortName) => (
-          <option key={sortName.value}>{sortName.name}</option>
+        {sortMovies.map((sort) => (
+          <option key={sort.value} value={sort.value}>
+            {sort.name}
+          </option>
         ))}
       </select>
     </label>
