@@ -3,6 +3,7 @@ import type { ModifiedMovieType, MovieDomainType } from '@/features/movies/api/m
 const LOCAL_STORAGE_KEY = 'theme'
 
 export const localStorageFavoriteKey = 'favorites'
+export const filterSettingsKey = 'movies-filter'
 
 export function saveState<T>(state: T, key: string = LOCAL_STORAGE_KEY) {
   const stateAsString = JSON.stringify(state)
@@ -17,17 +18,13 @@ export function restoreState<T>(defaultState: T, key: string = LOCAL_STORAGE_KEY
   return state
 }
 
-export const getFavoriteMoviesFromLs = (): ModifiedMovieType[] => {
-  return restoreState([], localStorageFavoriteKey)
-}
-
 export const delMovieFromLS = (movieId: MovieDomainType['id']) => {
-  let favoriteMovieFromLS = getFavoriteMoviesFromLs()
+  let favoriteMovieFromLS: ModifiedMovieType[] = restoreState([], localStorageFavoriteKey)
 
   const index = favoriteMovieFromLS.findIndex((lsMovie) => lsMovie.id === movieId)
   if (index != -1) favoriteMovieFromLS = favoriteMovieFromLS?.filter((movieLS) => movieLS.id !== movieId)
   saveState(favoriteMovieFromLS, localStorageFavoriteKey)
-  const resultItemsFromLS = getFavoriteMoviesFromLs()
+  const resultItemsFromLS = restoreState([], localStorageFavoriteKey)
   resultItemsFromLS.length === 0 && localStorage.removeItem(localStorageFavoriteKey)
   return favoriteMovieFromLS
 }

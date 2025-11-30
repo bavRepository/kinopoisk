@@ -1,5 +1,5 @@
-import { getFavoriteMoviesFromLs } from '@/common/localStorage/localStorage.ts'
-import type { BaseMoviesResponse, FetchMoviesArgs } from '@/features/movies/api/moviesApi.types.ts'
+import { localStorageFavoriteKey, restoreState } from '@/common/localStorage/localStorage.ts'
+import type { BaseMoviesResponse, FetchMoviesArgs, ModifiedMovieType } from '@/features/movies/api/moviesApi.types.ts'
 import type { moviesApiUpdateQueryDataType } from '@/common/hooks/useUpdateCachedDataFavorite.ts'
 import type { MoviesCategories } from '@/common/constants'
 
@@ -9,7 +9,7 @@ export const updateRequestCache = <T extends { id: number }>(
   categoryMovieItem: MoviesCategories,
   params: FetchMoviesArgs = { page: 1 },
 ) => {
-  const favoriteMovieFromLS = getFavoriteMoviesFromLs()
+  const favoriteMovieFromLS: ModifiedMovieType[] = restoreState([], localStorageFavoriteKey)
   const movieList = data?.results || []
 
   movieList.forEach((movie) => {

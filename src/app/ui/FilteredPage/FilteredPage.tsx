@@ -3,20 +3,22 @@ import s from './filteredPage.module.css'
 import { useAppSelector, useDebounceValue } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { Container } from '@/common/components/Container/Container.tsx'
-import { type ChangeEvent, useState } from 'react'
+import { type ChangeEvent, useEffect, useState } from 'react'
 import { useGetGenresQuery, useGetMovieListByFilterQuery } from '@/features/movies/api/moviesApi.ts'
 import { Pagination, Spinner } from '@/common/components'
 import { SortControl } from '@/app/ui/FilteredPage/SortControl/SortControl.tsx'
 import { RatingRangeSlider } from '@/app/ui/FilteredPage/RatingWrapper/RatingRangeSlider.tsx'
 import { Genres } from '@/app/ui/FilteredPage/Genres/Genres.tsx'
 import { MovieCategoryModel } from '@/common/MovieCategoryModel/MovieCategoryModel.tsx'
+import { filterSettingsKey, restoreState, saveState } from '@/common/localStorage/localStorage.ts'
+import type { filterSettingsObjType, SortValuesType } from '@/app/ui/FilteredPage/filteredPage.types.ts'
 
 export const sortQueryName = {
   Popularity: { desc: 'popularity.desc', asc: 'popularity.asc' },
   Rating: { desc: 'vote_average.gte', asc: 'vote_average.lte' },
   ReleaseDate: { desc: 'release_date.desc', asc: 'release_date.asc' },
   TITLE: { desc: 'original_title.desc', asc: 'original_title.asc' },
-}
+} as const
 
 export const SortMovies = [
   { name: 'Popularity ↓', value: 'popularity.desc' },
@@ -33,9 +35,12 @@ export type GenreWithClicked = {
   name: string
   isClicked: boolean
 }
+
+const defaultRangeValues: [number, number] = [0, 10]
+
 export const FilteredPage = () => {
-  const [sortBy, setSortBy] = useState(sortQueryName.Popularity.desc)
-  const [range, setRange] = useState<[number, number]>([0, 10])
+  const [sortBy, setSortBy] = useState<SortValuesType>(sortQueryName.Popularity.desc)
+  const [range, setRange] = useState(defaultRangeValues)
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedGenres, setSelectedGenres] = useState<number[]>([])
   const currentTheme = useAppSelector(selectThemeMode)
@@ -45,28 +50,81 @@ export const FilteredPage = () => {
 
   const { data: genresResp, isFetching: genresLoading } = useGetGenresQuery()
 
+  const filterSettingsObj: filterSettingsObjType = {
+    sortBy: sortBy,
+    selectedGenres: selectedGenres,
+    page: currentPage,
+    range: range,
+  }
+
+  useEffect(() => {
+    const { sortBy, page, selectedGenres, range }: filterSettingsObjType = restoreState(
+      filterSettingsObj,
+      filterSettingsKey,
+    )
+    setSortBy(sortBy)
+    setCurrentPage(page)
+    setRange(range)
+    setSelectedGenres(selectedGenres)
+  }, [])
+
   const queryParams = {
-    sort_by: sortBy,
+    sortBy: sortBy,
     [sortQueryName.Rating.desc]: debounceRange[0],
     [sortQueryName.Rating.asc]: debounceRange[1],
     with_genres: debounceGenres.join(','),
     page: currentPage,
-  }
+  } as const
 
   const { data: moviesData, isFetching: moviesLoading } = useGetMovieListByFilterQuery(queryParams, {
     skip: !selectedGenres.length && !sortBy,
   })
 
-  const handleSort = (e: ChangeEvent<HTMLSelectElement>) => setSortBy(e.target.value)
+  const handleSort = (e: ChangeEvent<HTMLSelectElement>) => {
+    const newSort = e.target.value as SortValuesType
+    setSortBy(newSort)
+    filterSettingsObj.sortBy = sortBy
+    // saveState({ sortBy: newSort, selectedGenres, page: currentPage, range }, filterSettingsKey)
+    saveState(filterSettingsObj, filterSettingsKey)
+  }
 
-  const toggleGenre = (id: number) =>
+  const toggleGenre = (id: number) => {
+    const filterSettingsObjFromLS: filterSettingsObjType = restoreState(filterSettingsObj, filterSettingsKey)
+    const updatedSettings = {
+      ...filterSettingsObjFromLS,
+      selectedGenres: filterSettingsObjFromLS.selectedGenres.includes(id)
+        ? filterSettingsObjFromLS.selectedGenres.filter((genre) => genre !== id)
+        : [...filterSettingsObjFromLS.selectedGenres, id],
+    }
+    saveState(updatedSettings, filterSettingsKey)
     setSelectedGenres((prev) => (prev.includes(id) ? prev.filter((g) => g !== id) : [...prev, id]))
-
+  }
   const genresWithState =
     genresResp?.genres.map((genre) => ({
       ...genre,
       isClicked: selectedGenres.includes(genre.id),
     })) ?? []
+
+  const setCurrentPageHandler = (page: number) => {
+    setCurrentPage(page)
+    filterSettingsObj.page = currentPage
+    saveState(filterSettingsObj, filterSettingsKey)
+  }
+
+  const setCurrentRangeHandler = (range: [number, number]) => {
+    setRange(range)
+    filterSettingsObj.range = range
+    saveState(filterSettingsObj, filterSettingsKey)
+  }
+
+  const resetHandler = () => {
+    setSortBy(sortQueryName.Popularity.desc)
+    setRange(defaultRangeValues)
+    setSelectedGenres([])
+    localStorage.removeItem(filterSettingsKey)
+  }
+
+  console.log(genresLoading)
 
   const nightColor = currentTheme === 'dark' ? ' ' + s.nightColor : ''
   const nightBgAndColor = currentTheme === 'dark' ? ' ' + s.nightBgAndColor : ''
@@ -83,21 +141,14 @@ export const FilteredPage = () => {
               currentValue={sortBy}
               sortHandler={handleSort}
             />
-            <RatingRangeSlider range={range} setRange={setRange} currentTheme={currentTheme} />
+            <RatingRangeSlider range={range} setRange={setCurrentRangeHandler} currentTheme={currentTheme} />
             <Genres
               areGenresFetching={genresLoading}
               genreListWithIsClickedField={genresWithState}
               onGenreHandler={toggleGenre}
               currentTheme={currentTheme}
             />
-            <button
-              className={s.resetBtn}
-              onClick={() => {
-                setSortBy('popularity.desc')
-                setRange([0, 10])
-                setSelectedGenres([])
-              }}
-            >
+            <button className={s.resetBtn} onClick={resetHandler}>
               Reset filters
             </button>
           </aside>
@@ -118,7 +169,7 @@ export const FilteredPage = () => {
           <div className={s.paginationWrapper}>
             <Pagination
               currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
+              setCurrentPage={setCurrentPageHandler}
               pagesCount={moviesData?.total_pages || 0}
               totalResults={moviesData?.total_results}
             />

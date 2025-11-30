@@ -1,9 +1,4 @@
-import {
-  delMovieFromLS,
-  getFavoriteMoviesFromLs,
-  localStorageFavoriteKey,
-  saveState,
-} from '@/common/localStorage/localStorage.ts'
+import { delMovieFromLS, localStorageFavoriteKey, restoreState, saveState } from '@/common/localStorage/localStorage.ts'
 import { isMovieWithProperty } from '@/common/utils/isErrorWithProperty.ts'
 
 import type {
@@ -41,7 +36,7 @@ export const changingLocalStorageMovies: ChangingLocalStorageMovies = ({
     if (movie?.favorite) {
       delMovieFromLS(movieId)
     } else {
-      const moviesFromLS = getFavoriteMoviesFromLs()
+      const moviesFromLS: ModifiedMovieType[] = restoreState([], localStorageFavoriteKey)
       const index = moviesFromLS.findIndex((lsItem) => lsItem.id === movieId)
 
       if (index != -1) {
