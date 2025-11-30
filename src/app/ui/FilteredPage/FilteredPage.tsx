@@ -1,6 +1,6 @@
 import 'react-range-slider-input/dist/style.css'
 import s from './filteredPage.module.css'
-import { useAppSelector, useDebounceValue } from '@/common/hooks'
+import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { Container } from '@/common/components/Container/Container.tsx'
 import { type ChangeEvent, useState } from 'react'
