@@ -63,7 +63,14 @@ export const moviesListResponseSchema = baseMoviesResponseSchema(z.array(movieDo
 export const movieDetailsSchema = z.object({
   adult: z.boolean(),
   backdrop_path: z.string().nullable(),
-  belongs_to_collection: z.null().optional(),
+  belongs_to_collection: z
+    .object({
+      id: z.number(),
+      name: z.string(),
+      poster_path: z.string().nullable(),
+      backdrop_path: z.string().nullable(),
+    })
+    .nullable(),
   budget: z.number(),
   genres: z.array(genreSchema),
   homepage: z.string(),
