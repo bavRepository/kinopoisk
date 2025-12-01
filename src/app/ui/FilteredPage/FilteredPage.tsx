@@ -12,7 +12,7 @@ import { Genres } from '@/app/ui/FilteredPage/Genres/Genres.tsx'
 import { MovieCategoryModel } from '@/common/MovieCategoryModel/MovieCategoryModel.tsx'
 import { filterSettingsKey, restoreState, saveState } from '@/common/localStorage/localStorage.ts'
 import type { filterSettingsObjType, SortValuesType } from '@/app/ui/FilteredPage/filteredPage.types.ts'
-
+import noResults from '@/assets/images/no_results_found.png'
 export const sortOptionsName = {
   Popularity: { desc: 'popularity.desc', asc: 'popularity.asc' },
   Rating: { desc: 'vote_average.gte', asc: 'vote_average.lte' },
@@ -155,11 +155,17 @@ export const FilteredPage = () => {
             {moviesLoading ? (
               <Spinner />
             ) : (
-              <MovieCategoryModel
-                isLoading={false}
-                movies={moviesData?.results ?? []}
-                options={{ full: true, params: queryParams }}
-              />
+              <>
+                {moviesData?.results.length === 0 ? (
+                  <img className={s.noResults} src={noResults} alt='no results found' />
+                ) : (
+                  <MovieCategoryModel
+                    isLoading={false}
+                    movies={moviesData?.results ?? []}
+                    options={{ full: true, params: queryParams }}
+                  />
+                )}
+              </>
             )}
           </div>
         </div>

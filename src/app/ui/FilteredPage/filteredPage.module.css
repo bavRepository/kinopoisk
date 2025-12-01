@@ -3,6 +3,15 @@
     min-height: calc(100vh - 61px - 77px);
 }
 
+.noResults {
+    height: 300px;
+    width: 250px;
+    object-fit: cover;
+    display: block;
+    margin: 64px auto 0;
+
+}
+
 .contentWrapper {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
@@ -54,6 +63,8 @@ color: var(--color-night);
     display: flex;
     gap: 24px;
     flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
 }
 
 .nightBgAndColor {
