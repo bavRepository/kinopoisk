@@ -68,7 +68,7 @@ export const movieDetailsSchema = z.object({
   genres: z.array(genreSchema),
   homepage: z.string(),
   id: z.number(),
-  imdb_id: z.string(),
+  imdb_id: z.string().nullable(),
   original_language: z.string(),
   original_title: z.string(),
   overview: z.string(),
