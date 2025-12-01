@@ -64,7 +64,7 @@ export const moviesApi = baseApi.injectEndpoints({
       ...withZodCatch(moviesListResponseSchema),
     }),
 
-    getMovie: build.query({
+    getDetailMovie: build.query({
       query: ({ id }) => ({ url: `movie/${id}` }),
       transformResponse: (res: MovieDetailsWithFavorite) => ({ ...res, favorite: false }),
       ...withZodCatch(movieDetailsWithFavoriteSchema),
@@ -124,7 +124,7 @@ export const {
   useGetNowPlayingMoviesQuery,
   useGetPromoMoviesQuery,
   useGetSearchMovieQuery,
-  useGetMovieQuery,
+  useGetDetailMovieQuery,
   useGetCreditsQuery,
   useGetSimilarQuery,
   useGetGenresQuery,

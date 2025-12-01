@@ -5,7 +5,7 @@ import { useParams } from 'react-router'
 import {
   useGetCreditsQuery,
   useGetMovieConfigurationQuery,
-  useGetMovieQuery,
+  useGetDetailMovieQuery,
   useGetSimilarQuery,
 } from '@/features/movies/api/moviesApi.ts'
 import { Cast } from '@/app/ui/MovieDetailsPage/Cast/Cast.tsx'
@@ -23,7 +23,7 @@ const CAST_LIST_SIZE = 6
 export const MovieDetails = () => {
   const uriParams = useParams()
   const id = { id: Number(uriParams?.id) }
-  const { data: detailedMovieInfo } = useGetMovieQuery(id)
+  const { data: detailedMovieInfo } = useGetDetailMovieQuery(id)
   const { data: credits } = useGetCreditsQuery(id)
   const { data: configuration } = useGetMovieConfigurationQuery()
   const { data: similar, isLoading: isSimilarLoading } = useGetSimilarQuery(id)
