@@ -23,10 +23,10 @@ export const sortOptionChoice = {
 export const SortMoviesOptionsForSelect = [
   { name: 'Popularity ↓', value: 'popularity.desc' },
   { name: 'Popularity ↑', value: 'popularity.asc' },
-  { name: 'Rating ↓', value: 'vote_average.gte' },
-  { name: 'Rating ↑', value: 'vote_average.lte' },
-  { name: 'Release Date ↓', value: 'release_date.desc' },
-  { name: 'Release Date ↑', value: 'release_date.asc' },
+  { name: 'Rating ↓', value: 'vote_average.desc' },
+  { name: 'Rating ↑', value: 'vote_average.asc' },
+  { name: 'Release Date ↓', value: 'primary_release_date.desc' },
+  { name: 'Release Date ↑', value: 'primary_release_date.asc' },
   { name: 'TITLE A-Z', value: 'original_title.desc' },
   { name: 'TITLE Z-A', value: 'original_title.asc' },
 ]
