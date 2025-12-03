@@ -13,14 +13,14 @@ import { MovieCategoryModel } from '@/common/MovieCategoryModel/MovieCategoryMod
 import { filterSettingsKey, restoreState, saveState } from '@/common/localStorage/localStorage.ts'
 import type { filterSettingsObjType, SortValuesType } from '@/app/ui/FilteredPage/filteredPage.types.ts'
 import noResults from '@/assets/images/no_results_found.png'
-export const sortOptionsName = {
+export const sortOptionChoice = {
   Popularity: { desc: 'popularity.desc', asc: 'popularity.asc' },
   Rating: { desc: 'vote_average.gte', asc: 'vote_average.lte' },
   ReleaseDate: { desc: 'release_date.desc', asc: 'release_date.asc' },
   TITLE: { desc: 'original_title.desc', asc: 'original_title.asc' },
 } as const
 
-export const SortMovies = [
+export const SortMoviesOptionsForSelect = [
   { name: 'Popularity ↓', value: 'popularity.desc' },
   { name: 'Popularity ↑', value: 'popularity.asc' },
   { name: 'Rating ↓', value: 'vote_average.gte' },
@@ -39,7 +39,7 @@ export type GenreWithClicked = {
 const defaultRangeValues: [number, number] = [0, 10]
 
 export const FilteredPage = () => {
-  const [sortBy, setSortBy] = useState<SortValuesType>(sortOptionsName.Popularity.desc)
+  const [sortBy, setSortBy] = useState<SortValuesType>(sortOptionChoice.Popularity.desc)
   const [range, setRange] = useState(defaultRangeValues)
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedGenres, setSelectedGenres] = useState<number[]>([])
@@ -69,9 +69,9 @@ export const FilteredPage = () => {
   }, [])
 
   const queryParams = {
-    sortBy: sortBy,
-    [sortOptionsName.Rating.desc]: debounceRange[0],
-    [sortOptionsName.Rating.asc]: debounceRange[1],
+    sort_by: sortBy,
+    [sortOptionChoice.Rating.desc]: debounceRange[0],
+    [sortOptionChoice.Rating.asc]: debounceRange[1],
     with_genres: debounceGenres.join(','),
     page: currentPage,
   } as const
@@ -89,7 +89,7 @@ export const FilteredPage = () => {
   const handleSort = (e: ChangeEvent<HTMLSelectElement>) => {
     const newSort = e.target.value as SortValuesType
     setSortBy(newSort)
-    filterSettingsObj.sortBy = sortBy
+    filterSettingsObj.sortBy = newSort
     saveState(filterSettingsObj, filterSettingsKey)
   }
 
@@ -119,7 +119,7 @@ export const FilteredPage = () => {
 
   const resetHandler = () => {
     localStorage.removeItem(filterSettingsKey)
-    setSortBy(sortOptionsName.Popularity.desc)
+    setSortBy(sortOptionChoice.Popularity.desc)
     setRange(defaultRangeValues)
     setSelectedGenres([])
   }
@@ -134,7 +134,7 @@ export const FilteredPage = () => {
           <aside className={s.filters + nightBgAndColor}>
             <h1 className={s.title + nightColor}>Filters / Sort</h1>
             <SortControl
-              sortMovies={SortMovies}
+              SortMoviesOptionsForSelect={SortMoviesOptionsForSelect}
               currentTheme={currentTheme}
               currentValue={sortBy}
               sortHandler={handleSort}

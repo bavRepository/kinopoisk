@@ -5,14 +5,14 @@ import type { ChangeEvent } from 'react'
 type PropsType = {
   currentTheme: ThemeMode
   currentValue: string
-  sortMovies: Array<{
+  SortMoviesOptionsForSelect: Array<{
     name: string
     value: string
   }>
   sortHandler: (e: ChangeEvent<HTMLSelectElement>) => void
 }
 
-export const SortControl = ({ sortMovies, currentTheme, sortHandler, currentValue }: PropsType) => {
+export const SortControl = ({ SortMoviesOptionsForSelect, currentTheme, sortHandler, currentValue }: PropsType) => {
   const nightColor = currentTheme === 'dark' ? ' ' + s.nightColor : ''
   const nightBgAndColor = currentTheme === 'dark' ? ' ' + s.nightBgAndColor : ''
 
@@ -20,7 +20,7 @@ export const SortControl = ({ sortMovies, currentTheme, sortHandler, currentValu
     <label className={s.filterLabel + nightColor}>
       Sort by
       <select className={s.sortSelect + nightBgAndColor} value={currentValue} onChange={sortHandler}>
-        {sortMovies.map((sort) => (
+        {SortMoviesOptionsForSelect.map((sort) => (
           <option key={sort.value} value={sort.value}>
             {sort.name}
           </option>
