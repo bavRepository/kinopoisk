@@ -1,6 +1,6 @@
 import { MOVIES_CATEGORIES } from '@/common/constants'
 import s from '../categoryMoviesPage.module.css'
-import { useGetTopRatedMoviesQuery } from '@/features/movies/api/moviesApi.ts'
+import { useGetUpcomingMoviesQuery } from '@/features/movies/api/moviesApi.ts'
 import { useAppSelector } from '@/common/hooks'
 import { selectThemeMode } from '@/app/model/app-slice.ts'
 import { MovieCategoryModel } from '@/common/MovieCategoryModel/MovieCategoryModel.tsx'
@@ -10,7 +10,7 @@ import { movieItemSize } from '@/common/styles'
 
 export const UpcomingMovies = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const { data, isFetching } = useGetTopRatedMoviesQuery({ page: currentPage })
+  const { data, isFetching } = useGetUpcomingMoviesQuery({ page: currentPage })
 
   const currentTheme = useAppSelector(selectThemeMode)
   const themeColor = currentTheme === 'dark' ? ' ' + s.colorNight : ''
