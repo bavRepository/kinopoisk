@@ -26,7 +26,7 @@ export const MovieDetails = () => {
   const { data: detailedMovieInfo } = useGetDetailMovieQuery(id)
   const { data: credits } = useGetCreditsQuery(id)
   const { data: configuration } = useGetMovieConfigurationQuery()
-  const { data: similar, isLoading: isSimilarLoading } = useGetSimilarQuery(id)
+  const { data: similar, isFetching: isSimilarLoading } = useGetSimilarQuery(id)
   const changeFavoriteCacheData = useUpdateCachedDataFavorite()
   const currentTheme = useAppSelector(selectThemeMode)
 
