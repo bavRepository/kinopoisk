@@ -153,7 +153,7 @@ export const FilteredPage = () => {
 
           <div className={s.movies}>
             {moviesLoading ? (
-              <Spinner />
+              <Spinner style={{ paddingTop: '115px' }} />
             ) : (
               <>
                 {moviesData?.results.length === 0 ? (
