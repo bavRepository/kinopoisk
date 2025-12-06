@@ -15,6 +15,7 @@ export type OptionsType = {
   skeleton?: boolean
   skeletonSize?: number
   round?: boolean
+  movieGridCellSize?: string
 }
 
 type PropsType = {

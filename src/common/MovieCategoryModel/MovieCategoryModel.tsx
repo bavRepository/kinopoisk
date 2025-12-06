@@ -46,5 +46,18 @@ export const MovieCategoryModel = ({ options, movies, isLoading }: Props) => {
     )
   })
 
-  return <>{isLoading ? <SkeletonMovie options={options} /> : <div className={s.moviesCategory}>{mappedMovies}</div>}</>
+  return (
+    <>
+      {isLoading ? (
+        <SkeletonMovie options={options} />
+      ) : (
+        <div
+          className={s.moviesCategory}
+          style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${options?.movieGridCellSize}, 1fr))` }}
+        >
+          {mappedMovies}
+        </div>
+      )}
+    </>
+  )
 }

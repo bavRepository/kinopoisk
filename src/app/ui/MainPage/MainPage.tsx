@@ -15,7 +15,13 @@ export const MainPage = () => {
     <section className={s.main}>
       {isLoading && <LinearProgress />}
       <Promo isLoadingHandler={isLoadingHandler} />
-      <MoviesCategory options={{ full: false, style: movieItemSize.mainPageMovieItemSize }} />
+      <MoviesCategory
+        options={{
+          full: false,
+          style: movieItemSize.mainPageMovieItemSize,
+          movieGridCellSize: movieItemSize.mainPageMovieItemSize.width,
+        }}
+      />
     </section>
   )
 }
