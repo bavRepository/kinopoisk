@@ -55,6 +55,7 @@ export const SearchPage = () => {
               movies={results}
               options={{
                 style: movieItemSize.categoryPageMovieItemSize,
+                movieGridCellSize: movieItemSize.categoryPageMovieItemSize.width,
                 full: true,
                 skeleton: false,
                 params: {
