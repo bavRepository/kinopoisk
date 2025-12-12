@@ -20,7 +20,12 @@ export const UpcomingMovies = () => {
       <h1 className={s.title + themeColor}>{MOVIES_CATEGORIES.UpcomingMovies}</h1>
       <MovieCategoryModel
         movies={data?.results}
-        options={{ style: movieItemSize.categoryPageMovieItemSize, full: true, params: { page: currentPage } }}
+        options={{
+          style: movieItemSize.categoryPageMovieItemSize,
+          movieGridCellSize: movieItemSize.categoryPageMovieItemSize.width,
+          full: true,
+          params: { page: currentPage },
+        }}
         isLoading={isFetching}
       />
       <div className={s.paginationWrapper}>
